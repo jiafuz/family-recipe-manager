@@ -210,6 +210,887 @@
         border-radius: 12px;
         box-shadow: 0 3px 12px #594a3a16;
       }
+      .family-toolbar {
+        min-height: 72px !important;
+        align-items: center !important;
+        padding-top: 27px !important;
+        padding-bottom: 9px !important;
+      }
+      .family-space-trigger {
+        display: flex;
+        align-items: center;
+        min-width: 0;
+        max-width: 230px;
+        border: 0;
+        border-radius: 14px;
+        background: transparent;
+        color: var(--ink);
+        padding: 3px 5px 3px 0;
+        text-align: left;
+      }
+      .family-space-mark {
+        display: grid;
+        place-items: center;
+        width: 34px;
+        height: 34px;
+        flex: none;
+        border-radius: 12px;
+        background: linear-gradient(145deg, #e55a45, var(--red));
+        color: white;
+        font-family: STKaiti, KaiTi, serif;
+        font-size: 17px;
+        font-style: normal;
+        box-shadow: 0 5px 13px #c9473528;
+      }
+      .family-space-trigger > span {
+        min-width: 0;
+        margin-left: 8px;
+      }
+      .family-space-trigger b,
+      .family-space-trigger small {
+        display: block;
+      }
+      .family-space-trigger b {
+        max-width: 130px;
+        overflow: hidden;
+        font-size: 11px;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+      }
+      .family-space-trigger small {
+        margin-top: 2px;
+        color: var(--muted) !important;
+        font-size: 7px;
+      }
+      .family-space-trigger em {
+        margin-left: 6px;
+        color: var(--muted);
+        font-size: 8px;
+        font-style: normal;
+      }
+      .family-toolbar-actions {
+        display: flex;
+        align-items: center;
+        gap: 7px;
+      }
+      .family-tool-button {
+        position: relative;
+        display: grid;
+        place-items: center;
+        width: 34px;
+        height: 34px;
+        border: 0;
+        border-radius: 12px;
+        background: var(--card);
+        color: var(--ink);
+        padding: 0;
+        box-shadow: 0 3px 12px #594a3a0c;
+      }
+      .family-tool-button svg {
+        width: 18px;
+        height: 18px;
+        fill: none;
+        stroke: currentColor;
+        stroke-width: 1.8;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+      }
+      .family-notice-dot {
+        position: absolute;
+        top: 6px;
+        right: 7px;
+        width: 5px;
+        height: 5px;
+        border: 1px solid var(--card);
+        border-radius: 50%;
+        background: var(--red);
+      }
+      .family-member-button {
+        display: flex;
+        grid-template-columns: none;
+        align-items: center;
+        justify-content: center;
+        width: 42px;
+        padding: 0 5px;
+      }
+      .family-member-button > span:first-child {
+        display: grid;
+        place-items: center;
+        width: 22px;
+        height: 22px;
+        border-radius: 50%;
+        background: #e7d9f1;
+        font-size: 11px;
+      }
+      .family-member-button > span:last-child {
+        display: grid;
+        place-items: center;
+        width: 15px;
+        height: 15px;
+        margin-left: -3px;
+        border: 2px solid var(--card);
+        border-radius: 50%;
+        background: #72ad75;
+        color: white;
+        font-size: 10px;
+        line-height: 1;
+      }
+      .home-order-context {
+        margin: -2px 16px 8px;
+        border-radius: 10px;
+        background: #f7e9e5;
+        color: var(--red);
+        padding: 7px 10px;
+        font-size: 8px;
+      }
+      .family-sheet-current {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        margin: 4px 0 12px;
+        border-radius: 16px;
+        background: #f5eee5;
+        padding: 12px;
+      }
+      .family-sheet-current > i {
+        display: grid;
+        place-items: center;
+        width: 40px;
+        height: 40px;
+        flex: none;
+        border-radius: 13px;
+        background: var(--red);
+        color: white;
+        font-family: STKaiti, KaiTi, serif;
+        font-size: 20px;
+        font-style: normal;
+      }
+      .family-sheet-current > span {
+        min-width: 0;
+        flex: 1;
+      }
+      .family-sheet-current b,
+      .family-sheet-current small {
+        display: block;
+      }
+      .family-sheet-current b {
+        font-size: 12px;
+      }
+      .family-sheet-current small {
+        margin-top: 3px;
+        color: var(--muted);
+        font-size: 8px;
+      }
+      .family-sheet-current em {
+        border-radius: 999px;
+        background: #e3ebdc;
+        color: var(--green);
+        padding: 4px 7px;
+        font-size: 7px;
+        font-style: normal;
+      }
+      .family-utility-list {
+        display: grid;
+      }
+      .family-utility-list[hidden] {
+        display: none;
+      }
+      .family-utility-list > button {
+        display: grid;
+        grid-template-columns: 34px minmax(0, 1fr) auto;
+        align-items: center;
+        gap: 9px;
+        min-height: 54px;
+        border: 0;
+        border-top: 1px solid var(--line);
+        background: transparent;
+        color: var(--ink);
+        padding: 7px 2px;
+        text-align: left;
+      }
+      .family-utility-list > button > i {
+        display: grid;
+        place-items: center;
+        width: 32px;
+        height: 32px;
+        border-radius: 11px;
+        background: #f0e7dc;
+        font-size: 15px;
+        font-style: normal;
+      }
+      .family-utility-list > button b,
+      .family-utility-list > button small {
+        display: block;
+      }
+      .family-utility-list > button b {
+        font-size: 10px;
+      }
+      .family-utility-list > button small {
+        margin-top: 3px;
+        color: var(--muted);
+        font-size: 8px;
+      }
+      .family-utility-list > button > em {
+        color: var(--muted);
+        font-size: 12px;
+        font-style: normal;
+      }
+      .family-space-form {
+        margin-top: 7px;
+        border-radius: 15px;
+        background: #f5f0e9;
+        padding: 12px;
+      }
+      .family-space-form[hidden] {
+        display: none;
+      }
+      .family-space-form b,
+      .family-space-form small {
+        display: block;
+      }
+      .family-space-form b {
+        font-size: 11px;
+      }
+      .family-space-form small {
+        margin-top: 3px;
+        color: var(--muted);
+        font-size: 8px;
+      }
+      .family-space-form input,
+      .family-member-add input {
+        width: 100%;
+        margin-top: 10px;
+        border: 0;
+        border-radius: 11px;
+        background: var(--card);
+        outline: none;
+        padding: 10px;
+        font-size: 9px;
+      }
+      .family-form-actions {
+        display: grid;
+        grid-template-columns: 0.8fr 1.2fr;
+        gap: 7px;
+        margin-top: 8px;
+      }
+      .family-form-actions button {
+        border: 0;
+        border-radius: 10px;
+        background: #e9e2d9;
+        color: var(--ink);
+        padding: 9px;
+        font-size: 9px;
+      }
+      .family-form-actions button:last-child {
+        background: var(--red);
+        color: white;
+      }
+      .family-member-list,
+      .family-notification-list {
+        display: grid;
+        gap: 7px;
+        margin: 5px 0 12px;
+      }
+      .family-member-row,
+      .family-notification-item {
+        display: flex;
+        align-items: center;
+        gap: 9px;
+        border-radius: 13px;
+        background: #f5f0e9;
+        padding: 10px;
+      }
+      .family-member-row > i,
+      .family-notification-item > i {
+        display: grid;
+        place-items: center;
+        width: 34px;
+        height: 34px;
+        flex: none;
+        border-radius: 11px;
+        background: #eadff0;
+        font-size: 16px;
+        font-style: normal;
+      }
+      .family-member-row > span,
+      .family-notification-item > span {
+        min-width: 0;
+        flex: 1;
+      }
+      .family-member-row b,
+      .family-member-row small,
+      .family-notification-item b,
+      .family-notification-item small {
+        display: block;
+      }
+      .family-member-row b,
+      .family-notification-item b {
+        font-size: 10px;
+      }
+      .family-member-row small,
+      .family-notification-item small {
+        margin-top: 3px;
+        color: var(--muted);
+        font-size: 8px;
+        line-height: 1.45;
+      }
+      .family-notification-item.read {
+        opacity: 0.58;
+      }
+      .family-notification-item > em {
+        width: 6px;
+        height: 6px;
+        flex: none;
+        border-radius: 50%;
+        background: var(--red);
+        font-style: normal;
+      }
+      .family-notification-item.read > em {
+        background: transparent;
+      }
+      .family-member-add {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) auto;
+        gap: 7px;
+        margin-bottom: 8px;
+      }
+      .family-member-add input {
+        margin: 0;
+      }
+      .family-member-add button,
+      .family-sheet-secondary {
+        border: 0;
+        border-radius: 11px;
+        background: #e8efe3;
+        color: var(--green);
+        padding: 9px 12px;
+        font-size: 9px;
+        font-weight: 700;
+      }
+      .family-sheet-secondary {
+        width: 100%;
+      }
+      .utility-screen {
+        padding-bottom: 24px;
+        background: var(--paper);
+      }
+      .utility-page-header {
+        position: sticky;
+        top: 0;
+        z-index: 8;
+        display: grid;
+        grid-template-columns: 42px minmax(0, 1fr) 42px;
+        align-items: center;
+        min-height: 72px;
+        padding: 27px 12px 9px;
+        border-bottom: 1px solid var(--line);
+        background: #f7f3ecf2;
+        backdrop-filter: blur(16px);
+      }
+      .utility-page-header h2 {
+        margin: 0;
+        text-align: center;
+        font-size: 15px;
+      }
+      .utility-page-header button {
+        display: grid;
+        place-items: center;
+        width: 34px;
+        height: 34px;
+        border: 0;
+        border-radius: 11px;
+        background: var(--card);
+        color: var(--ink);
+        padding: 0;
+        font-size: 18px;
+      }
+      .utility-page-header > span {
+        width: 34px;
+      }
+      .utility-content {
+        padding: 14px 16px 30px;
+      }
+      .notification-center-tabs {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 4px;
+        border-radius: 13px;
+        background: #ece6de;
+        padding: 3px;
+      }
+      .notification-center-tabs button {
+        border: 0;
+        border-radius: 10px;
+        background: transparent;
+        color: var(--muted);
+        padding: 9px 5px;
+        font-size: 9px;
+      }
+      .notification-center-tabs button.on {
+        background: var(--card);
+        color: var(--red);
+        font-weight: 700;
+      }
+      .notification-center-head {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin: 15px 2px 8px;
+      }
+      .notification-center-head b {
+        font-size: 11px;
+      }
+      .notification-center-head button {
+        border: 0;
+        background: transparent;
+        color: var(--green);
+        padding: 4px 0;
+        font-size: 8px;
+      }
+      .notification-center-list {
+        display: grid;
+        gap: 8px;
+      }
+      .notification-center-item {
+        display: grid;
+        grid-template-columns: 38px minmax(0, 1fr) 7px;
+        align-items: start;
+        gap: 9px;
+        border-radius: 15px;
+        background: var(--card);
+        padding: 12px;
+      }
+      .notification-center-item > i {
+        display: grid;
+        place-items: center;
+        width: 36px;
+        height: 36px;
+        border-radius: 12px;
+        background: #f2e7dc;
+        font-size: 17px;
+        font-style: normal;
+      }
+      .notification-center-item.system > i {
+        background: #e7eef5;
+      }
+      .notification-center-item b,
+      .notification-center-item small,
+      .notification-center-item p {
+        display: block;
+      }
+      .notification-center-item b {
+        font-size: 10px;
+      }
+      .notification-center-item p {
+        margin: 4px 0 0;
+        color: var(--muted);
+        font-size: 8px;
+        line-height: 1.55;
+      }
+      .notification-center-item small {
+        margin-top: 6px;
+        color: #aaa097;
+        font-size: 7px;
+      }
+      .notification-center-item > em {
+        width: 6px;
+        height: 6px;
+        margin-top: 5px;
+        border-radius: 50%;
+        background: var(--red);
+        font-style: normal;
+      }
+      .notification-center-item.read {
+        opacity: 0.62;
+      }
+      .notification-center-item.read > em {
+        background: transparent;
+      }
+      .invite-family-hero {
+        position: relative;
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        overflow: hidden;
+        border: 1px solid #eadaca;
+        border-bottom: 0;
+        border-radius: 20px 20px 0 0;
+        background: linear-gradient(145deg, #fff9f1, #f7ebdc);
+        padding: 17px 16px 14px;
+      }
+      .invite-family-hero::after {
+        position: absolute;
+        right: 9px;
+        bottom: -21px;
+        color: rgba(201, 71, 53, 0.06);
+        content: "家";
+        font-family: STKaiti, KaiTi, serif;
+        font-size: 70px;
+        font-weight: 700;
+        pointer-events: none;
+      }
+      .invite-family-hero > i {
+        display: grid;
+        place-items: center;
+        width: 52px;
+        height: 52px;
+        flex: none;
+        border-radius: 16px;
+        background: linear-gradient(145deg, #d85d49, var(--red));
+        box-shadow: 0 9px 18px rgba(201, 71, 53, 0.22);
+        font-size: 27px;
+        font-style: normal;
+      }
+      .kitchen-summary-card > i {
+        display: grid;
+        place-items: center;
+        width: 52px;
+        height: 52px;
+        flex: none;
+        border-radius: 16px;
+        background: #dff0df;
+        font-size: 27px;
+        font-style: normal;
+      }
+      .invite-family-hero b,
+      .invite-family-hero small {
+        display: block;
+      }
+      .invite-family-hero b {
+        font-size: 14px;
+        letter-spacing: 0.02em;
+      }
+      .invite-family-hero small {
+        margin-top: 4px;
+        color: #74675c;
+        font-size: 8px;
+      }
+      .invite-code-card {
+        border: 1px solid #eadaca;
+        border-top: 0;
+        border-radius: 0 0 20px 20px;
+        background: linear-gradient(145deg, #fff9f1, #f7ebdc);
+        box-shadow: 0 12px 28px rgba(82, 55, 32, 0.09);
+        padding: 0 15px 16px;
+      }
+      .invite-code-panel {
+        position: relative;
+        border-radius: 15px;
+        background: rgba(255, 253, 249, 0.9);
+        box-shadow: inset 0 0 0 1px rgba(227, 208, 190, 0.8);
+        padding: 15px 14px 14px;
+        text-align: center;
+      }
+      .invite-code-heading {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        text-align: left;
+      }
+      .invite-code-heading b {
+        color: var(--red);
+        font-size: 10px;
+      }
+      .invite-code-heading span {
+        border-radius: 999px;
+        background: #f2e6d9;
+        color: #8d7563;
+        padding: 4px 7px;
+        font-size: 7px;
+      }
+      .invite-code-value {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 10px;
+        margin: 10px 0 8px;
+        border: 1px dashed #d8b7a2;
+        border-radius: 12px;
+        background: #f8efe5;
+        padding: 10px 10px 10px 14px;
+      }
+      .invite-code-value strong {
+        color: var(--ink);
+        font-size: 20px;
+        font-weight: 600;
+        letter-spacing: 0.27em;
+      }
+      .invite-code-value button {
+        border: 0;
+        border-radius: 9px;
+        background: var(--green);
+        color: white;
+        padding: 8px 10px;
+        font-size: 8px;
+      }
+      .invite-code-panel > small {
+        display: block;
+        color: var(--muted);
+        font-size: 8px;
+      }
+      .utility-primary-button {
+        width: 100%;
+        margin-top: 12px;
+        border: 0;
+        border-radius: 12px;
+        background: var(--red);
+        color: white;
+        padding: 12px;
+        font-size: 10px;
+        font-weight: 700;
+      }
+      .utility-primary-button.blue {
+        background: var(--red);
+        box-shadow: 0 8px 18px rgba(201, 71, 53, 0.2);
+      }
+      .utility-primary-button:disabled {
+        background: #d5d8da;
+        color: white;
+      }
+      .invite-tips-card {
+        margin-top: 12px;
+        border-radius: 16px;
+        background: #edf1e8;
+        color: #536247;
+        padding: 14px;
+      }
+      .invite-tips-card b {
+        color: var(--green);
+        font-size: 10px;
+      }
+      .invite-tips-card ul {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 7px 10px;
+        margin: 9px 0 0;
+        padding: 0;
+        list-style: none;
+      }
+      .invite-tips-card li {
+        position: relative;
+        padding-left: 9px;
+        font-size: 8px;
+        line-height: 1.5;
+      }
+      .invite-tips-card li::before {
+        position: absolute;
+        top: 4px;
+        left: 0;
+        width: 4px;
+        height: 4px;
+        border-radius: 50%;
+        background: #95a584;
+        content: "";
+      }
+      .invite-order-secondary {
+        display: grid;
+        grid-template-columns: 34px minmax(0, 1fr) auto;
+        align-items: center;
+        gap: 9px;
+        margin-top: 12px;
+        border-radius: 15px;
+        background: #f5ece2;
+        padding: 12px;
+        text-align: left;
+      }
+      .invite-order-secondary > i {
+        display: grid;
+        place-items: center;
+        width: 34px;
+        height: 34px;
+        border-radius: 11px;
+        background: #fff8ef;
+        color: var(--red);
+        font-size: 16px;
+        font-style: normal;
+      }
+      .invite-order-secondary b,
+      .invite-order-secondary small {
+        display: block;
+      }
+      .invite-order-secondary b {
+        font-size: 10px;
+      }
+      .invite-order-secondary small {
+        margin-top: 3px;
+        color: var(--muted);
+        font-size: 8px;
+      }
+      .invite-order-secondary button {
+        border: 0;
+        border-radius: 10px;
+        background: #fff8ef;
+        color: var(--red);
+        padding: 8px 12px;
+        font-size: 8px;
+        font-weight: 700;
+      }
+      .utility-section-title {
+        margin: 4px 0 9px;
+        font-size: 11px;
+      }
+      .kitchen-icon-grid {
+        display: grid;
+        grid-template-columns: repeat(5, 1fr);
+        gap: 8px;
+      }
+      .kitchen-icon-grid button {
+        display: grid;
+        place-items: center;
+        aspect-ratio: 1;
+        border: 0;
+        border-radius: 14px;
+        background: var(--card);
+        font-size: 21px;
+      }
+      .kitchen-icon-grid button.on {
+        background: #e3f4e6;
+        box-shadow: inset 0 0 0 1px #4cbd7a;
+      }
+      .utility-field {
+        display: block;
+        margin-top: 20px;
+      }
+      .utility-field > b,
+      .utility-field > small {
+        display: block;
+      }
+      .utility-field > b {
+        font-size: 11px;
+      }
+      .utility-field > small {
+        margin-top: 5px;
+        color: var(--muted);
+        font-size: 8px;
+      }
+      .utility-field input {
+        width: 100%;
+        margin-top: 9px;
+        border: 1px solid var(--line);
+        border-radius: 13px;
+        background: var(--card);
+        outline: none;
+        padding: 12px;
+        font-size: 10px;
+      }
+      .join-code-wrap {
+        position: relative;
+        margin-top: 12px;
+      }
+      .join-code-boxes {
+        display: grid;
+        grid-template-columns: repeat(6, 1fr);
+        gap: 7px;
+      }
+      .join-code-boxes i {
+        display: grid;
+        place-items: center;
+        aspect-ratio: 1;
+        border: 1px solid var(--line);
+        border-radius: 11px;
+        background: var(--card);
+        font-size: 15px;
+        font-style: normal;
+      }
+      .join-code-boxes i.filled {
+        border-color: #65bd8a;
+        background: #e6f5eb;
+      }
+      .join-code-wrap input {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        opacity: 0;
+      }
+      .utility-note-list {
+        margin: 18px 0 0;
+        color: var(--muted);
+        font-size: 8px;
+        line-height: 2;
+      }
+      .kitchen-list {
+        display: grid;
+        gap: 8px;
+      }
+      .kitchen-list button {
+        display: grid;
+        grid-template-columns: 44px minmax(0, 1fr) auto;
+        align-items: center;
+        gap: 10px;
+        border: 0;
+        border-radius: 15px;
+        background: var(--card);
+        color: var(--ink);
+        padding: 11px;
+        text-align: left;
+      }
+      .kitchen-list button > i {
+        display: grid;
+        place-items: center;
+        width: 42px;
+        height: 42px;
+        border-radius: 13px;
+        background: #e6f2e5;
+        font-size: 22px;
+        font-style: normal;
+      }
+      .kitchen-list button b,
+      .kitchen-list button small {
+        display: block;
+      }
+      .kitchen-list button b {
+        font-size: 11px;
+      }
+      .kitchen-list button small {
+        margin-top: 4px;
+        color: var(--muted);
+        font-size: 8px;
+      }
+      .kitchen-list button em {
+        border-radius: 999px;
+        background: #e5eee0;
+        color: var(--green);
+        padding: 4px 7px;
+        font-size: 7px;
+        font-style: normal;
+      }
+      .kitchen-summary-card {
+        display: flex;
+        align-items: center;
+        gap: 11px;
+        border-radius: 16px;
+        background: var(--card);
+        padding: 14px;
+      }
+      .kitchen-summary-card b,
+      .kitchen-summary-card small {
+        display: block;
+      }
+      .kitchen-summary-card b {
+        font-size: 13px;
+      }
+      .kitchen-summary-card small {
+        margin-top: 4px;
+        color: var(--muted);
+        font-size: 8px;
+      }
+      .kitchen-edit-card {
+        margin-top: 12px;
+        border-radius: 16px;
+        background: var(--card);
+        padding: 13px;
+      }
+      .kitchen-edit-card h3 {
+        margin: 0 0 10px;
+        font-size: 11px;
+      }
+      .kitchen-edit-members {
+        display: grid;
+        gap: 7px;
+      }
+      .kitchen-edit-members .family-member-row {
+        background: #f7f2eb;
+      }
       .avatar {
         width: 38px;
         height: 38px;
@@ -378,21 +1259,45 @@
         padding-top: 8px;
       }
       .nav button {
+        flex: 1;
+        min-width: 0;
         border: 0;
         background: none;
         color: #988e85;
-        font-size: 10px;
+        font-size: 9px;
         display: grid;
-        gap: 3px;
+        gap: 4px;
         place-items: center;
+        padding: 3px 2px 8px;
       }
       .nav button i {
+        display: grid;
+        place-items: center;
+        width: 34px;
+        height: 27px;
+        border-radius: 10px;
         font-style: normal;
-        font-size: 21px;
+        transition:
+          color 0.2s ease,
+          background 0.2s ease,
+          transform 0.2s ease;
+      }
+      .nav button svg {
+        width: 21px;
+        height: 21px;
+        fill: none;
+        stroke: currentColor;
+        stroke-width: 1.8;
+        stroke-linecap: round;
+        stroke-linejoin: round;
       }
       .nav button.active {
         color: var(--red);
         font-weight: 700;
+      }
+      .nav button.active i {
+        background: #f7e5e0;
+        transform: translateY(-1px);
       }
       .cover {
         height: 285px;
@@ -816,6 +1721,7 @@
         display: flex;
         align-items: center;
         gap: 9px;
+        min-width: 0;
       }
       .today-recommend-head > div > i {
         width: 34px;
@@ -839,12 +1745,55 @@
         color: var(--muted);
         font-size: 8px;
       }
-      .today-recommend-head > button {
+      .today-recommend-head-actions {
+        display: flex;
+        align-items: center;
+        gap: 4px;
+        flex: none;
+      }
+      .today-recommend-head-actions button {
         border: 0;
         background: transparent;
+        padding: 5px 6px;
+        font-size: 8px;
+      }
+      .today-recommend-view {
         color: var(--red);
-        padding: 4px 0;
-        font-size: 9px;
+      }
+      .today-recommend-toggle {
+        border-radius: 8px !important;
+        background: #f3e9dc !important;
+        color: var(--muted);
+      }
+      .today-recommend-body {
+        display: block;
+      }
+      .today-recommend-card.is-collapsed {
+        margin-bottom: 12px;
+        border-radius: 14px;
+        padding: 8px 10px;
+      }
+      .today-recommend-card.is-collapsed .today-recommend-body,
+      .today-recommend-card.is-collapsed .today-recommend-view {
+        display: none;
+      }
+      .today-recommend-card.is-collapsed .today-recommend-head > div > i {
+        width: 30px;
+        height: 30px;
+        border-radius: 10px;
+        font-size: 15px;
+      }
+      .today-recommend-card.is-collapsed .today-recommend-head span {
+        min-width: 0;
+      }
+      .today-recommend-card.is-collapsed .today-recommend-head small {
+        max-width: 210px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+      }
+      .today-recommend-card.is-collapsed .today-recommend-toggle {
+        color: var(--red);
       }
       .today-recommend-dishes {
         display: flex;
@@ -899,6 +1848,188 @@
         background: var(--red);
         color: #fff;
         font-weight: 700;
+      }
+      .home-menu-heading {
+        align-items: center;
+        margin-bottom: 9px;
+      }
+      .home-menu-tools {
+        display: flex;
+        gap: 6px;
+      }
+      .home-menu-tools button {
+        border: 1px solid var(--line);
+        border-radius: 999px;
+        background: var(--card);
+        color: var(--ink);
+        padding: 6px 8px;
+        font-size: 8px;
+        white-space: nowrap;
+      }
+      .home-menu-tools button:last-child {
+        border-color: #efd1c4;
+        color: var(--red);
+      }
+      .recipe-add-methods {
+        display: grid;
+        gap: 8px;
+      }
+      .recipe-add-method {
+        display: grid;
+        grid-template-columns: 38px 1fr auto;
+        align-items: center;
+        gap: 10px;
+        width: 100%;
+        border: 1px solid var(--line);
+        border-radius: 14px;
+        background: var(--card);
+        color: var(--ink);
+        padding: 10px;
+        text-align: left;
+      }
+      .recipe-add-method > i {
+        display: grid;
+        place-items: center;
+        width: 38px;
+        height: 38px;
+        border-radius: 12px;
+        background: #eaf0e5;
+        color: var(--green);
+        font-size: 16px;
+        font-style: normal;
+      }
+      .recipe-add-method:nth-child(2) > i {
+        background: #eaf0fa;
+        color: #4e72b8;
+      }
+      .recipe-add-method:nth-child(3) > i {
+        background: #f9e8eb;
+        color: var(--red);
+      }
+      .recipe-add-method:nth-child(4) > i {
+        background: #eee8f8;
+        color: #7257a1;
+      }
+      .recipe-add-method b,
+      .recipe-add-method small {
+        display: block;
+      }
+      .recipe-add-method b {
+        font-size: 10px;
+      }
+      .recipe-add-method small {
+        margin-top: 3px;
+        color: var(--muted);
+        font-size: 8px;
+      }
+      .recipe-add-method > span:last-child {
+        color: #b9b1a9;
+      }
+      .recipe-add-method.disabled {
+        opacity: 0.58;
+      }
+      .recipe-add-methods.compact .recipe-add-method {
+        min-height: 62px;
+        border: 0;
+        border-radius: 14px;
+        background: #f7f3ed;
+        box-shadow: none;
+        transition:
+          background 0.16s ease,
+          transform 0.16s ease;
+      }
+      .recipe-add-methods.compact .recipe-add-method:active {
+        background: #f0e9e1;
+        transform: scale(0.985);
+      }
+      .recipe-add-methods.compact .recipe-add-method > i {
+        background: #e5eee0;
+      }
+      .recipe-add-methods.compact .recipe-add-method:nth-child(2) > i {
+        background: #e7edf7;
+      }
+      .recipe-add-methods.compact .recipe-add-method:nth-child(3) > i {
+        background: #f5e5e7;
+      }
+      .recipe-link-providers {
+        display: flex;
+        gap: 6px;
+        margin-top: 5px;
+      }
+      .recipe-link-providers em {
+        border-radius: 999px;
+        background: #f3eee8;
+        color: #85786d;
+        padding: 2px 6px;
+        font-size: 7px;
+        font-style: normal;
+      }
+      .recipe-link-field {
+        display: flex;
+        gap: 8px;
+        margin-top: 12px;
+      }
+      .recipe-link-field input {
+        min-width: 0;
+        flex: 1;
+        border: 1px solid var(--line);
+        border-radius: 12px;
+        background: #faf8f4;
+        padding: 11px;
+        font-size: 9px;
+        outline: none;
+      }
+      .recipe-link-field button {
+        border: 0;
+        border-radius: 12px;
+        background: var(--red);
+        color: #fff;
+        padding: 0 13px;
+        font-size: 9px;
+        font-weight: 700;
+      }
+      .recipe-link-help {
+        margin: 8px 2px 0;
+        color: var(--muted);
+        font-size: 8px;
+        line-height: 1.5;
+      }
+      .invite-order-preview {
+        margin: 5px 0 12px;
+        padding: 14px;
+        border-radius: 16px;
+        background: linear-gradient(135deg, #eef3e9, #faf7f1);
+      }
+      .invite-order-preview b,
+      .invite-order-preview small {
+        display: block;
+      }
+      .invite-order-preview b {
+        font-size: 12px;
+      }
+      .invite-order-preview small {
+        margin-top: 5px;
+        color: var(--muted);
+        font-size: 8px;
+        line-height: 1.5;
+      }
+      .invite-order-actions {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 8px;
+      }
+      .invite-order-actions button {
+        border: 1px solid var(--line);
+        border-radius: 12px;
+        background: var(--card);
+        color: var(--ink);
+        padding: 10px;
+        font-size: 9px;
+      }
+      .invite-order-actions button:last-child {
+        border-color: var(--green);
+        background: var(--green);
+        color: white;
       }
       .recommend-sheet-card {
         max-height: 84vh;
@@ -1178,6 +2309,124 @@
         width: 32px;
         height: 32px;
       }
+      .manage-inline-actions {
+        display: grid;
+        flex: none;
+        gap: 5px;
+      }
+      .manage-inline-actions button {
+        min-width: 34px;
+        border: 1px solid #cfe2cc;
+        border-radius: 8px;
+        background: #f1f8ef;
+        color: var(--green);
+        padding: 5px 7px;
+        font-size: 8px;
+      }
+      .manage-inline-actions button:last-child {
+        border-color: #f0d0ca;
+        background: #fff5f2;
+        color: var(--red);
+      }
+      .recipe-manage-top {
+        display: grid;
+        grid-template-columns: 76px 1fr 76px;
+        min-height: 74px;
+        box-sizing: border-box;
+        align-items: end;
+        padding: 28px 16px 12px;
+        background: #f7f2ecef;
+        backdrop-filter: blur(16px);
+      }
+      .recipe-manage-top > div {
+        text-align: center;
+      }
+      .recipe-manage-top h2 {
+        margin: 0;
+        font-family: inherit;
+        font-size: 18px;
+        font-weight: 750;
+        line-height: 32px;
+      }
+      .recipe-manage-top .back {
+        justify-self: start;
+      }
+      .recipe-manage-top .add-recipe-link {
+        justify-self: end;
+        border: 1px solid #cfe2cc;
+        border-radius: 999px;
+        background: #f3f8f0;
+        color: var(--green);
+        padding: 7px 9px;
+        font-size: 8px;
+      }
+      .manage-menu-layout {
+        display: grid;
+        grid-template-columns: 82px minmax(0, 1fr);
+        gap: 11px;
+        align-items: start;
+        padding: 0 14px 24px;
+      }
+      .manage-category-rail {
+        position: sticky;
+        top: 92px;
+        overflow: hidden;
+        border-radius: 16px;
+        background: #eee8e0;
+      }
+      .manage-category-rail button {
+        position: relative;
+        width: 100%;
+        border: 0;
+        background: transparent;
+        color: #7e746b;
+        padding: 13px 5px;
+        font-size: 11px;
+      }
+      .manage-category-rail button.on {
+        background: var(--card);
+        color: var(--red);
+        font-weight: 700;
+      }
+      .manage-category-rail button.on::before {
+        position: absolute;
+        top: 11px;
+        bottom: 11px;
+        left: 0;
+        width: 3px;
+        border-radius: 0 3px 3px 0;
+        background: var(--red);
+        content: "";
+      }
+      .manage-category-rail small {
+        display: block;
+        margin-top: 2px;
+        color: #aaa098;
+        font-size: 9px;
+      }
+      .manage-catalog {
+        min-width: 0;
+      }
+      .manage-catalog .manage-list {
+        gap: 9px;
+        padding: 0;
+      }
+      .manage-catalog .manage-item {
+        border: 0;
+        border-radius: 16px;
+        padding: 9px;
+        box-shadow: 0 4px 14px #654a320c;
+      }
+      .manage-catalog .manage-pic {
+        width: 58px;
+        min-width: 58px;
+        height: 58px;
+        border-radius: 13px;
+        font-size: 32px;
+      }
+      .manage-catalog .manage-tags span:nth-child(n + 2) {
+        display: none;
+      }
       .create-btn {
         position: static;
         width: calc(100% - 32px);
@@ -1314,29 +2563,6 @@
         margin: -4px 16px 10px;
         color: var(--muted);
         font-size: 9px;
-      }
-      .recipe-workspace-tabs {
-        margin: 0 16px 12px;
-        padding: 3px;
-        border-radius: 12px;
-        background: #ebe5de;
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        gap: 3px;
-      }
-      .recipe-workspace-tabs button {
-        border: 0;
-        border-radius: 9px;
-        background: transparent;
-        color: var(--muted);
-        padding: 8px;
-        font-size: 10px;
-      }
-      .recipe-workspace-tabs button.on {
-        background: var(--card);
-        color: var(--ink);
-        font-weight: 700;
-        box-shadow: 0 2px 8px #594a3a0b;
       }
       .solo-prep-entry {
         display: none;
@@ -2154,6 +3380,91 @@
         display: grid;
         gap: 9px;
       }
+      .record-focus-panel {
+        margin: 0 16px 12px;
+      }
+      .record-date-strip,
+      .record-meal-tabs {
+        display: grid;
+        gap: 7px;
+      }
+      .record-date-strip {
+        grid-template-columns: repeat(4, 1fr);
+      }
+      .record-date-strip button {
+        min-width: 0;
+        border: 0;
+        border-radius: 13px;
+        background: #eee8e0;
+        color: var(--muted);
+        padding: 9px 4px;
+        font-size: 9px;
+      }
+      .record-date-strip button b,
+      .record-date-strip button small {
+        display: block;
+      }
+      .record-date-strip button b {
+        color: var(--ink);
+        font-size: 10px;
+      }
+      .record-date-strip button small {
+        margin-top: 2px;
+        font-size: 7px;
+      }
+      .record-date-strip button.on {
+        background: var(--ink);
+        color: #fff;
+      }
+      .record-date-strip button.on b {
+        color: #fff;
+      }
+      .record-meal-tabs {
+        grid-template-columns: repeat(3, 1fr);
+        margin-top: 9px;
+        padding: 3px;
+        border-radius: 13px;
+        background: #eee8e0;
+      }
+      .record-meal-tabs button {
+        border: 0;
+        border-radius: 10px;
+        background: transparent;
+        color: var(--muted);
+        padding: 8px;
+        font-size: 9px;
+      }
+      .record-meal-tabs button.on {
+        background: var(--card);
+        color: var(--red);
+        font-weight: 700;
+        box-shadow: 0 2px 8px #594a3a0c;
+      }
+      .record-calendar-panel {
+        display: none;
+      }
+      .record-calendar-panel.show {
+        display: block;
+      }
+      .record-calendar-panel:not(.show) + .calendar-legend {
+        display: none;
+      }
+      .record-day-toolbar {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin: 0 16px 9px;
+      }
+      .record-day-toolbar h3 {
+        margin: 0;
+        font-size: 14px;
+      }
+      .record-day-toolbar small {
+        display: block;
+        margin-top: 2px;
+        color: var(--muted);
+        font-size: 8px;
+      }
       .meal-card {
         background: var(--card);
         border-radius: 17px;
@@ -2161,6 +3472,442 @@
         display: grid;
         grid-template-columns: 43px 1fr;
         gap: 10px;
+      }
+      .record-order-card {
+        display: block;
+        scroll-margin-top: 162px;
+        border: 1px solid transparent;
+        padding: 12px;
+        transition:
+          border-color 0.18s ease,
+          box-shadow 0.18s ease;
+      }
+      .record-order-card:not(.focused) {
+        display: none;
+      }
+      .record-order-card.focused {
+        border-color: #e8c4b8;
+        box-shadow: 0 5px 18px #8d5c4212;
+      }
+      .record-order-head,
+      .record-order-person,
+      .record-order-footer,
+      .record-dish-row {
+        display: flex;
+        align-items: center;
+      }
+      .record-order-head {
+        justify-content: space-between;
+        padding-bottom: 9px;
+        border-bottom: 1px solid var(--line);
+      }
+      .record-order-head b {
+        font-size: 12px;
+      }
+      .record-order-head small {
+        margin-left: 5px;
+        color: var(--muted);
+        font-size: 8px;
+      }
+      .record-order-status {
+        color: var(--red);
+        font-size: 8px;
+      }
+      .record-order-status.done {
+        color: var(--green);
+      }
+      .record-order-person {
+        gap: 7px;
+        padding: 9px 0 3px;
+      }
+      .record-order-person i {
+        display: grid;
+        place-items: center;
+        width: 25px;
+        height: 25px;
+        border-radius: 9px;
+        background: #f4e6dc;
+        font-size: 13px;
+        font-style: normal;
+      }
+      .record-order-person span,
+      .record-order-person b,
+      .record-order-person small {
+        display: block;
+      }
+      .record-order-person b {
+        font-size: 9px;
+      }
+      .record-order-person small {
+        margin-top: 2px;
+        color: var(--muted);
+        font-size: 7px;
+      }
+      .record-dish-list {
+        max-height: 264px;
+        overflow-y: auto;
+        overflow-x: hidden;
+      }
+      .record-dish-swipe {
+        position: relative;
+        overflow: hidden;
+        border-bottom: 1px solid var(--line);
+      }
+      .record-dish-delete {
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        width: 58px;
+        border: 0;
+        background: var(--red);
+        color: #fff;
+        font-size: 9px;
+        font-weight: 700;
+      }
+      .record-dish-row {
+        position: relative;
+        z-index: 1;
+        gap: 9px;
+        padding: 9px 0;
+        background: var(--card);
+        touch-action: pan-y;
+        transition: transform 0.18s ease;
+        user-select: none;
+      }
+      .record-dish-row.swiped {
+        transform: translateX(-58px);
+      }
+      .record-dish-row > i {
+        display: grid;
+        place-items: center;
+        flex: none;
+        width: 45px;
+        height: 45px;
+        border-radius: 11px;
+        background: #efe1d3;
+        font-size: 25px;
+        font-style: normal;
+      }
+      .record-dish-row > span {
+        min-width: 0;
+        flex: 1;
+      }
+      .record-dish-row b,
+      .record-dish-row small {
+        display: block;
+      }
+      .record-dish-row b {
+        overflow: hidden;
+        font-size: 10px;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+      }
+      .record-dish-row small {
+        margin-top: 3px;
+        color: var(--muted);
+        font-size: 7px;
+      }
+      .record-dish-row em {
+        color: var(--muted);
+        font-size: 8px;
+        font-style: normal;
+      }
+      .record-order-footer {
+        justify-content: flex-end;
+        gap: 7px;
+        padding-top: 10px;
+      }
+      .record-order-footer button {
+        border: 0;
+        border-radius: 9px;
+        background: #f2ebe3;
+        color: var(--ink);
+        padding: 7px 9px;
+        font-size: 8px;
+      }
+      .record-order-footer button:last-child {
+        background: var(--red);
+        color: #fff;
+      }
+      .record-order-footer button.done {
+        background: #e7eee2;
+        color: var(--green);
+      }
+      .record-empty-order {
+        padding: 18px 2px 8px;
+        text-align: center;
+        color: var(--muted);
+        font-size: 9px;
+      }
+      .record-shopping-entry {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        width: 100%;
+        border: 0;
+        border-radius: 16px;
+        background: #edf2e9;
+        color: var(--ink);
+        padding: 12px;
+        text-align: left;
+      }
+      .record-shopping-entry > i {
+        display: grid;
+        place-items: center;
+        flex: none;
+        width: 36px;
+        height: 36px;
+        border-radius: 11px;
+        background: #dfe9d7;
+        font-size: 18px;
+        font-style: normal;
+      }
+      .record-shopping-entry > span:first-of-type {
+        min-width: 0;
+        flex: 1;
+      }
+      .record-shopping-entry b,
+      .record-shopping-entry small {
+        display: block;
+      }
+      .record-shopping-entry b {
+        font-size: 10px;
+      }
+      .record-shopping-entry small {
+        margin-top: 3px;
+        color: var(--muted);
+        font-size: 8px;
+      }
+      .record-shopping-entry > span:last-child {
+        color: var(--green);
+        font-size: 9px;
+      }
+      .record-shopping-top {
+        display: grid;
+        grid-template-columns: 68px 1fr 68px;
+        align-items: end;
+      }
+      .record-shopping-top > div {
+        text-align: center;
+      }
+      .record-shopping-top .back {
+        justify-self: start;
+      }
+      .record-shopping-top .top-action {
+        justify-self: end;
+      }
+      .record-shopping-tabs {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 4px;
+        margin: 0 16px 12px;
+        padding: 3px;
+        border-radius: 13px;
+        background: #eee8e0;
+      }
+      .record-shopping-tabs button {
+        border: 0;
+        border-radius: 10px;
+        background: transparent;
+        color: var(--muted);
+        padding: 8px 4px;
+        font-size: 9px;
+      }
+      .record-shopping-tabs button.on {
+        background: var(--card);
+        color: var(--green);
+        font-weight: 700;
+      }
+      .record-shopping-summary {
+        display: flex;
+        justify-content: space-between;
+        margin: 0 16px 8px;
+        border-radius: 14px;
+        background: #edf2e9;
+        color: #526247;
+        padding: 11px;
+        font-size: 9px;
+      }
+      .record-shopping-summary b {
+        font-size: 12px;
+      }
+      .record-shopping-page-list {
+        margin: 0 16px 24px;
+        padding-bottom: 10px;
+      }
+      .record-shopping-page-list .record-procurement-category-head {
+        padding: 0 0 7px;
+        color: var(--ink);
+      }
+      .record-shopping-page-list .record-procurement-category {
+        margin: 0 0 9px;
+        border-radius: 16px;
+        padding: 11px 12px 5px;
+      }
+      .record-shopping-page-list .record-procurement-category.tone-vegetable {
+        background: #eaf3e4;
+      }
+      .record-shopping-page-list .record-procurement-category.tone-meat {
+        background: #f7e8e3;
+      }
+      .record-shopping-page-list .record-procurement-category.tone-fresh {
+        background: #e7f1f1;
+      }
+      .record-shopping-page-list .record-procurement-category.tone-staple {
+        background: #f6efdc;
+      }
+      .record-shopping-page-list .record-procurement-category.tone-seasoning {
+        background: #f0e9f2;
+      }
+      .record-shopping-page-list .record-procurement-category.tone-other {
+        background: #f0ece6;
+      }
+      .record-shopping-page-list .record-procurement-category-head b {
+        display: flex;
+        align-items: center;
+        gap: 5px;
+        font-size: 10px;
+      }
+      .record-shopping-page-list .record-procurement-category-head i {
+        font-size: 13px;
+        font-style: normal;
+      }
+      .record-shopping-page-list .record-procurement-item {
+        border-top-color: rgba(73, 68, 59, 0.1);
+      }
+      .record-shopping-share-intro {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        margin: 4px 0 13px;
+        border-radius: 15px;
+        background: #edf2e9;
+        padding: 12px;
+      }
+      .record-shopping-share-intro > i {
+        display: grid;
+        place-items: center;
+        width: 36px;
+        height: 36px;
+        flex: none;
+        border-radius: 12px;
+        background: #dce8d5;
+        font-size: 18px;
+        font-style: normal;
+      }
+      .record-shopping-share-intro b,
+      .record-shopping-share-intro small {
+        display: block;
+      }
+      .record-shopping-share-intro b {
+        font-size: 11px;
+      }
+      .record-shopping-share-intro small {
+        margin-top: 3px;
+        color: var(--muted);
+        font-size: 8px;
+        line-height: 1.5;
+      }
+      .record-shopping-share-range {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 7px;
+      }
+      .record-shopping-share-range button {
+        position: relative;
+        min-height: 69px;
+        border: 0;
+        border-radius: 14px;
+        background: #f3efe9;
+        color: var(--ink);
+        padding: 10px 7px;
+        text-align: left;
+      }
+      .record-shopping-share-range button.on {
+        background: #e7f0e1;
+        color: #506647;
+        box-shadow: inset 0 0 0 1px #b9cbaa;
+      }
+      .record-shopping-share-range span,
+      .record-shopping-share-range small {
+        display: block;
+      }
+      .record-shopping-share-range span {
+        font-size: 10px;
+        font-weight: 700;
+      }
+      .record-shopping-share-range small {
+        margin-top: 5px;
+        color: var(--muted);
+        font-size: 8px;
+      }
+      .record-shopping-share-range i {
+        position: absolute;
+        top: 8px;
+        right: 8px;
+        display: grid;
+        place-items: center;
+        width: 16px;
+        height: 16px;
+        border-radius: 50%;
+        background: #6f865e;
+        color: white;
+        font-size: 9px;
+        font-style: normal;
+        opacity: 0;
+      }
+      .record-shopping-share-range button.on i {
+        opacity: 1;
+      }
+      .record-shopping-share-foot {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin: 11px 1px 2px;
+        color: var(--muted);
+        font-size: 8px;
+      }
+      .record-shopping-share-foot button {
+        border: 0;
+        background: transparent;
+        color: var(--green);
+        padding: 4px 0;
+        font-size: 8px;
+      }
+      .record-menu-share-preview {
+        margin: 4px 0 12px;
+        border-radius: 17px;
+        background: linear-gradient(145deg, #fff9f0, #f2e7db);
+        padding: 15px;
+      }
+      .record-menu-share-preview h3 {
+        margin: 0;
+        font-size: 16px;
+      }
+      .record-menu-share-preview > small {
+        display: block;
+        margin-top: 4px;
+        color: var(--muted);
+        font-size: 8px;
+      }
+      .record-menu-share-dishes {
+        display: grid;
+        gap: 7px;
+        margin-top: 12px;
+      }
+      .record-menu-share-dishes div {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        border-radius: 11px;
+        background: #ffffffb8;
+        padding: 8px;
+        font-size: 9px;
+      }
+      .record-menu-share-dishes i {
+        font-size: 20px;
+        font-style: normal;
       }
       .record-procurement-card {
         background: linear-gradient(145deg, #f8faf4, #ffffff);
@@ -5061,12 +6808,45 @@
         <div class="notch"></div>
         <div class="app">
           <section class="screen active" id="home">
-            <header class="top app-topbar">
-              <div>
-                <h2>点菜</h2>
-                <small id="homeTableSubtitle">从我家会做的菜里，选下一餐</small>
+            <header class="top app-topbar family-toolbar">
+              <button
+                class="family-space-trigger"
+                onclick="openFamilySpaceSheet()"
+              >
+                <i class="family-space-mark">家</i
+                ><span
+                  ><b class="family-space-name">我家厨房</b
+                  ><small
+                    ><span class="family-space-member-count">3 位成员</span> ·
+                    家庭共用</small
+                  ></span
+                ><em>⌄</em>
+              </button>
+              <div class="family-toolbar-actions">
+                <button
+                  class="family-tool-button"
+                  onclick="openNotificationCenter()"
+                  aria-label="查看通知"
+                >
+                  <svg viewBox="0 0 24 24">
+                    <path
+                      d="M6.5 9a5.5 5.5 0 0 1 11 0c0 6 2.5 6 2.5 7.5h-16C4 15 6.5 15 6.5 9Z"
+                    />
+                    <path d="M10 20h4" /></svg
+                  ><span class="family-notice-dot"></span>
+                </button>
+                <button
+                  class="family-tool-button family-member-button"
+                  onclick="openFamilyMemberInviteScreen()"
+                  aria-label="家庭成员"
+                >
+                  <span>妈</span><span>＋</span>
+                </button>
               </div>
             </header>
+            <div class="home-order-context" id="homeTableSubtitle" hidden>
+              正在编辑本餐菜单
+            </div>
             <label class="search-box"
               >⌕<input
                 id="homeRecipeSearch"
@@ -5085,30 +6865,56 @@
                     ></span
                   >
                 </div>
-                <button onclick="openTodayRecommendation()">查看推荐 ›</button>
+                <div class="today-recommend-head-actions">
+                  <button
+                    class="today-recommend-view"
+                    onclick="openTodayRecommendation()"
+                  >
+                    查看推荐 ›
+                  </button>
+                  <button
+                    class="today-recommend-toggle"
+                    id="todayRecommendToggle"
+                    aria-expanded="true"
+                    onclick="toggleTodayRecommendationCard(event)"
+                  >
+                    收起⌃
+                  </button>
+                </div>
               </div>
-              <div
-                class="today-recommend-dishes"
-                id="todayRecommendPreview"
-              ></div>
-              <div class="today-recommend-meta">
-                <span id="todayRecommendReason"
-                  >换换口味，也照顾最近的搭配</span
-                >
-              </div>
-              <div class="today-recommend-card-actions">
-                <button onclick="refreshTodayRecommendation(event)">
-                  ↻ 换一组
-                </button>
-                <button onclick="openTodayRecommendationSettings()">
-                  调整推荐偏好
-                </button>
-                <button onclick="useTodayRecommendation()">选用推荐</button>
+              <div class="today-recommend-body">
+                <div
+                  class="today-recommend-dishes"
+                  id="todayRecommendPreview"
+                ></div>
+                <div class="today-recommend-meta">
+                  <span id="todayRecommendReason"
+                    >换换口味，也照顾最近的搭配</span
+                  >
+                </div>
+                <div class="today-recommend-card-actions">
+                  <button onclick="refreshTodayRecommendation(event)">
+                    ↻ 换一组
+                  </button>
+                  <button onclick="openTodayRecommendationSettings()">
+                    调整推荐偏好
+                  </button>
+                  <button onclick="useTodayRecommendation()">选用推荐</button>
+                </div>
               </div>
             </section>
-            <div class="section-head">
+            <div class="section-head home-menu-heading">
               <h3>今天想吃什么？</h3>
-              <span>已选 <b id="cartCount">0</b> 道</span>
+              <b id="cartCount" hidden>0</b>
+              <div class="home-menu-tools" aria-label="菜谱维护">
+                <button onclick="openHomeRecipeManagement()">
+                  ☷ 菜谱管理
+                </button>
+                <button onclick="openHomeRecipeAddMethods()">
+                  ＋ 添加菜谱
+                </button>
+                <button onclick="openInviteOrderSheet()">↗ 邀请点菜</button>
+              </div>
             </div>
             <div class="menu-layout">
               <aside class="category-rail">
@@ -5151,10 +6957,8 @@
                 </button>
               </aside>
               <div class="menu-list">
-                <div class="group-title">
-                  <b id="categoryTitle">热门推荐</b
-                  ><span id="categoryCount">共 6 道</span>
-                </div>
+                <b id="categoryTitle" hidden>热门推荐</b>
+                <span id="categoryCount" hidden>共 6 道</span>
                 <div
                   class="menu-dish"
                   data-cat="meat"
@@ -5294,33 +7098,20 @@
             </div>
           </section>
           <section class="screen" id="manage">
-            <header class="top app-topbar">
+            <header class="top recipe-manage-top">
+              <button class="icon-btn back" onclick="closeRecipeManagement()">
+                ‹
+              </button>
               <div>
-                <h2 id="ownedRecipeTitle">我家菜谱</h2>
-                <small id="ownedRecipeSubtitle"
-                  >管理可点菜谱，也收好准备学的菜</small
-                >
+                <h2 id="ownedRecipeTitle">菜谱管理</h2>
               </div>
               <button
-                class="top-action icon-only"
-                onclick="toggleManageView(this)"
-                aria-label="切换视图"
+                class="add-recipe-link"
+                onclick="openHomeRecipeAddMethods()"
               >
-                ▦
+                ＋ 添加菜谱
               </button>
             </header>
-            <div class="recipe-workspace-tabs">
-              <button onclick="switchRecipeWorkspace('discover')">
-                发现菜谱
-              </button>
-              <button
-                class="on"
-                id="ownedRecipeTabManage"
-                onclick="switchRecipeWorkspace('owned')"
-              >
-                我家菜谱
-              </button>
-            </div>
             <label class="search-box"
               >⌕<input
                 id="manageSearch"
@@ -5339,145 +7130,196 @@
                 清除
               </button></label
             >
-            <div class="manage-summary">
-              <button
-                class="active"
-                data-family-filter="all"
-                onclick="filterFamilyRecipes(this,'all')"
-              >
-                <b id="familyAllCount">4</b>全部</button
-              ><button
-                class="warn"
-                data-family-filter="available"
-                onclick="filterFamilyRecipes(this,'available')"
-              >
-                <b id="familyAvailableCount">4</b>开放点菜</button
-              ><button
-                data-family-filter="learning"
-                onclick="filterFamilyRecipes(this,'learning')"
-              >
-                <b id="familyLearningCount">0</b>想学先存
-              </button>
-            </div>
             <div class="family-request-panel empty" id="familyRequestPanel">
               <div class="family-request-head">
                 <b>家人想吃</b><span id="familyRequestCount">0 道待处理</span>
               </div>
               <div id="familyRequestList"></div>
             </div>
-            <p class="family-state-note" id="familyStateNote">
-              “开放点菜”会出现在全家的点菜页；所有成员都可以继续改良家庭版本。
-            </p>
-            <div class="section-head">
-              <h3 id="manageHeading">我家菜谱</h3>
-              <span id="manageResult">4 道示例菜谱</span>
+            <div class="manage-menu-layout">
+              <aside class="manage-category-rail" aria-label="菜谱分类">
+                <button
+                  class="on"
+                  data-manage-cat="all"
+                  onclick="filterManageCategory(this,'all','全部菜谱')"
+                >
+                  ☷ 全部<small id="manageCatAll">4</small>
+                </button>
+                <button
+                  data-manage-cat="vegetable"
+                  onclick="filterManageCategory(this,'vegetable','蔬菜')"
+                >
+                  🥬 蔬菜<small id="manageCatVegetable">1</small>
+                </button>
+                <button
+                  data-manage-cat="meat"
+                  onclick="filterManageCategory(this,'meat','肉类')"
+                >
+                  🥩 肉类<small id="manageCatMeat">1</small>
+                </button>
+                <button
+                  data-manage-cat="fish"
+                  onclick="filterManageCategory(this,'fish','鱼虾')"
+                >
+                  🐟 鱼虾<small id="manageCatFish">1</small>
+                </button>
+                <button
+                  data-manage-cat="soup"
+                  onclick="filterManageCategory(this,'soup','汤羹')"
+                >
+                  🥣 汤羹<small id="manageCatSoup">1</small>
+                </button>
+                <button
+                  data-manage-cat="egg"
+                  onclick="filterManageCategory(this,'egg','禽蛋')"
+                >
+                  🥚 禽蛋<small id="manageCatEgg">0</small>
+                </button>
+                <button
+                  data-manage-cat="staple"
+                  onclick="filterManageCategory(this,'staple','主食')"
+                >
+                  🍚 主食<small id="manageCatStaple">0</small>
+                </button>
+              </aside>
+              <div class="manage-catalog">
+                <span id="manageHeading" hidden></span>
+                <span id="manageResult" hidden></span>
+                <div class="manage-list" id="manageList">
+                  <div
+                    class="manage-item"
+                    data-cat="meat"
+                    data-name="外婆红烧肉 五花肉 肉类"
+                    data-recipe-name="外婆红烧肉"
+                    data-status="打磨中"
+                    data-incomplete="false"
+                    data-time="3"
+                    onclick="openPointRecipeDetail('外婆红烧肉','manage')"
+                  >
+                    <div class="manage-pic">🥘</div>
+                    <div class="manage-copy">
+                      <h4>外婆红烧肉 <span class="badge">V6</span></h4>
+                      <p>打磨中 · 3 天前更新 · ★ 4.9</p>
+                      <div class="manage-tags">
+                        <span>肉类</span><span>90 分钟</span
+                        ><span>12 种用料</span>
+                      </div>
+                    </div>
+                    <div class="manage-inline-actions">
+                      <button
+                        onclick="event.stopPropagation();editManagedRecipe('外婆红烧肉')"
+                      >
+                        编辑
+                      </button>
+                      <button
+                        onclick="event.stopPropagation();deleteManagedRecipe('外婆红烧肉')"
+                      >
+                        删除
+                      </button>
+                    </div>
+                  </div>
+                  <div
+                    class="manage-item"
+                    data-cat="vegetable"
+                    data-name="蒜蓉时蔬 青菜 蔬菜类"
+                    data-recipe-name="蒜蓉时蔬"
+                    data-status="已稳定"
+                    data-incomplete="false"
+                    data-time="8"
+                    onclick="openPointRecipeDetail('蒜蓉时蔬','manage')"
+                  >
+                    <div class="manage-pic" style="background: #dbe4c9">🥬</div>
+                    <div class="manage-copy">
+                      <h4>蒜蓉时蔬 <span class="badge">V4</span></h4>
+                      <p>已稳定 · 8 天前更新 · ★ 4.7</p>
+                      <div class="manage-tags">
+                        <span>蔬菜</span><span>10 分钟</span
+                        ><span>6 种用料</span>
+                      </div>
+                    </div>
+                    <div class="manage-inline-actions">
+                      <button
+                        onclick="event.stopPropagation();editManagedRecipe('蒜蓉时蔬')"
+                      >
+                        编辑
+                      </button>
+                      <button
+                        onclick="event.stopPropagation();deleteManagedRecipe('蒜蓉时蔬')"
+                      >
+                        删除
+                      </button>
+                    </div>
+                  </div>
+                  <div
+                    class="manage-item"
+                    data-cat="fish"
+                    data-name="油焖大虾 虾 海鲜 鱼虾类"
+                    data-recipe-name="油焖大虾"
+                    data-status="打磨中"
+                    data-incomplete="true"
+                    data-time="12"
+                    onclick="openPointRecipeDetail('油焖大虾','manage')"
+                  >
+                    <div class="manage-pic" style="background: #f4e0ab">🍤</div>
+                    <div class="manage-copy">
+                      <h4>油焖大虾 <span class="badge">V3</span></h4>
+                      <p>打磨中 · 12 天前更新 · ★ 4.8</p>
+                      <div class="manage-tags">
+                        <span>鱼虾</span><span>25 分钟</span
+                        ><span class="need">缺手法视频</span>
+                      </div>
+                    </div>
+                    <div class="manage-inline-actions">
+                      <button
+                        onclick="event.stopPropagation();editManagedRecipe('油焖大虾')"
+                      >
+                        编辑
+                      </button>
+                      <button
+                        onclick="event.stopPropagation();deleteManagedRecipe('油焖大虾')"
+                      >
+                        删除
+                      </button>
+                    </div>
+                  </div>
+                  <div
+                    class="manage-item"
+                    data-cat="soup"
+                    data-name="菌菇鸡汤 鸡肉 菌菇 汤羹类"
+                    data-recipe-name="菌菇鸡汤"
+                    data-status="新尝试"
+                    data-incomplete="true"
+                    data-time="1"
+                    onclick="openPointRecipeDetail('菌菇鸡汤','manage')"
+                  >
+                    <div class="manage-pic" style="background: #dbe4c9">🍲</div>
+                    <div class="manage-copy">
+                      <h4>菌菇鸡汤 <span class="badge">草稿</span></h4>
+                      <p>新尝试 · 昨天创建 · 暂无点评</p>
+                      <div class="manage-tags">
+                        <span>汤羹</span><span>90 分钟</span
+                        ><span class="need">缺步骤照片</span>
+                      </div>
+                    </div>
+                    <div class="manage-inline-actions">
+                      <button
+                        onclick="event.stopPropagation();editManagedRecipe('菌菇鸡汤')"
+                      >
+                        编辑
+                      </button>
+                      <button
+                        onclick="event.stopPropagation();deleteManagedRecipe('菌菇鸡汤')"
+                      >
+                        删除
+                      </button>
+                    </div>
+                  </div>
+                </div>
+                <div class="manage-empty" id="manageEmpty">
+                  <b>没有找到对应菜谱</b>换个关键词或分类试试
+                </div>
+              </div>
             </div>
-            <div class="manage-list" id="manageList">
-              <div
-                class="manage-item"
-                data-name="外婆红烧肉 五花肉 肉类"
-                data-recipe-name="外婆红烧肉"
-                data-status="打磨中"
-                data-incomplete="false"
-                data-time="3"
-                onclick="openPointRecipeDetail('外婆红烧肉','manage')"
-              >
-                <div class="manage-pic">🥘</div>
-                <div class="manage-copy">
-                  <h4>外婆红烧肉 <span class="badge">V6</span></h4>
-                  <p>打磨中 · 3 天前更新 · ★ 4.9</p>
-                  <div class="manage-tags">
-                    <span>肉类</span><span>90 分钟</span><span>12 种用料</span>
-                  </div>
-                </div>
-                <button
-                  class="manage-more"
-                  onclick="event.stopPropagation();openManageActions('外婆红烧肉')"
-                >
-                  •••
-                </button>
-              </div>
-              <div
-                class="manage-item"
-                data-name="蒜蓉时蔬 青菜 蔬菜类"
-                data-recipe-name="蒜蓉时蔬"
-                data-status="已稳定"
-                data-incomplete="false"
-                data-time="8"
-                onclick="openPointRecipeDetail('蒜蓉时蔬','manage')"
-              >
-                <div class="manage-pic" style="background: #dbe4c9">🥬</div>
-                <div class="manage-copy">
-                  <h4>蒜蓉时蔬 <span class="badge">V4</span></h4>
-                  <p>已稳定 · 8 天前更新 · ★ 4.7</p>
-                  <div class="manage-tags">
-                    <span>蔬菜</span><span>10 分钟</span><span>6 种用料</span>
-                  </div>
-                </div>
-                <button
-                  class="manage-more"
-                  onclick="event.stopPropagation();openManageActions('蒜蓉时蔬')"
-                >
-                  •••
-                </button>
-              </div>
-              <div
-                class="manage-item"
-                data-name="油焖大虾 虾 海鲜 鱼虾类"
-                data-recipe-name="油焖大虾"
-                data-status="打磨中"
-                data-incomplete="true"
-                data-time="12"
-                onclick="openPointRecipeDetail('油焖大虾','manage')"
-              >
-                <div class="manage-pic" style="background: #f4e0ab">🍤</div>
-                <div class="manage-copy">
-                  <h4>油焖大虾 <span class="badge">V3</span></h4>
-                  <p>打磨中 · 12 天前更新 · ★ 4.8</p>
-                  <div class="manage-tags">
-                    <span>鱼虾</span><span>25 分钟</span
-                    ><span class="need">缺手法视频</span>
-                  </div>
-                </div>
-                <button
-                  class="manage-more"
-                  onclick="event.stopPropagation();openManageActions('油焖大虾')"
-                >
-                  •••
-                </button>
-              </div>
-              <div
-                class="manage-item"
-                data-name="菌菇鸡汤 鸡肉 菌菇 汤羹类"
-                data-recipe-name="菌菇鸡汤"
-                data-status="新尝试"
-                data-incomplete="true"
-                data-time="1"
-                onclick="openPointRecipeDetail('菌菇鸡汤','manage')"
-              >
-                <div class="manage-pic" style="background: #dbe4c9">🍲</div>
-                <div class="manage-copy">
-                  <h4>菌菇鸡汤 <span class="badge">草稿</span></h4>
-                  <p>新尝试 · 昨天创建 · 暂无点评</p>
-                  <div class="manage-tags">
-                    <span>汤羹</span><span>90 分钟</span
-                    ><span class="need">缺步骤照片</span>
-                  </div>
-                </div>
-                <button
-                  class="manage-more"
-                  onclick="event.stopPropagation();openManageActions('菌菇鸡汤')"
-                >
-                  •••
-                </button>
-              </div>
-            </div>
-            <div class="manage-empty" id="manageEmpty">
-              <b>没有找到对应菜谱</b>换个关键词或清除筛选试试
-            </div>
-            <button class="create-btn" onclick="openCreateChoices()">
-              ＋ 创建新菜谱
-            </button>
           </section>
           <section class="screen" id="recipeEditor">
             <header class="top">
@@ -6511,16 +8353,92 @@
             </div>
           </section>
           <section class="screen" id="foodCalendar">
-            <header class="top app-topbar">
-              <div>
-                <h2>点餐记录</h2>
-                <small>查看过去，也安排未来</small>
-              </div>
-              <button class="top-action" onclick="recordGoToday()">
-                回到今天
+            <header class="top app-topbar family-toolbar">
+              <button
+                class="family-space-trigger"
+                onclick="openFamilySpaceSheet()"
+              >
+                <i class="family-space-mark">家</i
+                ><span
+                  ><b class="family-space-name">我家厨房</b
+                  ><small
+                    ><span class="family-space-member-count">3 位成员</span> ·
+                    家庭共用</small
+                  ></span
+                ><em>⌄</em>
               </button>
+              <div class="family-toolbar-actions">
+                <button
+                  class="family-tool-button"
+                  onclick="openNotificationCenter()"
+                  aria-label="查看通知"
+                >
+                  <svg viewBox="0 0 24 24">
+                    <path
+                      d="M6.5 9a5.5 5.5 0 0 1 11 0c0 6 2.5 6 2.5 7.5h-16C4 15 6.5 15 6.5 9Z"
+                    />
+                    <path d="M10 20h4" /></svg
+                  ><span class="family-notice-dot"></span>
+                </button>
+                <button
+                  class="family-tool-button family-member-button"
+                  onclick="openFamilyMemberInviteScreen()"
+                  aria-label="家庭成员"
+                >
+                  <span>妈</span><span>＋</span>
+                </button>
+              </div>
             </header>
-            <div class="month-card">
+            <div class="record-focus-panel">
+              <div class="record-date-strip">
+                <button
+                  class="on"
+                  data-record-offset="0"
+                  onclick="selectRecordQuickDate(this,0)"
+                >
+                  <b>今天</b><small>—</small>
+                </button>
+                <button
+                  data-record-offset="1"
+                  onclick="selectRecordQuickDate(this,1)"
+                >
+                  <b>明天</b><small>—</small>
+                </button>
+                <button
+                  data-record-offset="2"
+                  onclick="selectRecordQuickDate(this,2)"
+                >
+                  <b>后天</b><small>—</small>
+                </button>
+                <button onclick="toggleRecordCalendar()">
+                  <b>选择日期</b><small>查看日历</small>
+                </button>
+              </div>
+              <div class="record-meal-tabs">
+                <button
+                  data-record-meal="早餐"
+                  onclick="selectRecordMeal(this,'早餐')"
+                >
+                  早餐
+                </button>
+                <button
+                  data-record-meal="午餐"
+                  onclick="selectRecordMeal(this,'午餐')"
+                >
+                  午餐
+                </button>
+                <button
+                  data-record-meal="晚餐"
+                  onclick="selectRecordMeal(this,'晚餐')"
+                >
+                  晚餐
+                </button>
+              </div>
+            </div>
+            <div
+              class="month-card record-calendar-panel"
+              id="recordCalendarPanel"
+            >
               <div class="month-head">
                 <button onclick="changeRecordMonth(-1)">‹</button
                 ><b id="recordMonthTitle">2026 年 7 月</b
@@ -6536,9 +8454,11 @@
               <span><i></i>历史饮食记录</span>
               <span><i></i>未来已点餐</span>
             </div>
-            <div class="section-head">
-              <h3 id="selectedDate">7月18日 · 今天</h3>
-              <span id="recordDayStatus">今天</span>
+            <div class="record-day-toolbar">
+              <div>
+                <h3 id="selectedDate">今天的菜单</h3>
+                <small id="recordDayStatus">临近餐次已优先显示</small>
+              </div>
             </div>
             <div class="day-log" id="recordDayLog">
               <div class="meal-card">
@@ -6564,24 +8484,92 @@
               </div>
             </div>
           </section>
-          <section class="screen" id="recipeLibrary">
-            <header class="top app-topbar">
+          <section class="screen" id="recordShopping">
+            <header class="top app-topbar record-shopping-top">
+              <button class="icon-btn back" onclick="closeRecordShopping()">
+                ‹
+              </button>
               <div>
-                <h2>菜谱</h2>
-                <small>发现好菜，也沉淀全家会做的菜</small>
+                <h2>采购清单</h2>
+                <small id="recordShoppingDate">今天 · 全天</small>
               </div>
+              <button class="top-action" onclick="shareRecordShopping()">
+                分享
+              </button>
             </header>
-            <div class="recipe-workspace-tabs">
-              <button class="on" onclick="switchRecipeWorkspace('discover')">
-                发现菜谱
+            <div class="record-shopping-tabs">
+              <button
+                class="on"
+                data-shopping-meal="all"
+                onclick="selectRecordShoppingMeal(this,'all')"
+              >
+                全天
               </button>
               <button
-                id="ownedRecipeTabLibrary"
-                onclick="switchRecipeWorkspace('owned')"
+                data-shopping-meal="早餐"
+                onclick="selectRecordShoppingMeal(this,'早餐')"
               >
-                我家菜谱
+                早餐
+              </button>
+              <button
+                data-shopping-meal="午餐"
+                onclick="selectRecordShoppingMeal(this,'午餐')"
+              >
+                午餐
+              </button>
+              <button
+                data-shopping-meal="晚餐"
+                onclick="selectRecordShoppingMeal(this,'晚餐')"
+              >
+                晚餐
               </button>
             </div>
+            <div
+              class="record-shopping-summary"
+              id="recordShoppingSummary"
+            ></div>
+            <div
+              class="record-shopping-page-list"
+              id="recordShoppingList"
+            ></div>
+          </section>
+          <section class="screen" id="recipeLibrary">
+            <header class="top app-topbar family-toolbar">
+              <button
+                class="family-space-trigger"
+                onclick="openFamilySpaceSheet()"
+              >
+                <i class="family-space-mark">家</i
+                ><span
+                  ><b class="family-space-name">我家厨房</b
+                  ><small
+                    ><span class="family-space-member-count">3 位成员</span> ·
+                    家庭共用</small
+                  ></span
+                ><em>⌄</em>
+              </button>
+              <div class="family-toolbar-actions">
+                <button
+                  class="family-tool-button"
+                  onclick="openNotificationCenter()"
+                  aria-label="查看通知"
+                >
+                  <svg viewBox="0 0 24 24">
+                    <path
+                      d="M6.5 9a5.5 5.5 0 0 1 11 0c0 6 2.5 6 2.5 7.5h-16C4 15 6.5 15 6.5 9Z"
+                    />
+                    <path d="M10 20h4" /></svg
+                  ><span class="family-notice-dot"></span>
+                </button>
+                <button
+                  class="family-tool-button family-member-button"
+                  onclick="openFamilyMemberInviteScreen()"
+                  aria-label="家庭成员"
+                >
+                  <span>妈</span><span>＋</span>
+                </button>
+              </div>
+            </header>
             <label class="search-box"
               >⌕<input
                 id="librarySearch"
@@ -7143,18 +9131,41 @@
             </div>
           </section>
           <section class="screen" id="profile">
-            <header class="top app-topbar">
-              <div>
-                <h2>我的</h2>
-                <small>家庭偏好与个人服务</small>
-              </div>
+            <header class="top app-topbar family-toolbar">
               <button
-                class="top-action icon-only"
-                onclick="focusProfilePreferences()"
-                aria-label="查看家庭与偏好"
+                class="family-space-trigger"
+                onclick="openFamilySpaceSheet()"
               >
-                ⚙
+                <i class="family-space-mark">家</i
+                ><span
+                  ><b class="family-space-name">我家厨房</b
+                  ><small
+                    ><span class="family-space-member-count">3 位成员</span> ·
+                    家庭共用</small
+                  ></span
+                ><em>⌄</em>
               </button>
+              <div class="family-toolbar-actions">
+                <button
+                  class="family-tool-button"
+                  onclick="openNotificationCenter()"
+                  aria-label="查看通知"
+                >
+                  <svg viewBox="0 0 24 24">
+                    <path
+                      d="M6.5 9a5.5 5.5 0 0 1 11 0c0 6 2.5 6 2.5 7.5h-16C4 15 6.5 15 6.5 9Z"
+                    />
+                    <path d="M10 20h4" /></svg
+                  ><span class="family-notice-dot"></span>
+                </button>
+                <button
+                  class="family-tool-button family-member-button"
+                  onclick="openFamilyMemberInviteScreen()"
+                  aria-label="家庭成员"
+                >
+                  <span>妈</span><span>＋</span>
+                </button>
+              </div>
             </header>
             <div class="profile-head">
               <div class="avatar">👩</div>
@@ -7215,25 +9226,407 @@
               </button>
             </div>
           </section>
+          <section class="screen utility-screen" id="notificationCenter">
+            <header class="utility-page-header">
+              <button onclick="returnFromUtilityScreen()" aria-label="返回">
+                ‹
+              </button>
+              <h2>通知</h2>
+              <span></span>
+            </header>
+            <div class="utility-content">
+              <div class="notification-center-tabs">
+                <button
+                  class="on"
+                  data-notification-tab="family"
+                  onclick="selectNotificationCenterTab(this,'family')"
+                >
+                  家庭动态
+                </button>
+                <button
+                  data-notification-tab="system"
+                  onclick="selectNotificationCenterTab(this,'system')"
+                >
+                  APP 通知
+                </button>
+              </div>
+              <div class="notification-center-head">
+                <b id="notificationCenterTitle">家庭动态</b>
+                <button onclick="markAllNotificationCenterRead()">
+                  全部已读
+                </button>
+              </div>
+              <div
+                class="notification-center-list"
+                id="notificationCenterList"
+              ></div>
+            </div>
+          </section>
+          <section class="screen utility-screen" id="familyMemberInvite">
+            <header class="utility-page-header">
+              <button onclick="returnFromUtilityScreen()" aria-label="返回">
+                ‹
+              </button>
+              <h2>邀请家庭成员</h2>
+              <span></span>
+            </header>
+            <div class="utility-content">
+              <div class="invite-family-hero">
+                <i id="familyInviteIcon">🏠</i
+                ><span
+                  ><b class="family-space-name">我家厨房</b
+                  ><small>邀请家人一起点菜和管理菜单</small></span
+                >
+              </div>
+              <div class="invite-code-card">
+                <div class="invite-code-panel">
+                  <div class="invite-code-heading">
+                    <b>专属邀请码</b><span>7 天内有效</span>
+                  </div>
+                  <div class="invite-code-value">
+                    <strong id="familyInviteCode">581905</strong
+                    ><button onclick="copyFamilyInviteCode()">复制</button>
+                  </div>
+                  <small>邀请码 7 天内有效，对方输入后即可加入家庭</small>
+                  <button
+                    class="utility-primary-button blue"
+                    onclick="shareFamilyInvite()"
+                  >
+                    分享给微信好友
+                  </button>
+                </div>
+              </div>
+              <div class="invite-tips-card">
+                <b>加入后可以一起做什么</b>
+                <ul>
+                  <li>一起点菜和编辑菜单</li>
+                  <li>最多支持 10 位成员</li>
+                  <li>查看家庭历史菜单</li>
+                  <li>共同维护家庭菜谱</li>
+                </ul>
+              </div>
+              <div class="invite-order-secondary">
+                <i>筷</i
+                ><span
+                  ><b>只想请对方点这一餐？</b
+                  ><small>无需加入家庭，打开链接即可选菜</small></span
+                ><button onclick="openInviteOrderSheet()">邀请点菜</button>
+              </div>
+            </div>
+          </section>
+          <section class="screen utility-screen" id="kitchenSwitch">
+            <header class="utility-page-header">
+              <button onclick="returnFromUtilityScreen()" aria-label="返回">
+                ‹
+              </button>
+              <h2>切换厨房</h2>
+              <span></span>
+            </header>
+            <div class="utility-content">
+              <h3 class="utility-section-title">选择要进入的家庭厨房</h3>
+              <div class="kitchen-list" id="kitchenSwitchList"></div>
+              <button
+                class="utility-primary-button"
+                onclick="openKitchenCreateScreen()"
+              >
+                ＋ 创建新厨房
+              </button>
+            </div>
+          </section>
+          <section class="screen utility-screen" id="kitchenCreate">
+            <header class="utility-page-header">
+              <button onclick="returnFromUtilityScreen()" aria-label="返回">
+                ‹
+              </button>
+              <h2>创建厨房</h2>
+              <span></span>
+            </header>
+            <div class="utility-content">
+              <h3 class="utility-section-title">厨房图标</h3>
+              <div class="kitchen-icon-grid" id="kitchenCreateIcons">
+                <button
+                  class="on"
+                  data-kitchen-icon="🏠"
+                  onclick="selectKitchenIcon(this,'create')"
+                >
+                  🏠</button
+                ><button
+                  data-kitchen-icon="🏡"
+                  onclick="selectKitchenIcon(this,'create')"
+                >
+                  🏡</button
+                ><button
+                  data-kitchen-icon="🏘️"
+                  onclick="selectKitchenIcon(this,'create')"
+                >
+                  🏘️</button
+                ><button
+                  data-kitchen-icon="🏰"
+                  onclick="selectKitchenIcon(this,'create')"
+                >
+                  🏰</button
+                ><button
+                  data-kitchen-icon="🗼"
+                  onclick="selectKitchenIcon(this,'create')"
+                >
+                  🗼</button
+                ><button
+                  data-kitchen-icon="🗽"
+                  onclick="selectKitchenIcon(this,'create')"
+                >
+                  🗽</button
+                ><button
+                  data-kitchen-icon="⛩️"
+                  onclick="selectKitchenIcon(this,'create')"
+                >
+                  ⛩️</button
+                ><button
+                  data-kitchen-icon="🏯"
+                  onclick="selectKitchenIcon(this,'create')"
+                >
+                  🏯</button
+                ><button
+                  data-kitchen-icon="💒"
+                  onclick="selectKitchenIcon(this,'create')"
+                >
+                  💒</button
+                ><button
+                  data-kitchen-icon="❤️"
+                  onclick="selectKitchenIcon(this,'create')"
+                >
+                  ❤️</button
+                ><button
+                  data-kitchen-icon="☀️"
+                  onclick="selectKitchenIcon(this,'create')"
+                >
+                  ☀️</button
+                ><button
+                  data-kitchen-icon="⭐"
+                  onclick="selectKitchenIcon(this,'create')"
+                >
+                  ⭐</button
+                ><button
+                  data-kitchen-icon="🍀"
+                  onclick="selectKitchenIcon(this,'create')"
+                >
+                  🍀</button
+                ><button
+                  data-kitchen-icon="🌸"
+                  onclick="selectKitchenIcon(this,'create')"
+                >
+                  🌸</button
+                ><button
+                  data-kitchen-icon="🎨"
+                  onclick="selectKitchenIcon(this,'create')"
+                >
+                  🎨
+                </button>
+              </div>
+              <label class="utility-field"
+                ><b>厨房名称</b
+                ><input
+                  id="kitchenCreateName"
+                  maxlength="20"
+                  placeholder="请输入厨房名称"
+                  oninput="updateKitchenCreateButton()"
+                /><small id="kitchenCreateCount">0/20</small></label
+              >
+              <button
+                class="utility-primary-button"
+                id="kitchenCreateButton"
+                onclick="createKitchenWorkspace()"
+                disabled
+              >
+                创建厨房
+              </button>
+            </div>
+          </section>
+          <section class="screen utility-screen" id="kitchenJoin">
+            <header class="utility-page-header">
+              <button onclick="returnFromUtilityScreen()" aria-label="返回">
+                ‹
+              </button>
+              <h2>加入厨房</h2>
+              <span></span>
+            </header>
+            <div class="utility-content">
+              <label class="utility-field"
+                ><b>输入邀请码</b
+                ><small>请输入家庭管理员提供的 6 位邀请码</small></label
+              >
+              <div
+                class="join-code-wrap"
+                onclick="document.getElementById('kitchenJoinCode').focus()"
+              >
+                <div class="join-code-boxes" id="kitchenJoinBoxes">
+                  <i></i><i></i><i></i><i></i><i></i><i></i>
+                </div>
+                <input
+                  id="kitchenJoinCode"
+                  maxlength="6"
+                  inputmode="numeric"
+                  autocomplete="one-time-code"
+                  oninput="syncKitchenJoinCode(this)"
+                />
+              </div>
+              <button
+                class="utility-primary-button"
+                id="kitchenJoinButton"
+                onclick="joinKitchenWorkspace()"
+                disabled
+              >
+                加入厨房
+              </button>
+              <p class="utility-note-list">
+                💡 邀请码由家庭管理员提供，有效期为 7 天<br />👪
+                一个账号最多可以加入 5 个厨房
+              </p>
+            </div>
+          </section>
+          <section class="screen utility-screen" id="kitchenEdit">
+            <header class="utility-page-header">
+              <button onclick="returnFromUtilityScreen()" aria-label="返回">
+                ‹
+              </button>
+              <h2>编辑厨房</h2>
+              <span></span>
+            </header>
+            <div class="utility-content">
+              <div class="kitchen-summary-card">
+                <i id="kitchenEditHeroIcon">🏠</i
+                ><span
+                  ><b id="kitchenEditHeroName">我家厨房</b
+                  ><small
+                    >你是创建者 ·
+                    <span id="kitchenEditMemberCount">3 位家庭成员</span></small
+                  ></span
+                >
+              </div>
+              <div class="kitchen-edit-card">
+                <h3>厨房成员</h3>
+                <div class="kitchen-edit-members" id="kitchenEditMembers"></div>
+                <button
+                  class="family-sheet-secondary"
+                  onclick="openFamilyMemberInviteScreen()"
+                >
+                  ＋ 邀请新成员
+                </button>
+              </div>
+              <div class="kitchen-edit-card">
+                <h3>厨房信息</h3>
+                <label class="utility-field" style="margin-top: 0"
+                  ><b>厨房名称</b><input id="kitchenEditName" maxlength="20"
+                /></label>
+                <h3 style="margin-top: 15px">厨房头像</h3>
+                <div class="kitchen-icon-grid" id="kitchenEditIcons">
+                  <button
+                    data-kitchen-icon="🏠"
+                    onclick="selectKitchenIcon(this,'edit')"
+                  >
+                    🏠</button
+                  ><button
+                    data-kitchen-icon="🏡"
+                    onclick="selectKitchenIcon(this,'edit')"
+                  >
+                    🏡</button
+                  ><button
+                    data-kitchen-icon="🏘️"
+                    onclick="selectKitchenIcon(this,'edit')"
+                  >
+                    🏘️</button
+                  ><button
+                    data-kitchen-icon="🏰"
+                    onclick="selectKitchenIcon(this,'edit')"
+                  >
+                    🏰</button
+                  ><button
+                    data-kitchen-icon="❤️"
+                    onclick="selectKitchenIcon(this,'edit')"
+                  >
+                    ❤️</button
+                  ><button
+                    data-kitchen-icon="⭐"
+                    onclick="selectKitchenIcon(this,'edit')"
+                  >
+                    ⭐</button
+                  ><button
+                    data-kitchen-icon="🍀"
+                    onclick="selectKitchenIcon(this,'edit')"
+                  >
+                    🍀</button
+                  ><button
+                    data-kitchen-icon="🌸"
+                    onclick="selectKitchenIcon(this,'edit')"
+                  >
+                    🌸</button
+                  ><button
+                    data-kitchen-icon="🎨"
+                    onclick="selectKitchenIcon(this,'edit')"
+                  >
+                    🎨</button
+                  ><button
+                    data-kitchen-icon="🍚"
+                    onclick="selectKitchenIcon(this,'edit')"
+                  >
+                    🍚
+                  </button>
+                </div>
+              </div>
+              <button
+                class="utility-primary-button"
+                onclick="saveKitchenWorkspaceEdit()"
+              >
+                保存修改
+              </button>
+            </div>
+          </section>
           <nav class="nav" id="mainNav">
             <button
               class="active"
               data-target="home"
               onclick="navTo(this,'home')"
             >
-              <i>⌂</i>点菜</button
-            ><button
-              data-target="recipeLibrary"
-              onclick="navTo(this,'recipeLibrary')"
-            >
-              <i>▤</i>菜谱</button
+              <i aria-hidden="true"
+                ><svg viewBox="0 0 24 24">
+                  <path d="M4 12.5h16" />
+                  <path d="M5.5 12.5c.7 4 3 6 6.5 6s5.8-2 6.5-6" />
+                  <path d="M8.5 21h7" />
+                  <path d="m13.5 4 3.5 6" />
+                  <path d="m17 3 2.5 7" /></svg
+              ></i>
+              点菜</button
             ><button
               data-target="foodCalendar"
               onclick="navTo(this,'foodCalendar')"
             >
-              <i>▦</i>点餐记录</button
+              <i aria-hidden="true"
+                ><svg viewBox="0 0 24 24">
+                  <rect x="3.5" y="5" width="17" height="15.5" rx="3" />
+                  <path d="M8 3v4M16 3v4M3.5 10h17" />
+                  <path d="m8.5 15 2 2 4.5-4.5" /></svg
+              ></i>
+              点餐记录</button
+            ><button
+              data-target="recipeLibrary"
+              onclick="navTo(this,'recipeLibrary')"
+            >
+              <i aria-hidden="true"
+                ><svg viewBox="0 0 24 24">
+                  <path
+                    d="M3.5 5.5c3.2-1.1 6-.5 8.5 1.5v13c-2.5-2-5.3-2.6-8.5-1.5Z"
+                  />
+                  <path
+                    d="M20.5 5.5c-3.2-1.1-6-.5-8.5 1.5v13c2.5-2 5.3-2.6 8.5-1.5Z"
+                  /></svg
+              ></i>
+              菜谱广场</button
             ><button data-target="profile" onclick="navTo(this,'profile')">
-              <i>☻</i>我的
+              <i aria-hidden="true"
+                ><svg viewBox="0 0 24 24">
+                  <circle cx="12" cy="8" r="3.5" />
+                  <path d="M5.5 20c.5-4 2.7-6 6.5-6s6 2 6.5 6" /></svg
+              ></i>
+              我的
             </button>
           </nav>
           <div
@@ -7328,12 +9721,12 @@
                     data-value="mixed"
                     onclick="selectRecommendationSetting(this,'source','mixed')"
                   >
-                    我家＋发现菜谱</button
+                    我家＋菜谱广场</button
                   ><button
                     data-value="outside"
                     onclick="selectRecommendationSetting(this,'source','outside')"
                   >
-                    只从发现菜谱
+                    只从菜谱广场
                   </button>
                 </div>
               </div>
@@ -7721,6 +10114,251 @@
           </div>
           <div
             class="sheet"
+            id="homeRecipeAddSheet"
+            onclick="closeHomeRecipeAddMethods(event)"
+          >
+            <div class="sheet-card">
+              <div class="sheet-handle"></div>
+              <div class="sheet-title">
+                <div>
+                  <h3>添加菜谱</h3>
+                  <small>选择最省事的添加方式</small>
+                </div>
+                <button onclick="closeHomeRecipeAddMethods()">×</button>
+              </div>
+              <div class="recipe-add-methods compact">
+                <button class="recipe-add-method" onclick="addRecipeInDetail()">
+                  <i>✎</i>
+                  <span
+                    ><b>手动录入</b
+                    ><small>记录菜名、用料、步骤和家庭口味</small></span
+                  >
+                  <span>›</span>
+                </button>
+                <button
+                  class="recipe-add-method"
+                  onclick="addRecipeFromDiscovery()"
+                >
+                  <i>⌕</i>
+                  <span
+                    ><b>菜谱广场</b
+                    ><small>去丰富菜谱库挑选，加入点菜清单</small></span
+                  >
+                  <span>›</span>
+                </button>
+                <button
+                  class="recipe-add-method"
+                  onclick="openRecipeLinkImport()"
+                >
+                  <i>⌘</i>
+                  <span
+                    ><b>链接导入</b><small>粘贴分享链接，快速建立家庭版本</small
+                    ><span class="recipe-link-providers"
+                      ><em>小红书</em><em>下厨房</em></span
+                    ></span
+                  >
+                  <span>›</span>
+                </button>
+              </div>
+            </div>
+          </div>
+          <div
+            class="sheet"
+            id="recipeLinkImportSheet"
+            onclick="closeRecipeLinkImport(event)"
+          >
+            <div class="sheet-card">
+              <div class="sheet-handle"></div>
+              <div class="sheet-title">
+                <div>
+                  <h3>链接导入</h3>
+                  <small>当前优先支持小红书与下厨房</small>
+                </div>
+                <button onclick="closeRecipeLinkImport()">×</button>
+              </div>
+              <div class="recipe-link-providers">
+                <em>小红书 / xhslink.com</em><em>下厨房 / xiachufang.com</em>
+              </div>
+              <div class="recipe-link-field">
+                <input
+                  id="recipeImportUrl"
+                  type="url"
+                  placeholder="粘贴菜谱分享链接"
+                />
+                <button onclick="importRecipeLink()">开始导入</button>
+              </div>
+              <p class="recipe-link-help">
+                导入后会生成可编辑的家庭菜谱草稿，请确认用料和步骤后再开放点菜。
+              </p>
+            </div>
+          </div>
+          <div
+            class="sheet"
+            id="familySpaceSheet"
+            onclick="closeFamilySpaceSheet(event)"
+          >
+            <div class="sheet-card">
+              <div class="sheet-handle"></div>
+              <div class="sheet-title">
+                <div>
+                  <h3>家庭厨房</h3>
+                  <small>家庭空间相关操作集中放在这里</small>
+                </div>
+                <button onclick="closeFamilySpaceSheet()">×</button>
+              </div>
+              <div class="family-sheet-current">
+                <i>家</i
+                ><span
+                  ><b class="family-space-name">我家厨房</b
+                  ><small
+                    ><span class="family-space-member-count">3 位成员</span> ·
+                    菜单和采购共同同步</small
+                  ></span
+                ><em>当前</em>
+              </div>
+              <div class="family-utility-list" id="familySpaceActions">
+                <button onclick="openKitchenSwitchScreen()">
+                  <i>⇄</i
+                  ><span
+                    ><b>切换厨房</b
+                    ><small id="kitchenSwitchSummary"
+                      >创建第二个厨房后即可切换</small
+                    ></span
+                  ><em>›</em>
+                </button>
+                <button onclick="openKitchenCreateScreen()">
+                  <i>＋</i
+                  ><span
+                    ><b>创建厨房</b
+                    ><small>为另一组家人建立独立空间</small></span
+                  ><em>›</em>
+                </button>
+                <button onclick="openKitchenJoinScreen()">
+                  <i>⌁</i
+                  ><span
+                    ><b>加入厨房</b
+                    ><small>输入家人分享的 6 位邀请码</small></span
+                  ><em>›</em>
+                </button>
+                <button onclick="openKitchenEditScreen()">
+                  <i>⚙</i
+                  ><span
+                    ><b>编辑厨房</b
+                    ><small>管理名称、头像和厨房成员</small></span
+                  ><em>›</em>
+                </button>
+              </div>
+            </div>
+          </div>
+          <div
+            class="sheet"
+            id="familyNotificationSheet"
+            onclick="closeFamilyNotificationSheet(event)"
+          >
+            <div class="sheet-card">
+              <div class="sheet-handle"></div>
+              <div class="sheet-title">
+                <div>
+                  <h3>家庭通知</h3>
+                  <small>菜单修改、成员加入和采购变化</small>
+                </div>
+                <button onclick="closeFamilyNotificationSheet()">×</button>
+              </div>
+              <div class="family-notification-list" id="familyNotificationList">
+                <div class="family-notification-item">
+                  <i>🍽️</i
+                  ><span
+                    ><b>妈妈更新了明日晚餐</b
+                    ><small
+                      >新增清蒸鲈鱼，采购清单已自动同步 · 10 分钟前</small
+                    ></span
+                  ><em></em>
+                </div>
+                <div class="family-notification-item">
+                  <i>🧺</i
+                  ><span
+                    ><b>今天的采购清单有变化</b
+                    ><small>番茄和鸡蛋仍需要购买 · 35 分钟前</small></span
+                  ><em></em>
+                </div>
+                <div class="family-notification-item">
+                  <i>👪</i
+                  ><span
+                    ><b>小满加入了家庭厨房</b
+                    ><small>现在共有 3 位成员一起点菜 · 昨天</small></span
+                  ><em></em>
+                </div>
+              </div>
+              <button
+                class="family-sheet-secondary"
+                onclick="markAllFamilyNotificationsRead()"
+              >
+                全部标为已读
+              </button>
+            </div>
+          </div>
+          <div
+            class="sheet"
+            id="familyMemberSheet"
+            onclick="closeFamilyMemberSheet(event)"
+          >
+            <div class="sheet-card">
+              <div class="sheet-handle"></div>
+              <div class="sheet-title">
+                <div>
+                  <h3>家庭成员</h3>
+                  <small>成员可以共同点菜、编辑菜单和查看采购</small>
+                </div>
+                <button onclick="closeFamilyMemberSheet()">×</button>
+              </div>
+              <div
+                class="family-member-list"
+                id="familyToolbarMemberList"
+              ></div>
+              <div class="family-member-add">
+                <input
+                  id="familyMemberNameInput"
+                  maxlength="8"
+                  placeholder="输入新成员称呼"
+                />
+                <button onclick="addFamilyToolbarMember()">添加成员</button>
+              </div>
+              <button
+                class="family-sheet-secondary"
+                onclick="openInviteOrderFromMembers()"
+              >
+                邀请家人来点菜
+              </button>
+            </div>
+          </div>
+          <div
+            class="sheet"
+            id="inviteOrderSheet"
+            onclick="closeInviteOrderSheet(event)"
+          >
+            <div class="sheet-card">
+              <div class="sheet-handle"></div>
+              <div class="sheet-title">
+                <div>
+                  <h3>邀请家人点菜</h3>
+                  <small>对方打开后直接进入点菜页</small>
+                </div>
+                <button onclick="closeInviteOrderSheet()">×</button>
+              </div>
+              <div class="invite-order-preview">
+                <b>来我家点下一餐 🍚</b>
+                <small
+                  >家宴邀请你一起选菜。对方提交后，菜单与采购清单会自动同步。</small
+                >
+              </div>
+              <div class="invite-order-actions">
+                <button onclick="copyInviteOrderLink()">复制邀请链接</button>
+                <button onclick="shareInviteOrder()">发送给家人</button>
+              </div>
+            </div>
+          </div>
+          <div
+            class="sheet"
             id="createSheet"
             onclick="closeCreateChoices(event)"
           >
@@ -7797,6 +10435,36 @@
           </div>
           <div
             class="sheet"
+            id="recordMenuShareSheet"
+            onclick="closeRecordMenuShare(event)"
+          >
+            <div class="sheet-card">
+              <div class="sheet-handle"></div>
+              <div class="sheet-title">
+                <div>
+                  <h3>分享菜单</h3>
+                  <small>只分享菜单，不包含采购清单</small>
+                </div>
+                <button onclick="closeRecordMenuShare()">×</button>
+              </div>
+              <div class="record-menu-share-preview">
+                <h3 id="recordMenuShareTitle">今天 · 午餐</h3>
+                <small id="recordMenuShareMeta">家庭菜单</small>
+                <div
+                  class="record-menu-share-dishes"
+                  id="recordMenuShareDishes"
+                ></div>
+              </div>
+              <div class="buy-actions" style="margin-top: 10px">
+                <button onclick="saveRecordMenuPoster()">保存图片</button>
+                <button onclick="shareRecordMenuPoster()">
+                  分享到微信/更多
+                </button>
+              </div>
+            </div>
+          </div>
+          <div
+            class="sheet"
             id="prepShareSheet"
             onclick="closePrepShare(event)"
           >
@@ -7824,6 +10492,68 @@
                   分享到微信/更多
                 </button>
               </div>
+            </div>
+          </div>
+          <div
+            class="sheet"
+            id="recordShoppingShareRangeSheet"
+            onclick="closeRecordShoppingShareRange(event)"
+          >
+            <div class="sheet-card">
+              <div class="sheet-handle"></div>
+              <div class="sheet-title">
+                <div>
+                  <h3>选择分享范围</h3>
+                  <small>默认分享全天，也可以合并任意几餐</small>
+                </div>
+                <button onclick="closeRecordShoppingShareRange()">×</button>
+              </div>
+              <div class="record-shopping-share-intro">
+                <i>🧺</i>
+                <span>
+                  <b id="recordShoppingShareDate">今天采购清单</b>
+                  <small>分享图会同时呈现合并汇总与所选餐次明细</small>
+                </span>
+              </div>
+              <div
+                class="record-shopping-share-range"
+                id="recordShoppingShareRange"
+              >
+                <button
+                  class="on"
+                  data-share-meal="早餐"
+                  onclick="toggleRecordShoppingShareMeal(this)"
+                >
+                  <span>早餐</span><small>0 道菜</small><i>✓</i>
+                </button>
+                <button
+                  class="on"
+                  data-share-meal="午餐"
+                  onclick="toggleRecordShoppingShareMeal(this)"
+                >
+                  <span>午餐</span><small>0 道菜</small><i>✓</i>
+                </button>
+                <button
+                  class="on"
+                  data-share-meal="晚餐"
+                  onclick="toggleRecordShoppingShareMeal(this)"
+                >
+                  <span>晚餐</span><small>0 道菜</small><i>✓</i>
+                </button>
+              </div>
+              <div class="record-shopping-share-foot">
+                <span id="recordShoppingShareSummary">已选全天 · 三餐合并</span>
+                <button onclick="selectAllRecordShoppingShareMeals()">
+                  全选三餐
+                </button>
+              </div>
+              <button
+                class="cart-next"
+                id="recordShoppingShareConfirm"
+                onclick="confirmRecordShoppingShare()"
+              >
+                分享全天采购清单
+              </button>
             </div>
           </div>
           <div
@@ -7874,7 +10604,6 @@
         const primaryScreens = new Set([
           "home",
           "recipeLibrary",
-          "manage",
           "foodCalendar",
           "profile",
         ]);
@@ -7886,11 +10615,7 @@
         document
           .querySelectorAll(".nav button")
           .forEach((b) =>
-            b.classList.toggle(
-              "active",
-              b.dataset.target === id ||
-                (id === "manage" && b.dataset.target === "recipeLibrary"),
-            ),
+            b.classList.toggle("active", b.dataset.target === id),
           );
       }
       function navTo(btn, id) {
@@ -7899,6 +10624,7 @@
           toast("已退出原餐次编辑，请重新选菜和点餐时间");
         }
         showScreen(id);
+        if (id === "foodCalendar") recordGoToday(true);
       }
       let currentDiningTable = "family";
       const appToday = new Date();
@@ -7981,12 +10707,6 @@
       }
       function returnToMenuRecords() {
         showScreen("foodCalendar");
-      }
-      function openOwnedRecipes() {
-        switchRecipeWorkspace("owned");
-      }
-      function switchRecipeWorkspace(view) {
-        showScreen(view === "owned" ? "manage" : "recipeLibrary");
       }
       const pointRecipeDetails = {
         外婆红烧肉: {
@@ -8299,10 +11019,13 @@
         }
         profileSettingData[activeProfileSetting].selected = new Set(selected);
         if (activeProfileSetting === "family") {
+          activeFamilyWorkspace().members = [...selected];
+          persistFamilyWorkspaces();
           document.getElementById("profileFamilyCount").textContent =
             `${selected.length} 位成员`;
           document.getElementById("profileFamilySummary").textContent =
             `${selected.join("、")} ›`;
+          syncFamilyToolbar();
         } else if (activeProfileSetting === "pantry") {
           document.getElementById("profilePantrySummary").textContent =
             `${selected.length} 种家中已有 ›`;
@@ -8839,6 +11562,571 @@
       function openCreateChoices() {
         document.getElementById("createSheet").classList.add("show");
       }
+      function openHomeRecipeManagement() {
+        showScreen("manage");
+        updateFamilyRecipeCounts();
+        filterManage();
+      }
+      function closeRecipeManagement() {
+        showScreen("home");
+      }
+      function openHomeRecipeAddMethods() {
+        document.getElementById("homeRecipeAddSheet").classList.add("show");
+      }
+      function closeHomeRecipeAddMethods(event) {
+        if (
+          event &&
+          event.target !== document.getElementById("homeRecipeAddSheet")
+        )
+          return;
+        document.getElementById("homeRecipeAddSheet").classList.remove("show");
+      }
+      function addRecipeFromDiscovery() {
+        closeHomeRecipeAddMethods();
+        showScreen("recipeLibrary");
+      }
+      function addRecipesInBatch() {
+        closeHomeRecipeAddMethods();
+        openStarterRecipes();
+      }
+      function addRecipeFromPhoto() {
+        closeHomeRecipeAddMethods();
+        startPhotoRecipeImport();
+      }
+      function addRecipeInDetail() {
+        closeHomeRecipeAddMethods();
+        openRecipeEditor("创建菜谱");
+      }
+      let pendingRecipeImportUrl = "";
+      function openRecipeLinkImport() {
+        closeHomeRecipeAddMethods();
+        document.getElementById("recipeImportUrl").value = "";
+        document.getElementById("recipeLinkImportSheet").classList.add("show");
+      }
+      function closeRecipeLinkImport(event) {
+        if (
+          event &&
+          event.target !== document.getElementById("recipeLinkImportSheet")
+        )
+          return;
+        document
+          .getElementById("recipeLinkImportSheet")
+          .classList.remove("show");
+      }
+      function importRecipeLink() {
+        const value = document.getElementById("recipeImportUrl").value.trim();
+        const sharedUrl = value
+          .match(/https?:\/\/[^\s]+/)?.[0]
+          ?.replace(/[，。)\]]+$/, "");
+        let url;
+        try {
+          url = new URL(sharedUrl || value);
+        } catch (error) {
+          toast("请粘贴完整的菜谱链接");
+          return;
+        }
+        const host = url.hostname.toLowerCase();
+        const source =
+          host.includes("xiaohongshu.com") || host.includes("xhslink.com")
+            ? "小红书"
+            : host.includes("xiachufang.com")
+              ? "下厨房"
+              : "";
+        if (!source) {
+          toast("目前优先支持小红书和下厨房链接");
+          return;
+        }
+        pendingRecipeImportUrl = url.href;
+        closeRecipeLinkImport();
+        openRecipeEditor(`${source}链接导入`);
+        toast(`已识别${source}链接，请确认导入内容`);
+      }
+      const familyWorkspaceNameKey = "familyRecipe.familyWorkspaceName";
+      const familyNotificationsReadKey = "familyRecipe.familyNotificationsRead";
+      const familyWorkspacesKey = "familyRecipe.familyWorkspaces";
+      const currentFamilyWorkspaceKey = "familyRecipe.currentFamilyWorkspace";
+      let currentFamilyWorkspaceName = "我家厨房";
+      let familyWorkspaces = [
+        {
+          id: "home",
+          name: "我家厨房",
+          icon: "🏠",
+          members: ["爸爸", "妈妈", "小满"],
+        },
+      ];
+      let currentFamilyWorkspaceId = "home";
+      let utilityReturnScreen = "home";
+      let activeNotificationCenterTab = "family";
+      let allNotificationsRead = false;
+      let activeKitchenCreateIcon = "🏠";
+      let activeKitchenEditIcon = "🏠";
+      const notificationCenterData = {
+        family: [
+          {
+            icon: "🍽️",
+            title: "妈妈更新了明日晚餐",
+            copy: "新增清蒸鲈鱼，采购清单已自动同步。",
+            time: "10 分钟前",
+          },
+          {
+            icon: "🧺",
+            title: "今天的采购清单有变化",
+            copy: "番茄和鸡蛋仍需要购买，点击点餐记录可查看明细。",
+            time: "35 分钟前",
+          },
+          {
+            icon: "👪",
+            title: "小满加入了家庭厨房",
+            copy: "现在可以一起点菜、编辑未来菜单和查看采购清单。",
+            time: "昨天",
+          },
+        ],
+        system: [
+          {
+            icon: "✨",
+            title: "今日推荐现在可以收起了",
+            copy: "收起后会记住你的选择，需要时随时展开。",
+            time: "今天",
+          },
+          {
+            icon: "📣",
+            title: "菜谱广场新增时令专题",
+            copy: "夏季快手菜和清爽汤羹已经上线。",
+            time: "2 天前",
+          },
+          {
+            icon: "🛡️",
+            title: "家庭数据与隐私说明",
+            copy: "家庭名称和成员信息仅用于家庭协作展示。",
+            time: "7 月 18 日",
+          },
+        ],
+      };
+      function activeFamilyWorkspace() {
+        return (
+          familyWorkspaces.find(
+            (workspace) => workspace.id === currentFamilyWorkspaceId,
+          ) || familyWorkspaces[0]
+        );
+      }
+      function currentFamilyMemberNames() {
+        return [...(activeFamilyWorkspace()?.members || [])];
+      }
+      function syncFamilyToolbar() {
+        const workspace = activeFamilyWorkspace();
+        if (!workspace) return;
+        currentFamilyWorkspaceName = workspace.name;
+        const members = currentFamilyMemberNames();
+        document.querySelectorAll(".family-space-name").forEach((element) => {
+          element.textContent = workspace.name;
+        });
+        document.querySelectorAll(".family-space-mark").forEach((element) => {
+          element.textContent = workspace.icon || "家";
+        });
+        document
+          .querySelectorAll(".family-space-member-count")
+          .forEach((element) => {
+            element.textContent = `${members.length} 位成员`;
+          });
+        const profileCount = document.getElementById("profileFamilyCount");
+        const profileSummary = document.getElementById("profileFamilySummary");
+        if (profileCount) profileCount.textContent = `${members.length} 位成员`;
+        if (profileSummary)
+          profileSummary.textContent = `${members.join("、")} ›`;
+        const switchSummary = document.getElementById("kitchenSwitchSummary");
+        if (switchSummary) {
+          switchSummary.textContent =
+            familyWorkspaces.length >= 2
+              ? `共 ${familyWorkspaces.length} 个厨房可切换`
+              : "创建第二个厨房后即可切换";
+        }
+      }
+      function persistFamilyWorkspaces() {
+        try {
+          localStorage.setItem(
+            familyWorkspacesKey,
+            JSON.stringify(familyWorkspaces),
+          );
+          localStorage.setItem(
+            currentFamilyWorkspaceKey,
+            currentFamilyWorkspaceId,
+          );
+          localStorage.setItem(
+            familyWorkspaceNameKey,
+            currentFamilyWorkspaceName,
+          );
+        } catch (error) {
+          // 本地存储不可用时，本次打开期间仍保留厨房状态。
+        }
+      }
+      function loadFamilyWorkspace() {
+        try {
+          const storedWorkspaces = JSON.parse(
+            localStorage.getItem(familyWorkspacesKey) || "null",
+          );
+          if (Array.isArray(storedWorkspaces) && storedWorkspaces.length) {
+            familyWorkspaces = storedWorkspaces;
+          } else {
+            const legacyName = localStorage.getItem(familyWorkspaceNameKey);
+            if (legacyName) familyWorkspaces[0].name = legacyName;
+          }
+          currentFamilyWorkspaceId =
+            localStorage.getItem(currentFamilyWorkspaceKey) ||
+            familyWorkspaces[0].id;
+          if (localStorage.getItem(familyNotificationsReadKey) === "1") {
+            allNotificationsRead = true;
+            document
+              .querySelectorAll(".family-notice-dot")
+              .forEach((dot) => (dot.hidden = true));
+          }
+        } catch (error) {
+          familyWorkspaces = [
+            {
+              id: "home",
+              name: "我家厨房",
+              icon: "🏠",
+              members: ["爸爸", "妈妈", "小满"],
+            },
+          ];
+          currentFamilyWorkspaceId = "home";
+        }
+        const workspace = activeFamilyWorkspace();
+        currentFamilyWorkspaceId = workspace.id;
+        currentFamilyWorkspaceName = workspace.name;
+        profileSettingData.family.options = [
+          ...new Set([
+            ...profileSettingData.family.options,
+            ...workspace.members,
+          ]),
+        ];
+        profileSettingData.family.selected = new Set(workspace.members);
+        syncFamilyToolbar();
+      }
+      function openFamilySpaceSheet() {
+        syncFamilyToolbar();
+        document.getElementById("familySpaceSheet").classList.add("show");
+      }
+      function closeFamilySpaceSheet(event) {
+        if (event && event.target !== event.currentTarget) return;
+        document.getElementById("familySpaceSheet").classList.remove("show");
+      }
+      function openUtilityScreen(screenId) {
+        utilityReturnScreen =
+          document.querySelector(".screen.active")?.id || "home";
+        showScreen(screenId);
+      }
+      function returnFromUtilityScreen() {
+        showScreen(utilityReturnScreen || "home");
+      }
+      function openNotificationCenter() {
+        openUtilityScreen("notificationCenter");
+        const firstTab = document.querySelector(
+          '[data-notification-tab="family"]',
+        );
+        selectNotificationCenterTab(firstTab, "family");
+      }
+      function selectNotificationCenterTab(button, tab) {
+        activeNotificationCenterTab = tab;
+        document
+          .querySelectorAll("[data-notification-tab]")
+          .forEach((item) => item.classList.toggle("on", item === button));
+        document.getElementById("notificationCenterTitle").textContent =
+          tab === "family" ? "家庭动态" : "APP 通知";
+        document.getElementById("notificationCenterList").innerHTML =
+          notificationCenterData[tab]
+            .map(
+              (item) =>
+                `<article class="notification-center-item${tab === "system" ? " system" : ""}${allNotificationsRead ? " read" : ""}"><i>${item.icon}</i><span><b>${item.title}</b><p>${item.copy}</p><small>${item.time}</small></span><em></em></article>`,
+            )
+            .join("");
+      }
+      function markAllNotificationCenterRead() {
+        allNotificationsRead = true;
+        document
+          .querySelectorAll(".notification-center-item")
+          .forEach((item) => item.classList.add("read"));
+        document
+          .querySelectorAll(".family-notice-dot")
+          .forEach((dot) => (dot.hidden = true));
+        try {
+          localStorage.setItem(familyNotificationsReadKey, "1");
+        } catch (error) {
+          // 本地存储不可用时，仅更新当前页面状态。
+        }
+        toast("通知已全部标为已读");
+      }
+      function familyMemberEmoji(name) {
+        return { 爸爸: "👨", 妈妈: "👩", 小满: "🧒" }[name] || "🙂";
+      }
+      function familyInviteCodeForWorkspace(workspace) {
+        const seed = Array.from(workspace.id).reduce(
+          (total, character) => total + character.charCodeAt(0),
+          0,
+        );
+        return String(100000 + ((seed * 7919) % 900000)).slice(0, 6);
+      }
+      function openFamilyMemberInviteScreen() {
+        const workspace = activeFamilyWorkspace();
+        openUtilityScreen("familyMemberInvite");
+        document.getElementById("familyInviteIcon").textContent =
+          workspace.icon;
+        document.getElementById("familyInviteCode").textContent =
+          familyInviteCodeForWorkspace(workspace);
+        syncFamilyToolbar();
+      }
+      async function copyFamilyInviteCode() {
+        const code = document.getElementById("familyInviteCode").textContent;
+        try {
+          await navigator.clipboard.writeText(code);
+          toast("家庭邀请码已复制");
+        } catch (error) {
+          window.prompt("复制家庭邀请码", code);
+        }
+      }
+      async function shareFamilyInvite() {
+        const workspace = activeFamilyWorkspace();
+        const code = familyInviteCodeForWorkspace(workspace);
+        const shareData = {
+          title: `加入${workspace.name}`,
+          text: `家宴邀请你加入家庭厨房，邀请码：${code}（7 天内有效）`,
+        };
+        if (navigator.share) {
+          try {
+            await navigator.share(shareData);
+            return;
+          } catch (error) {
+            if (error.name === "AbortError") return;
+          }
+        }
+        await copyFamilyInviteCode();
+      }
+      function closeFamilySpaceAndOpen(screenId) {
+        closeFamilySpaceSheet();
+        openUtilityScreen(screenId);
+      }
+      function openKitchenSwitchScreen() {
+        closeFamilySpaceAndOpen("kitchenSwitch");
+        renderKitchenSwitchList();
+      }
+      function renderKitchenSwitchList() {
+        document.getElementById("kitchenSwitchList").innerHTML =
+          familyWorkspaces
+            .map(
+              (workspace) =>
+                `<button onclick="switchKitchenWorkspace('${workspace.id}')"><i>${workspace.icon}</i><span><b>${escapeHtml(workspace.name)}</b><small>${workspace.members.length} 位成员 · 菜单独立同步</small></span>${workspace.id === currentFamilyWorkspaceId ? "<em>当前</em>" : "<em>进入</em>"}</button>`,
+            )
+            .join("");
+      }
+      function switchKitchenWorkspace(workspaceId) {
+        if (workspaceId === currentFamilyWorkspaceId) {
+          toast("当前已经在这个厨房");
+          return;
+        }
+        currentFamilyWorkspaceId = workspaceId;
+        const workspace = activeFamilyWorkspace();
+        profileSettingData.family.options = [
+          ...new Set([
+            ...profileSettingData.family.options,
+            ...workspace.members,
+          ]),
+        ];
+        profileSettingData.family.selected = new Set(workspace.members);
+        currentFamilyWorkspaceName = workspace.name;
+        persistFamilyWorkspaces();
+        syncFamilyToolbar();
+        showScreen("home");
+        toast(`已切换到${workspace.name}`);
+      }
+      function openKitchenCreateScreen() {
+        closeFamilySpaceSheet();
+        openUtilityScreen("kitchenCreate");
+        activeKitchenCreateIcon = "🏠";
+        document.getElementById("kitchenCreateName").value = "";
+        document
+          .querySelectorAll("#kitchenCreateIcons button")
+          .forEach((button) =>
+            button.classList.toggle("on", button.dataset.kitchenIcon === "🏠"),
+          );
+        updateKitchenCreateButton();
+      }
+      function selectKitchenIcon(button, mode) {
+        const container = button.parentElement;
+        container
+          .querySelectorAll("button")
+          .forEach((item) => item.classList.toggle("on", item === button));
+        if (mode === "create")
+          activeKitchenCreateIcon = button.dataset.kitchenIcon;
+        else activeKitchenEditIcon = button.dataset.kitchenIcon;
+      }
+      function updateKitchenCreateButton() {
+        const input = document.getElementById("kitchenCreateName");
+        const value = input.value.trim();
+        document.getElementById("kitchenCreateCount").textContent =
+          `${value.length}/20`;
+        document.getElementById("kitchenCreateButton").disabled = !value;
+      }
+      function createKitchenWorkspace() {
+        const name = document.getElementById("kitchenCreateName").value.trim();
+        if (!name) return;
+        const workspace = {
+          id: `kitchen-${Date.now()}`,
+          name,
+          icon: activeKitchenCreateIcon,
+          members: ["妈妈"],
+        };
+        familyWorkspaces.push(workspace);
+        currentFamilyWorkspaceId = workspace.id;
+        currentFamilyWorkspaceName = workspace.name;
+        profileSettingData.family.selected = new Set(workspace.members);
+        persistFamilyWorkspaces();
+        syncFamilyToolbar();
+        showScreen("home");
+        toast(`${name}已创建`);
+      }
+      function openKitchenJoinScreen() {
+        closeFamilySpaceSheet();
+        openUtilityScreen("kitchenJoin");
+        const input = document.getElementById("kitchenJoinCode");
+        input.value = "";
+        syncKitchenJoinCode(input);
+        setTimeout(() => input.focus(), 80);
+      }
+      function syncKitchenJoinCode(input) {
+        input.value = input.value.replace(/\D/g, "").slice(0, 6);
+        const digits = input.value.split("");
+        document
+          .querySelectorAll("#kitchenJoinBoxes i")
+          .forEach((box, index) => {
+            box.textContent = digits[index] || "";
+            box.classList.toggle("filled", Boolean(digits[index]));
+          });
+        document.getElementById("kitchenJoinButton").disabled =
+          digits.length !== 6;
+      }
+      function joinKitchenWorkspace() {
+        const code = document.getElementById("kitchenJoinCode").value;
+        if (code.length !== 6) return;
+        const workspace = {
+          id: `joined-${code}`,
+          name: `家人厨房 ${code.slice(-2)}`,
+          icon: "🏡",
+          members: ["家庭管理员", "妈妈"],
+        };
+        const existing = familyWorkspaces.find(
+          (item) => item.id === workspace.id,
+        );
+        if (!existing) familyWorkspaces.push(workspace);
+        currentFamilyWorkspaceId = workspace.id;
+        currentFamilyWorkspaceName = workspace.name;
+        profileSettingData.family.options = [
+          ...new Set([
+            ...profileSettingData.family.options,
+            ...workspace.members,
+          ]),
+        ];
+        profileSettingData.family.selected = new Set(workspace.members);
+        persistFamilyWorkspaces();
+        syncFamilyToolbar();
+        showScreen("home");
+        toast(`已加入${workspace.name}`);
+      }
+      function openKitchenEditScreen() {
+        closeFamilySpaceSheet();
+        openUtilityScreen("kitchenEdit");
+        renderKitchenEditScreen();
+      }
+      function renderKitchenEditScreen() {
+        const workspace = activeFamilyWorkspace();
+        activeKitchenEditIcon = workspace.icon;
+        document.getElementById("kitchenEditHeroIcon").textContent =
+          workspace.icon;
+        document.getElementById("kitchenEditHeroName").textContent =
+          workspace.name;
+        document.getElementById("kitchenEditMemberCount").textContent =
+          `${workspace.members.length} 位家庭成员`;
+        document.getElementById("kitchenEditName").value = workspace.name;
+        document
+          .querySelectorAll("#kitchenEditIcons button")
+          .forEach((button) =>
+            button.classList.toggle(
+              "on",
+              button.dataset.kitchenIcon === workspace.icon,
+            ),
+          );
+        document.getElementById("kitchenEditMembers").innerHTML =
+          workspace.members
+            .map(
+              (name) =>
+                `<div class="family-member-row"><i>${familyMemberEmoji(name)}</i><span><b>${escapeHtml(name)}</b><small>${name === "妈妈" ? "当前使用者" : "家庭成员"}</small></span></div>`,
+            )
+            .join("");
+      }
+      function saveKitchenWorkspaceEdit() {
+        const workspace = activeFamilyWorkspace();
+        const name = document.getElementById("kitchenEditName").value.trim();
+        if (!name) {
+          toast("请输入厨房名称");
+          return;
+        }
+        workspace.name = name;
+        workspace.icon = activeKitchenEditIcon;
+        currentFamilyWorkspaceName = name;
+        persistFamilyWorkspaces();
+        syncFamilyToolbar();
+        renderKitchenEditScreen();
+        toast("厨房资料已保存");
+      }
+      function getInviteOrderLink() {
+        if (!/^https?:$/.test(location.protocol)) return "";
+        const baseUrl = location.href.split(/[?#]/)[0];
+        return `${baseUrl}?invite=family-order&from=jiayan`;
+      }
+      function openInviteOrderSheet() {
+        document.getElementById("inviteOrderSheet").classList.add("show");
+      }
+      function closeInviteOrderSheet(event) {
+        if (
+          event &&
+          event.target !== document.getElementById("inviteOrderSheet")
+        )
+          return;
+        document.getElementById("inviteOrderSheet").classList.remove("show");
+      }
+      async function copyInviteOrderLink() {
+        const inviteLink = getInviteOrderLink();
+        if (!inviteLink) {
+          toast("当前是本地原型，小程序上线后才能生成可访问的邀请链接");
+          return;
+        }
+        try {
+          await navigator.clipboard.writeText(inviteLink);
+          toast("邀请链接已复制，可发送给家人");
+        } catch (error) {
+          window.prompt("复制下面的邀请链接", inviteLink);
+        }
+      }
+      async function shareInviteOrder() {
+        const inviteLink = getInviteOrderLink();
+        if (!inviteLink) {
+          toast("当前是本地原型，小程序上线后将调起微信分享");
+          return;
+        }
+        const shareData = {
+          title: "来我家点下一餐",
+          text: "家宴邀请你一起选菜，提交后菜单会自动同步。",
+          url: inviteLink,
+        };
+        if (navigator.share) {
+          try {
+            await navigator.share(shareData);
+            closeInviteOrderSheet();
+            return;
+          } catch (error) {
+            if (error.name === "AbortError") return;
+          }
+        }
+        await copyInviteOrderLink();
+      }
       function closeCreateChoices(e) {
         if (e && e.target !== document.getElementById("createSheet")) return;
         document.getElementById("createSheet").classList.remove("show");
@@ -9078,6 +12366,7 @@
           finishMealSubmission(
             activeMergeReview ? "菜单修改已提交" : "订单已提交",
             savedDate,
+            savedMealKey.split("|")[1],
           );
         } else {
           mealSubmissionReturn = "home";
@@ -9142,6 +12431,7 @@
           "尚未选择点餐时间";
         document.getElementById("homeTableSubtitle").textContent =
           "从我家会做的菜里，选下一餐";
+        document.getElementById("homeTableSubtitle").hidden = true;
         lockedItems.clear();
         currentMealKey = "";
         activeMergeReview = false;
@@ -9247,8 +12537,34 @@
           toast("请确认本餐菜单");
         }
       }
-      function finishMealSubmission(message, dateLabel) {
-        const returnToRecords = mealSubmissionReturn === "foodCalendar";
+      function menuDateFromLabel(dateLabel) {
+        if (dateLabel === "今天") return dateAtOffset(0);
+        if (dateLabel === "明天") return dateAtOffset(1);
+        if (dateLabel === "后天") return dateAtOffset(2);
+        const match = dateLabel.match(/(?:(\d{4})年)?(\d{1,2})月(\d{1,2})日/);
+        if (!match) return new Date(appToday);
+        return new Date(
+          Number(match[1] || appToday.getFullYear()),
+          Number(match[2]) - 1,
+          Number(match[3]),
+        );
+      }
+      function openSubmittedMealRecord(dateLabel, meal) {
+        const date = menuDateFromLabel(dateLabel);
+        recordYear = date.getFullYear();
+        recordMonth = date.getMonth();
+        selectedRecordDay = date.getDate();
+        activeRecordMeal = meal || "午餐";
+        showScreen("foodCalendar");
+        renderRecordCalendar();
+        renderRecordDay(selectedRecordDay);
+        setTimeout(() => {
+          document
+            .querySelector(`[data-record-card-meal="${activeRecordMeal}"]`)
+            ?.scrollIntoView({ behavior: "smooth", block: "center" });
+        }, 80);
+      }
+      function finishMealSubmission(message, dateLabel, meal) {
         Object.keys(cartItems).forEach((name) => delete cartItems[name]);
         Object.keys(cartSources).forEach((name) => delete cartSources[name]);
         document.querySelectorAll("#home .add-round").forEach((btn) => {
@@ -9271,14 +12587,10 @@
         syncProfileStats();
         document.getElementById("homeTableSubtitle").textContent =
           "从我家会做的菜里，选下一餐";
-        toast(message + "，采购清单已自动更新");
+        document.getElementById("homeTableSubtitle").hidden = true;
+        toast(message + "，正在查看对应菜单");
         setTimeout(() => {
-          if (returnToRecords) {
-            showScreen("foodCalendar");
-            renderRecordDay(selectedRecordDay);
-          } else {
-            showScreen("home");
-          }
+          openSubmittedMealRecord(dateLabel, meal);
           mealSubmissionReturn = "home";
         }, 350);
       }
@@ -9365,9 +12677,11 @@
         ),
       );
       const mealPhotos = {};
+      const completedRecordMeals = new Set();
       let recordYear = recordToday.getFullYear();
       let recordMonth = recordToday.getMonth();
       let selectedRecordDay = recordToday.getDate();
+      let activeRecordMeal = "午餐";
       let activeMealMemory = null;
       let activeMealShare = null;
       function mealMemoryHtml(date, meal, dishes) {
@@ -9690,6 +13004,153 @@
           }
         }, "image/png");
       }
+      function nearestRecordMeal() {
+        const hour = new Date().getHours();
+        if (hour < 10) return "早餐";
+        if (hour < 15) return "午餐";
+        return "晚餐";
+      }
+      function selectedRecordDate() {
+        return new Date(recordYear, recordMonth, selectedRecordDay);
+      }
+      function syncRecordQuickDates() {
+        let matchesQuickDate = false;
+        document.querySelectorAll("[data-record-offset]").forEach((button) => {
+          const date = dateAtOffset(Number(button.dataset.recordOffset));
+          button.querySelector("small").textContent = shortDateLabel(date);
+          const matches = isSameDate(date, selectedRecordDate());
+          if (matches) matchesQuickDate = true;
+          button.classList.toggle("on", matches);
+        });
+        document
+          .querySelector(".record-date-strip button:last-child")
+          .classList.toggle("on", !matchesQuickDate);
+        document
+          .querySelectorAll("[data-record-meal]")
+          .forEach((button) =>
+            button.classList.toggle(
+              "on",
+              button.dataset.recordMeal === activeRecordMeal,
+            ),
+          );
+      }
+      function selectRecordQuickDate(button, offset) {
+        const date = dateAtOffset(offset);
+        recordYear = date.getFullYear();
+        recordMonth = date.getMonth();
+        selectedRecordDay = date.getDate();
+        document.getElementById("recordCalendarPanel").classList.remove("show");
+        renderRecordCalendar();
+        renderRecordDay(selectedRecordDay);
+      }
+      function toggleRecordCalendar() {
+        document.getElementById("recordCalendarPanel").classList.toggle("show");
+      }
+      function selectRecordMeal(button, meal) {
+        activeRecordMeal = meal;
+        renderRecordDay(selectedRecordDay);
+        setTimeout(() => {
+          document
+            .querySelector(`[data-record-card-meal="${meal}"]`)
+            ?.scrollIntoView({ behavior: "smooth", block: "center" });
+        }, 40);
+      }
+      function completeRecordMeal(dateLabel, meal) {
+        const key = `${dateLabel}|${meal}`;
+        if (completedRecordMeals.has(key)) completedRecordMeals.delete(key);
+        else completedRecordMeals.add(key);
+        renderRecordDay(selectedRecordDay);
+        toast(
+          completedRecordMeals.has(key)
+            ? `${meal}已标记完成`
+            : `${meal}已恢复为未完成`,
+        );
+      }
+      let recordDishSwipeState = null;
+      let suppressRecordDishClick = false;
+      function closeOtherRecordDishSwipes(currentRow) {
+        document.querySelectorAll(".record-dish-row.swiped").forEach((row) => {
+          if (row !== currentRow) row.classList.remove("swiped");
+        });
+      }
+      function startRecordDishSwipe(event) {
+        if (event.pointerType === "mouse" && event.button !== 0) return;
+        const row = event.currentTarget;
+        closeOtherRecordDishSwipes(row);
+        recordDishSwipeState = {
+          row,
+          pointerId: event.pointerId,
+          startX: event.clientX,
+          startY: event.clientY,
+          baseX: row.classList.contains("swiped") ? -58 : 0,
+          moved: false,
+        };
+        row.style.transition = "none";
+        row.setPointerCapture?.(event.pointerId);
+      }
+      function moveRecordDishSwipe(event) {
+        const state = recordDishSwipeState;
+        if (!state || state.row !== event.currentTarget) return;
+        const deltaX = event.clientX - state.startX;
+        const deltaY = event.clientY - state.startY;
+        if (Math.abs(deltaX) < 4 && Math.abs(deltaY) < 4) return;
+        if (Math.abs(deltaY) > Math.abs(deltaX) && !state.moved) return;
+        state.moved = true;
+        suppressRecordDishClick = true;
+        event.preventDefault();
+        const offset = Math.max(-58, Math.min(0, state.baseX + deltaX));
+        state.row.style.transform = `translateX(${offset}px)`;
+      }
+      function endRecordDishSwipe(event) {
+        const state = recordDishSwipeState;
+        if (!state || state.row !== event.currentTarget) return;
+        const deltaX = event.clientX - state.startX;
+        const shouldOpen = state.moved
+          ? state.baseX + deltaX < -29
+          : state.baseX === -58;
+        state.row.style.transition = "";
+        state.row.style.transform = "";
+        state.row.classList.toggle("swiped", shouldOpen);
+        state.row.releasePointerCapture?.(state.pointerId);
+        recordDishSwipeState = null;
+        if (state.moved) {
+          setTimeout(() => {
+            suppressRecordDishClick = false;
+          }, 0);
+        }
+      }
+      function openRecordDish(event, name) {
+        const row = event.currentTarget;
+        if (suppressRecordDishClick) {
+          event.preventDefault();
+          return;
+        }
+        if (row.classList.contains("swiped")) {
+          row.classList.remove("swiped");
+          return;
+        }
+        openPointRecipeDetail(name, "foodCalendar");
+      }
+      function deleteRecordDish(dateLabel, meal, name) {
+        const key = `${dateLabel}|${meal}`;
+        const menu = mealMenus[key];
+        if (!menu?.[name]) return;
+        if (!window.confirm(`确定从${dateLabel}${meal}删除“${name}”吗？`))
+          return;
+        delete menu[name];
+        delete mealMenuSources[key]?.[name];
+        delete mealMenuItemStatus[key]?.[name];
+        if (!Object.keys(menu).length) {
+          delete mealMenus[key];
+          delete mealMenuSources[key];
+          delete mealMenuItemStatus[key];
+          delete mealMenuStatus[key];
+          completedRecordMeals.delete(key);
+        }
+        renderRecordCalendar();
+        renderRecordDay(selectedRecordDay);
+        toast(`${name}已删除，采购清单同步更新`);
+      }
       function renderRecordCalendar() {
         const days = document.getElementById("recordMonthDays");
         const monthLength = new Date(recordYear, recordMonth + 1, 0).getDate();
@@ -9732,6 +13193,7 @@
           .forEach((item) => item.classList.remove("selected"));
         btn.classList.add("selected");
         selectedRecordDay = day;
+        document.getElementById("recordCalendarPanel").classList.remove("show");
         renderRecordDay(day);
       }
       function changeRecordMonth(offset) {
@@ -9747,8 +13209,14 @@
         renderRecordCalendar();
         renderRecordDay(1);
       }
-      function procurementItemsForDate(dateLabel) {
-        const dishes = dishesForDate(dateLabel);
+      function procurementItemsForDate(dateLabel, mealFilter = "all") {
+        const selectedMeals =
+          mealFilter === "all"
+            ? null
+            : new Set(Array.isArray(mealFilter) ? mealFilter : [mealFilter]);
+        const dishes = dishesForDate(dateLabel).filter(
+          (dish) => !selectedMeals || selectedMeals.has(dish.meal),
+        );
         const merged = new Map();
         dishes.forEach((dish) => {
           (
@@ -9789,18 +13257,49 @@
       ) {
         const key = `${dateLabel}|${meal}`;
         const menu = mealMenus[key];
+        const focused = meal === activeRecordMeal ? " focused" : "";
         if (!menu || !Object.keys(menu).length) {
-          return `<div class="meal-card"><div class="meal-label">${meal}<small>${time}</small></div><div class="meal-content"><b class="no-meal">暂无点餐记录</b>${allowEmptyEdit ? `<button class="record-edit" onclick="editRecordMeal('${dateLabel}','${meal}','new')">＋ 去点菜</button>` : ""}</div></div>`;
+          return `<section class="meal-card record-order-card${focused}" data-record-card-meal="${meal}"><div class="record-order-head"><span><b>${meal}</b><small>${time}</small></span><span class="record-order-status">暂无菜单</span></div><div class="record-empty-order">这一餐还没有点菜</div>${allowEmptyEdit ? `<div class="record-order-footer"><button onclick="editRecordMeal('${dateLabel}','${meal}','new')">＋ 去点菜</button></div>` : ""}</section>`;
         }
         const names = Object.keys(menu);
-        const sources = [
+        const requesterNames = [
           ...new Set(
-            names.map(
-              (name) => mealMenuSources[key]?.[name] || "家庭成员 · 已点餐",
+            names.map((name) =>
+              (mealMenuSources[key]?.[name] || "家庭成员 · 已点餐")
+                .split("·")[0]
+                .trim(),
             ),
           ),
         ];
-        return `<div class="meal-card"><div class="meal-label">${meal}<small>${time}</small></div><div class="meal-content"><b>${names.join(" · ")}</b><span class="record-status">采购已同步</span><p><span class="meal-who">${sources.join("，")}</span></p><button class="record-edit" onclick="editRecordMeal('${dateLabel}','${meal}','existing')">编辑菜单</button></div></div>`;
+        const isDone = completedRecordMeals.has(key);
+        const mealMeta =
+          time === "—"
+            ? `${names.length} 道菜`
+            : `${time} · ${names.length} 道菜`;
+        const dishes = names
+          .map((name) => {
+            const source = mealMenuSources[key]?.[name] || "家庭成员 · 已点餐";
+            const note = dishNotes[name]
+              ? `口味：${dishNotes[name]}`
+              : "按家庭菜谱制作";
+            const encodedDate = encodeURIComponent(dateLabel);
+            const encodedMeal = encodeURIComponent(meal);
+            const encodedName = encodeURIComponent(name);
+            return `<div class="record-dish-swipe"><button class="record-dish-delete" onclick="deleteRecordDish(decodeURIComponent('${encodedDate}'),decodeURIComponent('${encodedMeal}'),decodeURIComponent('${encodedName}'))">删除</button><div class="record-dish-row" data-recipe-name="${escapeHtml(name)}" onpointerdown="startRecordDishSwipe(event)" onpointermove="moveRecordDishSwipe(event)" onpointerup="endRecordDishSwipe(event)" onpointercancel="endRecordDishSwipe(event)" onclick="openRecordDish(event,decodeURIComponent('${encodedName}'))"><i>${dishEmoji[name] || "🍽️"}</i><span><b>${escapeHtml(name)}</b><small>${escapeHtml(source)} · ${escapeHtml(note)}</small></span><em>x${menu[name]}</em></div></div>`;
+          })
+          .join("");
+        const completeAction =
+          dateLabel === "今天"
+            ? `<button class="${isDone ? "done" : ""}" onclick="completeRecordMeal('${dateLabel}','${meal}')">${isDone ? "已完成" : "完成本餐"}</button>`
+            : "";
+        return `<section class="meal-card record-order-card${focused}" data-record-card-meal="${meal}"><div class="record-order-head"><span><b>${meal}</b><small>${mealMeta}</small></span><span class="record-order-status ${isDone ? "done" : ""}">${isDone ? "已完成" : "未完成"}</span></div><div class="record-order-person"><i>👪</i><span><b>${requesterNames.join("、")}</b><small>本餐菜单 · 左滑菜品可删除</small></span></div><div class="record-dish-list">${dishes}</div><div class="record-order-footer"><button onclick="editRecordMeal('${dateLabel}','${meal}','existing')">编辑菜单</button><button onclick="openRecordMenuShare('${dateLabel}','${meal}')">分享菜单</button>${completeAction}</div></section>`;
+      }
+      function renderRecordShoppingEntry(dateLabel) {
+        const { ingredients } = procurementItemsForDate(dateLabel);
+        const needBuy = ingredients.filter(
+          (item) => procurementStateLabel(dateLabel, item.name) === "需要购买",
+        ).length;
+        return `<button class="record-shopping-entry" onclick="openRecordShopping('${dateLabel}')"><i>🧺</i><span><b>${dateLabel}采购清单</b><small>${ingredients.length ? `${needBuy} 项需要购买 · 可按三餐查看` : "点菜后自动生成"}</small></span><span>查看 ›</span></button>`;
       }
       function renderRecordProcurementCard(dateLabel, displayDate) {
         const { dishes, ingredients } = procurementItemsForDate(dateLabel);
@@ -9830,7 +13329,7 @@
               .join("")}</div>`
           : `<div class="record-procurement-empty">当天还没有菜单，点菜后会自动生成采购清单</div>`;
         const footer = ingredients.length
-          ? `<div class="record-procurement-footer"><button onclick="openRecordProcurementDetail('${dateLabel}')">查看三餐详情</button><button onclick="openRecordProcurementShare('${dateLabel}')">分享采购清单 · ${needBuy}项</button></div>`
+          ? `<div class="record-procurement-footer"><button onclick="openRecordProcurementDetail('${dateLabel}')">查看三餐详情</button><button onclick="openRecordProcurementShare('${dateLabel}',true)">分享菜单＋清单 · ${needBuy}项需买</button></div>`
           : "";
         return `<section class="record-procurement-card" data-date-label="${dateLabel}"><div class="record-procurement-head"><div><i>🧺</i><span><b>${displayDate}采购清单</b><small>已默认全选，可取消不需要购买的食材</small></span></div><span>${dishes.length} 道菜</span></div><div class="record-procurement-summary"><span><b>${needBuy}</b> 项需要购买</span><span>${ingredients.length - needBuy} 项无需购买</span><button onclick="toggleAllRecordIngredients(this)">${needBuy === ingredients.length ? "取消全选" : "全部需买"}</button></div>${list}${footer}</section>`;
       }
@@ -9862,7 +13361,290 @@
         renderRecordDay(selectedRecordDay);
         toast(clearAll ? "已取消全部采购选择" : "全部食材已列入采购");
       }
+      let activeRecordShoppingDate = "今天";
+      let activeRecordShoppingMeal = "all";
+      function openRecordShopping(dateLabel) {
+        activeRecordShoppingDate = dateLabel;
+        activeRecordShoppingMeal = "all";
+        document
+          .querySelectorAll("[data-shopping-meal]")
+          .forEach((button) =>
+            button.classList.toggle(
+              "on",
+              button.dataset.shoppingMeal === "all",
+            ),
+          );
+        renderRecordShoppingScreen();
+        showScreen("recordShopping");
+      }
+      function closeRecordShopping() {
+        showScreen("foodCalendar");
+        renderRecordDay(selectedRecordDay);
+      }
+      function selectRecordShoppingMeal(button, meal) {
+        activeRecordShoppingMeal = meal;
+        button.parentElement
+          .querySelectorAll("button")
+          .forEach((item) => item.classList.toggle("on", item === button));
+        renderRecordShoppingScreen();
+      }
+      function renderRecordShoppingScreen() {
+        const { ingredients } = procurementItemsForDate(
+          activeRecordShoppingDate,
+          activeRecordShoppingMeal,
+        );
+        const needBuy = ingredients.filter(
+          (item) =>
+            procurementStateLabel(activeRecordShoppingDate, item.name) ===
+            "需要购买",
+        ).length;
+        document.getElementById("recordShoppingDate").textContent =
+          `${activeRecordShoppingDate} · ${activeRecordShoppingMeal === "all" ? "全天" : activeRecordShoppingMeal}`;
+        document.getElementById("recordShoppingSummary").innerHTML =
+          `<span><b>${needBuy}</b> 项需要购买</span><span>${ingredients.length - needBuy} 项无需购买</span>`;
+        const groups = {};
+        ingredients.forEach((item) => {
+          (groups[item.category] ||= []).push(item);
+        });
+        document.getElementById("recordShoppingList").innerHTML =
+          ingredients.length
+            ? Object.entries(groups)
+                .map(
+                  ([category, items]) =>
+                    `<section class="record-procurement-category tone-${procurementCategoryTone(category)}"><div class="record-procurement-category-head"><b><i>${procurementCategoryIcon(category)}</i>${escapeHtml(category)}</b><span>${items.length} 项</span></div>${items
+                      .map((item) => {
+                        const needsBuy =
+                          procurementStateLabel(
+                            activeRecordShoppingDate,
+                            item.name,
+                          ) === "需要购买";
+                        return `<div class="record-procurement-item ${needsBuy ? "buy" : "pending"}" data-ingredient="${escapeHtml(item.name)}"><button class="record-procurement-check" onclick="updateRecordShoppingIngredient(this)">✓</button><div class="record-procurement-copy"><b>${escapeHtml(item.name)}</b><small>${escapeHtml(item.sources.join("、"))}</small></div><div class="record-procurement-actions"><span>${escapeHtml(item.amount)}</span></div></div>`;
+                      })
+                      .join("")}</section>`,
+                )
+                .join("")
+            : `<div class="record-procurement-empty">当前餐次还没有采购项目</div>`;
+      }
+      function procurementCategoryTone(category) {
+        if (/蔬菜|菌菇|水果/.test(category)) return "vegetable";
+        if (/肉|禽/.test(category)) return "meat";
+        if (/水产|海鲜|蛋|奶/.test(category)) return "fresh";
+        if (/米|面|杂粮|主食/.test(category)) return "staple";
+        if (/调味|葱姜|香料|配料/.test(category)) return "seasoning";
+        return "other";
+      }
+      function procurementCategoryIcon(category) {
+        const tone = procurementCategoryTone(category);
+        return {
+          vegetable: "🥬",
+          meat: "🥩",
+          fresh: "🐟",
+          staple: "🌾",
+          seasoning: "🧂",
+          other: "🧺",
+        }[tone];
+      }
+      function updateRecordShoppingIngredient(button) {
+        const ingredient = button.closest(".record-procurement-item").dataset
+          .ingredient;
+        const key = `${currentDiningTable}|${activeRecordShoppingDate}|${ingredient}`;
+        const current = shoppingStates[key] || "buy";
+        shoppingStates[key] = current === "buy" ? "pending" : "buy";
+        renderRecordShoppingScreen();
+        toast(
+          shoppingStates[key] === "buy"
+            ? `${ingredient}已标记为需要购买`
+            : `${ingredient}已设为无需购买`,
+        );
+      }
+      const recordMealSequence = ["早餐", "午餐", "晚餐"];
+      let selectedRecordShareMeals = new Set(recordMealSequence);
+      function shareRecordShopping() {
+        selectedRecordShareMeals = new Set(recordMealSequence);
+        document.getElementById("recordShoppingShareDate").textContent =
+          `${activeRecordShoppingDate}采购清单`;
+        document
+          .querySelectorAll("#recordShoppingShareRange [data-share-meal]")
+          .forEach((button) => {
+            const meal = button.dataset.shareMeal;
+            button.classList.add("on");
+            button.setAttribute("aria-pressed", "true");
+            button.querySelector("small").textContent =
+              `${procurementItemsForDate(activeRecordShoppingDate, meal).dishes.length} 道菜`;
+          });
+        updateRecordShoppingShareRange();
+        document
+          .getElementById("recordShoppingShareRangeSheet")
+          .classList.add("show");
+      }
+      function closeRecordShoppingShareRange(event) {
+        if (event && event.target !== event.currentTarget) return;
+        document
+          .getElementById("recordShoppingShareRangeSheet")
+          .classList.remove("show");
+      }
+      function toggleRecordShoppingShareMeal(button) {
+        const meal = button.dataset.shareMeal;
+        if (selectedRecordShareMeals.has(meal)) {
+          selectedRecordShareMeals.delete(meal);
+        } else {
+          selectedRecordShareMeals.add(meal);
+        }
+        button.classList.toggle("on", selectedRecordShareMeals.has(meal));
+        button.setAttribute(
+          "aria-pressed",
+          String(selectedRecordShareMeals.has(meal)),
+        );
+        updateRecordShoppingShareRange();
+      }
+      function selectAllRecordShoppingShareMeals() {
+        selectedRecordShareMeals = new Set(recordMealSequence);
+        document
+          .querySelectorAll("#recordShoppingShareRange [data-share-meal]")
+          .forEach((button) => {
+            button.classList.add("on");
+            button.setAttribute("aria-pressed", "true");
+          });
+        updateRecordShoppingShareRange();
+      }
+      function updateRecordShoppingShareRange() {
+        const meals = recordMealSequence.filter((meal) =>
+          selectedRecordShareMeals.has(meal),
+        );
+        const isAllDay = meals.length === recordMealSequence.length;
+        const scope = isAllDay ? "全天" : meals.join("＋");
+        const button = document.getElementById("recordShoppingShareConfirm");
+        document.getElementById("recordShoppingShareSummary").textContent =
+          meals.length
+            ? `已选${scope} · ${meals.length} 餐合并`
+            : "请至少选择一餐";
+        button.textContent = meals.length
+          ? `分享${scope}采购清单`
+          : "请先选择餐次";
+        button.disabled = !meals.length;
+      }
+      function confirmRecordShoppingShare() {
+        const meals = recordMealSequence.filter((meal) =>
+          selectedRecordShareMeals.has(meal),
+        );
+        if (!meals.length) {
+          toast("请至少选择一餐");
+          return;
+        }
+        closeRecordShoppingShareRange();
+        openRecordProcurementShare(activeRecordShoppingDate, false, meals);
+      }
+      let activeRecordMenuShare = null;
+      function openRecordMenuShare(dateLabel, meal) {
+        const dishes = dishesForDate(dateLabel).filter(
+          (dish) => dish.meal === meal,
+        );
+        if (!dishes.length) {
+          toast("当前餐次还没有可分享的菜单");
+          return;
+        }
+        activeRecordMenuShare = { dateLabel, meal, dishes };
+        document.getElementById("recordMenuShareTitle").textContent =
+          `${dateLabel} · ${meal}`;
+        document.getElementById("recordMenuShareMeta").textContent =
+          `${dishes.length} 道菜 · 家宴家庭菜单`;
+        document.getElementById("recordMenuShareDishes").innerHTML = dishes
+          .map(
+            (dish) =>
+              `<div><i>${dishEmoji[dish.name] || "🍽️"}</i><span><b>${escapeHtml(dish.name)}</b><br><small>${escapeHtml(dish.requester || "家庭成员点餐")}</small></span></div>`,
+          )
+          .join("");
+        document.getElementById("recordMenuShareSheet").classList.add("show");
+      }
+      function closeRecordMenuShare(event) {
+        if (event && event.target !== event.currentTarget) return;
+        document
+          .getElementById("recordMenuShareSheet")
+          .classList.remove("show");
+      }
+      function recordMenuPosterBlob() {
+        if (!activeRecordMenuShare) return Promise.resolve(null);
+        const { dateLabel, meal, dishes } = activeRecordMenuShare;
+        const canvas = document.createElement("canvas");
+        canvas.width = 1080;
+        canvas.height = Math.max(1250, 430 + dishes.length * 170);
+        const context = canvas.getContext("2d");
+        context.fillStyle = "#f7f2ea";
+        context.fillRect(0, 0, canvas.width, canvas.height);
+        context.fillStyle = "#d14836";
+        context.fillRect(0, 0, canvas.width, 18);
+        context.fillStyle = "#2e2925";
+        context.font = "bold 58px sans-serif";
+        context.fillText(`${dateLabel} · ${meal}`, 64, 112);
+        context.fillStyle = "#766b62";
+        context.font = "28px sans-serif";
+        context.fillText(`家宴家庭菜单 · ${dishes.length} 道菜`, 64, 164);
+        let y = 220;
+        dishes.forEach((dish, index) => {
+          context.fillStyle = "#fffdf9";
+          context.beginPath();
+          context.roundRect(48, y, 984, 142, 24);
+          context.fill();
+          context.fillStyle = "#2e2925";
+          context.font = "48px sans-serif";
+          context.fillText(dishEmoji[dish.name] || "🍽️", 78, y + 88);
+          context.font = "bold 34px sans-serif";
+          context.fillText(`${index + 1}. ${dish.name}`, 160, y + 60);
+          context.fillStyle = "#766b62";
+          context.font = "25px sans-serif";
+          context.fillText(dish.requester || "家庭成员点餐", 160, y + 104);
+          y += 165;
+        });
+        context.fillStyle = "#9c493f";
+        context.font = "bold 30px sans-serif";
+        context.fillText("家宴 · 一起决定今天吃什么", 64, canvas.height - 70);
+        drawShareQr(context, 870, canvas.height - 150);
+        return new Promise((resolve) => canvas.toBlob(resolve, "image/png"));
+      }
+      async function saveRecordMenuPoster() {
+        const blob = await recordMenuPosterBlob();
+        if (!blob || !activeRecordMenuShare) return;
+        downloadPosterBlob(
+          blob,
+          `${activeRecordMenuShare.dateLabel}${activeRecordMenuShare.meal}菜单.png`,
+        );
+        toast("菜单图片已保存");
+      }
+      async function shareRecordMenuPoster() {
+        const blob = await recordMenuPosterBlob();
+        if (!blob || !activeRecordMenuShare) return;
+        const file = new File(
+          [blob],
+          `${activeRecordMenuShare.dateLabel}${activeRecordMenuShare.meal}菜单.png`,
+          { type: "image/png" },
+        );
+        if (navigator.canShare?.({ files: [file] })) {
+          try {
+            await navigator.share({ files: [file], title: "家庭菜单" });
+            toast("菜单已分享");
+          } catch (error) {
+            if (error.name !== "AbortError") toast("暂时无法调起系统分享");
+          }
+          return;
+        }
+        downloadPosterBlob(blob, file.name);
+        toast("当前浏览器不支持直接分享，菜单图片已保存");
+      }
       let activeRecordProcurementDate = "今天";
+      let recordShareIncludesMenu = false;
+      let activeRecordProcurementMeals = ["早餐", "午餐", "晚餐"];
+      function normalizeProcurementMeals(mealFilter = "all") {
+        if (mealFilter === "all") return [...recordMealSequence];
+        const requested = new Set(
+          Array.isArray(mealFilter) ? mealFilter : [mealFilter],
+        );
+        return recordMealSequence.filter((meal) => requested.has(meal));
+      }
+      function procurementMealScopeLabel(meals = activeRecordProcurementMeals) {
+        return meals.length === recordMealSequence.length
+          ? "全天"
+          : meals.join("＋");
+      }
       function procurementStateLabel(dateLabel, ingredient) {
         const state =
           shoppingStates[`${currentDiningTable}|${dateLabel}|${ingredient}`];
@@ -9886,6 +13668,7 @@
       }
       function openRecordProcurementDetail(dateLabel) {
         activeRecordProcurementDate = dateLabel;
+        activeRecordProcurementMeals = [...recordMealSequence];
         const dishes = dishesForDate(dateLabel);
         document.getElementById("recordProcurementDetailTitle").textContent =
           `${dateLabel} · 三餐采购详情`;
@@ -9910,9 +13693,21 @@
         closeRecordProcurementDetail();
         openRecordProcurementShare(activeRecordProcurementDate);
       }
-      function openRecordProcurementShare(dateLabel) {
+      function openRecordProcurementShare(
+        dateLabel,
+        includeMenu = false,
+        mealFilter = "all",
+      ) {
         activeRecordProcurementDate = dateLabel;
-        const { dishes, ingredients } = procurementItemsForDate(dateLabel);
+        recordShareIncludesMenu = includeMenu;
+        activeRecordProcurementMeals = normalizeProcurementMeals(mealFilter);
+        const isAllDay =
+          activeRecordProcurementMeals.length === recordMealSequence.length;
+        const scopeLabel = procurementMealScopeLabel();
+        const { dishes, ingredients } = procurementItemsForDate(
+          dateLabel,
+          activeRecordProcurementMeals,
+        );
         if (!ingredients.length) {
           toast("当天还没有可分享的采购清单");
           return;
@@ -9923,31 +13718,29 @@
         const noNeed = ingredients.filter(
           (item) => procurementStateLabel(dateLabel, item.name) === "无需购买",
         );
-        document.getElementById("prepPosterTitle").textContent =
-          `${dateLabel}采购清单`;
+        document.getElementById("prepPosterTitle").textContent = includeMenu
+          ? `${dateLabel}${isAllDay ? "" : scopeLabel}菜单与采购清单`
+          : `${dateLabel}${isAllDay ? "" : scopeLabel}采购清单`;
         document.getElementById("prepPosterMeta").textContent =
-          `${dishes.length} 道菜 · 全天汇总与三餐明细`;
+          `${dishes.length} 道菜 · ${isAllDay ? "全天汇总与三餐明细" : `${scopeLabel}合并采购明细`}`;
         document.getElementById("prepPosterIngredients").innerHTML =
-          `<b>全天汇总</b><br><strong>需要购买：</strong>${needBuy.length ? needBuy.map((item) => `${item.name} ${item.amount}`).join("、") : "无"}<br><strong>无需购买：</strong>${noNeed.length ? noNeed.map((item) => `${item.name} ${item.amount}`).join("、") : "无"}`;
-        document.getElementById("prepPosterMealDetails").innerHTML = [
-          "早餐",
-          "午餐",
-          "晚餐",
-        ]
-          .map((meal) => {
-            const mealDishes = dishes.filter((dish) => dish.meal === meal);
-            const mealIngredients = mergedMealIngredients(mealDishes);
-            const lines = mealIngredients.length
-              ? mealIngredients
-                  .map(
-                    (item) =>
-                      `${item.name} ${item.amount}（${procurementStateLabel(dateLabel, item.name)}）`,
-                  )
-                  .join("、")
-              : "暂无菜单";
-            return `<div class="poster-meal-section"><b>${meal} · ${mealDishes.map((dish) => dish.name).join("、") || "暂无菜品"}</b><small>${lines}</small></div>`;
-          })
-          .join("");
+          `<b>${isAllDay ? "全天汇总" : `${scopeLabel}合并`}</b><br><strong>需要购买：</strong>${needBuy.length ? needBuy.map((item) => `${item.name} ${item.amount}`).join("、") : "无"}<br><strong>无需购买：</strong>${noNeed.length ? noNeed.map((item) => `${item.name} ${item.amount}`).join("、") : "无"}`;
+        document.getElementById("prepPosterMealDetails").innerHTML =
+          activeRecordProcurementMeals
+            .map((meal) => {
+              const mealDishes = dishes.filter((dish) => dish.meal === meal);
+              const mealIngredients = mergedMealIngredients(mealDishes);
+              const lines = mealIngredients.length
+                ? mealIngredients
+                    .map(
+                      (item) =>
+                        `${item.name} ${item.amount}（${procurementStateLabel(dateLabel, item.name)}）`,
+                    )
+                    .join("、")
+                : "暂无菜单";
+              return `<div class="poster-meal-section"><b>${meal} · ${mealDishes.map((dish) => dish.name).join("、") || "暂无菜品"}</b><small>${lines}</small></div>`;
+            })
+            .join("");
         document.getElementById("prepShareSheet").classList.add("show");
       }
       function drawPosterText(
@@ -9980,7 +13773,10 @@
         return y + lineCount * lineHeight;
       }
       function procurementPosterBlob(dateLabel) {
-        const { dishes, ingredients } = procurementItemsForDate(dateLabel);
+        const { dishes, ingredients } = procurementItemsForDate(
+          dateLabel,
+          activeRecordProcurementMeals,
+        );
         const needBuy = ingredients.filter(
           (item) => procurementStateLabel(dateLabel, item.name) === "需要购买",
         );
@@ -10000,7 +13796,13 @@
         context.fillRect(0, 0, canvas.width, 18);
         context.fillStyle = "#2e2925";
         context.font = "bold 54px sans-serif";
-        context.fillText(`${dateLabel}采购清单`, 64, 100);
+        context.fillText(
+          recordShareIncludesMenu
+            ? `${dateLabel}${activeRecordProcurementMeals.length === recordMealSequence.length ? "" : procurementMealScopeLabel()}菜单与采购清单`
+            : `${dateLabel}${activeRecordProcurementMeals.length === recordMealSequence.length ? "" : procurementMealScopeLabel()}采购清单`,
+          64,
+          100,
+        );
         context.fillStyle = "#766b62";
         context.font = "28px sans-serif";
         context.fillText(
@@ -10041,7 +13843,7 @@
         };
         drawSection("需要购买", needBuy, "#d14836");
         drawSection("无需购买", noNeed, "#687b57");
-        ["早餐", "午餐", "晚餐"].forEach((meal) => {
+        activeRecordProcurementMeals.forEach((meal) => {
           const mealDishes = dishes.filter((dish) => dish.meal === meal);
           context.fillStyle = "#2e2925";
           context.font = "bold 31px sans-serif";
@@ -10082,8 +13884,19 @@
           toast("采购清单图片生成失败，请重试");
           return;
         }
-        downloadPosterBlob(blob, `${activeRecordProcurementDate}采购清单.png`);
-        toast("采购清单图片已保存");
+        const mealLabel =
+          activeRecordProcurementMeals.length === recordMealSequence.length
+            ? ""
+            : procurementMealScopeLabel();
+        const fileName = recordShareIncludesMenu
+          ? `${activeRecordProcurementDate}${mealLabel}菜单与采购清单.png`
+          : `${activeRecordProcurementDate}${mealLabel}采购清单.png`;
+        downloadPosterBlob(blob, fileName);
+        toast(
+          recordShareIncludesMenu
+            ? "菜单与采购清单图片已保存"
+            : "采购清单图片已保存",
+        );
       }
       async function shareRecordProcurementPoster() {
         const blob = await procurementPosterBlob(activeRecordProcurementDate);
@@ -10093,16 +13906,24 @@
         }
         const file = new File(
           [blob],
-          `${activeRecordProcurementDate}采购清单.png`,
+          recordShareIncludesMenu
+            ? `${activeRecordProcurementDate}${activeRecordProcurementMeals.length === recordMealSequence.length ? "" : procurementMealScopeLabel()}菜单与采购清单.png`
+            : `${activeRecordProcurementDate}${activeRecordProcurementMeals.length === recordMealSequence.length ? "" : procurementMealScopeLabel()}采购清单.png`,
           { type: "image/png" },
         );
         if (navigator.canShare?.({ files: [file] })) {
           try {
             await navigator.share({
               files: [file],
-              title: `${activeRecordProcurementDate}采购清单`,
+              title: recordShareIncludesMenu
+                ? `${activeRecordProcurementDate}${activeRecordProcurementMeals.length === recordMealSequence.length ? "" : procurementMealScopeLabel()}菜单与采购清单`
+                : `${activeRecordProcurementDate}${activeRecordProcurementMeals.length === recordMealSequence.length ? "" : procurementMealScopeLabel()}采购清单`,
             });
-            toast("采购清单已分享");
+            toast(
+              recordShareIncludesMenu
+                ? "菜单与采购清单已分享"
+                : "采购清单已分享",
+            );
           } catch (error) {
             if (error.name !== "AbortError") toast("暂时无法调起系统分享");
           }
@@ -10121,10 +13942,11 @@
         const isRecordedHistory = recordedHistoryDates.has(dateKey(date));
         const dateText = `${recordMonth + 1}月${day}日`;
         const menuDateLabel = fullMenuDateLabel(date);
-        title.textContent = `${dateText} · ${isPast ? "历史记录" : isToday ? "今天" : "未来点餐"}`;
+        syncRecordQuickDates();
+        title.textContent = isToday ? "今天的菜单" : `${dateText}菜单`;
 
         if (isPast && isRecordedHistory) {
-          status.textContent = "已完成";
+          status.textContent = "历史记录 · 已完成";
           log.innerHTML = `
             <div class="meal-card"><div class="meal-label">早餐<small>08:00</small></div><div class="meal-content"><b>小米粥 · 水煮蛋 · 凉拌黄瓜</b><p><span class="meal-who">妈妈记录</span> · 已制作完成</p>${mealMemoryHtml(dateText, "早餐", "小米粥 · 水煮蛋 · 凉拌黄瓜")}</div></div>
             <div class="meal-card"><div class="meal-label">午餐<small>12:10</small></div><div class="meal-content"><b>番茄炒蛋 · 蒜蓉时蔬</b><p><span class="meal-who">小满点菜</span> · 爸爸制作</p>${mealMemoryHtml(dateText, "午餐", "番茄炒蛋 · 蒜蓉时蔬")}</div></div>
@@ -10133,7 +13955,7 @@
         }
 
         if (isPast) {
-          status.textContent = "无记录";
+          status.textContent = "历史记录 · 无记录";
           log.innerHTML = `<div class="meal-card"><div class="meal-label">当天<small>—</small></div><div class="meal-content"><b class="no-meal">这一天没有饮食记录</b><p>历史记录仅用于回顾，不能补录或修改。</p></div></div>`;
           return;
         }
@@ -10142,29 +13964,32 @@
           const mealCount = new Set(
             dishesForDate("今天").map((dish) => dish.meal),
           ).size;
-          status.textContent = `${mealCount} 餐已点`;
+          status.textContent = `${activeRecordMeal} · ${mealCount} 餐已有菜单`;
           log.innerHTML = `
             ${recordMealCardHtml("今天", "早餐", "08:00")}
             ${recordMealCardHtml("今天", "午餐", "12:00")}
             ${recordMealCardHtml("今天", "晚餐", "18:30")}
-            ${renderRecordProcurementCard("今天", "今天的")}`;
+            ${renderRecordShoppingEntry("今天")}`;
           return;
         }
 
         const mealCount = new Set(
           dishesForDate(menuDateLabel).map((dish) => dish.meal),
         ).size;
-        status.textContent = mealCount ? `${mealCount} 餐已点` : "暂无点餐";
+        status.textContent = mealCount
+          ? `${activeRecordMeal} · ${mealCount} 餐已有菜单`
+          : `${activeRecordMeal} · 暂无点餐`;
         log.innerHTML = `
           ${recordMealCardHtml(menuDateLabel, "早餐", "—")}
           ${recordMealCardHtml(menuDateLabel, "午餐", "—")}
           ${recordMealCardHtml(menuDateLabel, "晚餐", "—")}
-          ${renderRecordProcurementCard(menuDateLabel, `${dateText}的`)}`;
+          ${renderRecordShoppingEntry(menuDateLabel)}`;
       }
       function editRecordMeal(date, meal, state) {
         mealSubmissionReturn = "foodCalendar";
         document.getElementById("homeTableSubtitle").textContent =
           `${date} · ${meal}，选好后直接提交`;
+        document.getElementById("homeTableSubtitle").hidden = false;
         Object.keys(cartItems).forEach((name) => delete cartItems[name]);
         Object.keys(cartSources).forEach((name) => delete cartSources[name]);
         lockedItems.clear();
@@ -10197,10 +14022,12 @@
             : `正在为${date}${meal}点菜`,
         );
       }
-      function recordGoToday() {
+      function recordGoToday(useNearestMeal = true) {
         recordYear = recordToday.getFullYear();
         recordMonth = recordToday.getMonth();
         selectedRecordDay = recordToday.getDate();
+        if (useNearestMeal) activeRecordMeal = nearestRecordMeal();
+        document.getElementById("recordCalendarPanel").classList.remove("show");
         renderRecordCalendar();
         renderRecordDay(selectedRecordDay);
       }
@@ -10450,14 +14277,17 @@
       };
       const todayRecommendationSourceLabels = {
         family: "我家菜谱",
-        mixed: "我家＋发现菜谱",
-        outside: "发现菜谱",
+        mixed: "我家＋菜谱广场",
+        outside: "菜谱广场",
       };
       const todayRecommendationSettings = {
         algorithm: "longTime",
         source: "family",
         count: 3,
       };
+      const todayRecommendationCollapsedKey =
+        "familyRecipe.todayRecommendationCollapsed";
+      let isTodayRecommendationCollapsed = false;
       let todayRecommendationDraft = { ...todayRecommendationSettings };
       let todayRecommendationRefresh = 0;
       let todayRecommendedDishes = [];
@@ -10562,6 +14392,42 @@
             : "");
         renderTodayRecommendationSheet();
       }
+      function loadTodayRecommendationDisplayPreference() {
+        try {
+          isTodayRecommendationCollapsed =
+            localStorage.getItem(todayRecommendationCollapsedKey) === "1";
+        } catch (error) {
+          isTodayRecommendationCollapsed = false;
+        }
+        applyTodayRecommendationCardState();
+      }
+      function applyTodayRecommendationCardState() {
+        const card = document.getElementById("todayRecommendCard");
+        const button = document.getElementById("todayRecommendToggle");
+        if (!card || !button) return;
+        card.classList.toggle("is-collapsed", isTodayRecommendationCollapsed);
+        button.textContent = isTodayRecommendationCollapsed ? "展开⌄" : "收起⌃";
+        button.setAttribute(
+          "aria-expanded",
+          String(!isTodayRecommendationCollapsed),
+        );
+      }
+      function toggleTodayRecommendationCard(event) {
+        if (event) event.stopPropagation();
+        isTodayRecommendationCollapsed = !isTodayRecommendationCollapsed;
+        try {
+          localStorage.setItem(
+            todayRecommendationCollapsedKey,
+            isTodayRecommendationCollapsed ? "1" : "0",
+          );
+        } catch (error) {
+          // 本地存储不可用时，本次打开期间仍保留状态。
+        }
+        applyTodayRecommendationCardState();
+        toast(
+          isTodayRecommendationCollapsed ? "今日推荐已收起" : "今日推荐已展开",
+        );
+      }
       function renderTodayRecommendationSheet() {
         const profile =
           todayRecommendationProfiles[todayRecommendationSettings.algorithm];
@@ -10572,7 +14438,7 @@
             ? todayRecommendedDishes
                 .map(
                   (dish) =>
-                    `<button class="recommend-dish-row${todayRecommendationSelected.has(dish.name) ? "" : " off"}" onclick="toggleTodayRecommendedDish(this,'${dish.name}')"><i>${dish.emoji}</i><div><b>${dish.name}</b><small>${profile.reason}<br>${dish.intro}</small></div>${dish.external ? "<em>发现菜谱</em>" : "<em>我家会做</em>"}</button>`,
+                    `<button class="recommend-dish-row${todayRecommendationSelected.has(dish.name) ? "" : " off"}" onclick="toggleTodayRecommendedDish(this,'${dish.name}')"><i>${dish.emoji}</i><div><b>${dish.name}</b><small>${profile.reason}<br>${dish.intro}</small></div>${dish.external ? "<em>菜谱广场</em>" : "<em>我家会做</em>"}</button>`,
                 )
                 .join("")
             : '<div class="record-procurement-empty">当前来源没有足够菜谱，请调整推荐范围</div>';
@@ -10728,13 +14594,14 @@
           ? "刚刚收录 · 来源公共菜谱"
           : "刚刚创建 · 家庭原创";
         const stateText = state === "available" ? "开放点菜" : "想学先存";
+        const category = data.category || "all";
         const encodedName = encodeURIComponent(name);
         const safeName = escapeHtml(name);
         document
           .getElementById("manageList")
           .insertAdjacentHTML(
             "afterbegin",
-            `<div class="manage-item" data-name="${safeName}" data-recipe-name="${safeName}" data-family-state="${state}" data-status="${stateText}" data-incomplete="false" data-time="0" onclick="openPointRecipeDetail(decodeURIComponent('${encodedName}'),'manage')"><div class="manage-pic">${data.emoji}</div><div class="manage-copy"><h4>${safeName} <span class="badge">${stateText}</span></h4><p>${stateText} · ${sourceText}</p><div class="manage-tags"><span>${state === "available" ? "全家可点" : "暂不开放点菜"}</span><span>${escapeHtml(data.time || "约 30 分钟")}</span><span>家庭版本 V1</span></div></div><button class="manage-more" onclick="event.stopPropagation();openManageActions(decodeURIComponent('${encodedName}'))">•••</button></div>`,
+            `<div class="manage-item" data-cat="${escapeHtml(category)}" data-name="${safeName}" data-recipe-name="${safeName}" data-family-state="${state}" data-status="${stateText}" data-incomplete="false" data-time="0" onclick="openPointRecipeDetail(decodeURIComponent('${encodedName}'),'manage')"><div class="manage-pic">${data.emoji}</div><div class="manage-copy"><h4>${safeName} <span class="badge">${stateText}</span></h4><p>${stateText} · ${sourceText}</p><div class="manage-tags"><span>${state === "available" ? "全家可点" : "暂不开放点菜"}</span><span>${escapeHtml(data.time || "约 30 分钟")}</span><span>家庭版本 V1</span></div></div><div class="manage-inline-actions"><button onclick="event.stopPropagation();editManagedRecipe(decodeURIComponent('${encodedName}'))">编辑</button><button onclick="event.stopPropagation();deleteManagedRecipe(decodeURIComponent('${encodedName}'))">删除</button></div></div>`,
           );
       }
       function updateFamilyRecipeCounts() {
@@ -10745,9 +14612,22 @@
           (item) => item.dataset.familyState === "learning",
         ).length;
         const available = items.length - learning;
-        document.getElementById("familyAllCount").textContent = items.length;
-        document.getElementById("familyAvailableCount").textContent = available;
-        document.getElementById("familyLearningCount").textContent = learning;
+        const countTargets = {
+          all: "manageCatAll",
+          vegetable: "manageCatVegetable",
+          meat: "manageCatMeat",
+          fish: "manageCatFish",
+          soup: "manageCatSoup",
+          egg: "manageCatEgg",
+          staple: "manageCatStaple",
+        };
+        Object.entries(countTargets).forEach(([category, id]) => {
+          const count =
+            category === "all"
+              ? items.length
+              : items.filter((item) => item.dataset.cat === category).length;
+          document.getElementById(id).textContent = count;
+        });
       }
       function resolveFamilyRecipe(name, state) {
         familyRecipeStates.set(name, state);
@@ -10920,7 +14800,7 @@
         }
         const recipeMeta = firstIntroduced
           ? '<p class="recommend-intro-copy"><span class="first-intro-badge">首次引入我家菜谱</span></p>'
-          : "<p>从发现菜谱加入 · 可继续改良<br>家庭版本 · V1</p>";
+          : "<p>从菜谱广场加入 · 可继续改良<br>家庭版本 · V1</p>";
         const sourceText = firstIntroduced ? "" : "刚刚加入我家菜谱";
         const encodedName = encodeURIComponent(name);
         const safeName = escapeHtml(name);
@@ -11050,6 +14930,7 @@
           .classList.remove("show");
       }
       setLibrarySlide(0);
+      activeRecordMeal = nearestRecordMeal();
       renderRecordCalendar();
       renderRecordDay(selectedRecordDay);
       let seriesCount = 0;
@@ -11090,6 +14971,7 @@
       }
       let manageStatus = "all",
         manageSummaryFilter = "all",
+        manageCategory = "all",
         manageGrid = false,
         manageSort = 0,
         currentRecipe = "";
@@ -11102,9 +14984,6 @@
           ? "block"
           : "none";
         let n = 0;
-        const familyFilter =
-          document.querySelector(".manage-summary button.active")?.dataset
-            .familyFilter || "all";
         document
           .querySelectorAll("#manageList .manage-item")
           .forEach((item) => {
@@ -11115,14 +14994,13 @@
               (manageSummaryFilter === "待补充"
                 ? item.dataset.incomplete === "true"
                 : item.dataset.status === manageSummaryFilter);
-            const familyState = item.dataset.familyState || "available";
-            const familyOk =
-              familyFilter === "all" || familyState === familyFilter;
+            const categoryOk =
+              manageCategory === "all" || item.dataset.cat === manageCategory;
             const show =
               (!q || item.dataset.name.toLowerCase().includes(q)) &&
               statusOk &&
               summaryOk &&
-              familyOk;
+              categoryOk;
             item.style.display = show
               ? manageGrid
                 ? "block"
@@ -11137,6 +15015,14 @@
       }
       function clearManageSearch() {
         document.getElementById("manageSearch").value = "";
+        filterManage();
+      }
+      function filterManageCategory(button, category, label) {
+        document
+          .querySelectorAll(".manage-category-rail button")
+          .forEach((item) => item.classList.toggle("on", item === button));
+        manageCategory = category;
+        document.getElementById("manageHeading").textContent = label;
         filterManage();
       }
       function setManageStatus(btn, status) {
@@ -11182,6 +15068,32 @@
           manageSort
         ].replace("↕ ", "");
         toast("已按" + labels[manageSort].replace("↕ ", "") + "排列");
+      }
+      function editManagedRecipe(name) {
+        openRecipeEditor("编辑菜谱", name, name);
+      }
+      function deleteManagedRecipe(name) {
+        const item = findManageRecipeItem(name);
+        if (!item) return;
+        if (
+          !window.confirm(`确定删除“${name}”吗？删除后将不再出现在点菜中。`)
+        ) {
+          return;
+        }
+        item.remove();
+        removePointRecipeCard(name);
+        familyRecipeStates.delete(name);
+        ownedPublicRecipes.delete(name);
+        requestedPublicRecipes.delete(name);
+        delete recipeIngredients[name];
+        delete pointRecipeDetails[name];
+        delete cartItems[name];
+        delete dishNotes[name];
+        delete cartSources[name];
+        updateFamilyRecipeCounts();
+        filterManage();
+        renderCart();
+        toast(`${name} 已从菜谱清单删除`);
       }
       function openManageActions(name) {
         currentRecipe = name;
@@ -11259,13 +15171,7 @@
           removePointRecipeCard(currentRecipe);
         }
         updateFamilyRecipeCounts();
-        const activeFilter = document.querySelector(
-          ".manage-summary button.active",
-        );
-        filterFamilyRecipes(
-          activeFilter,
-          activeFilter?.dataset.familyFilter || "all",
-        );
+        filterManage();
         closeManageActions();
         toast(
           nextState === "available"
@@ -11451,6 +15357,8 @@
       syncHomeCategoryCounts();
       updateFamilyRecipeCounts();
       syncProfileStats();
+      loadFamilyWorkspace();
+      loadTodayRecommendationDisplayPreference();
       renderTodayRecommendation(true);
       document.querySelectorAll(".chips:not(.manage-chips) .chip").forEach(
         (c) =>
