@@ -8,6 +8,7 @@ import { fileURLToPath } from "node:url";
 import mysql from "mysql2/promise";
 
 import { loadConfig } from "../config";
+import { seedPublicRecipes } from "./seed-public-recipes";
 
 const config = loadConfig();
 const currentDirectory = path.dirname(fileURLToPath(import.meta.url));
@@ -66,6 +67,8 @@ try {
       [filename, checksum],
     );
   }
+
+  await seedPublicRecipes(connection);
 
   console.info("数据库迁移完成");
 } finally {

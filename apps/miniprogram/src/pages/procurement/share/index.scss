@@ -1,0 +1,315 @@
+.procurement-share-page {
+  min-height: 100vh;
+  padding-bottom: 92px;
+  color: var(--color-ink);
+  background: var(--color-background);
+}
+
+.procurement-share-header {
+  position: sticky;
+  z-index: 5;
+  top: 0;
+  display: grid;
+  grid-template-columns: 42px 1fr 42px;
+  align-items: center;
+  min-height: 54px;
+  padding: env(safe-area-inset-top) 12px 0;
+  border-bottom: 1px solid var(--color-line);
+  background: rgb(255 253 249 / 96%);
+  text-align: center;
+}
+
+.procurement-share-header button {
+  width: 34px;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  font-size: 30px;
+  line-height: inherit;
+}
+
+.procurement-share-header button::after,
+.procurement-share-state button::after,
+.procurement-share-footer button::after {
+  border: 0;
+}
+
+.procurement-share-header > text {
+  font-size: 15px;
+  font-weight: 750;
+}
+
+.procurement-share-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 90px 24px;
+  color: var(--color-muted);
+  font-size: 11px;
+}
+
+.procurement-share-state button {
+  margin-top: 12px;
+  border: 0;
+  color: var(--color-primary);
+  background: transparent;
+  font-size: 11px;
+}
+
+.procurement-share-poster {
+  margin: 14px;
+  padding: 19px;
+  border: 1px solid rgb(213 72 54 / 18%);
+  border-radius: 24px;
+  background: #fffdf9;
+  box-shadow: 0 12px 34px rgb(70 48 34 / 8%);
+}
+
+.procurement-share-poster__heading {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+}
+
+.procurement-share-poster__heading > view text {
+  display: block;
+}
+
+.procurement-share-poster__heading > view text:first-child {
+  color: var(--color-primary);
+  font-size: 11px;
+  font-weight: 700;
+}
+
+.procurement-share-poster__heading > view text:last-child {
+  margin-top: 4px;
+  font-size: 20px;
+  font-weight: 800;
+}
+
+.procurement-share-poster__heading > text {
+  padding: 6px 9px;
+  border-radius: 10px;
+  color: #fff;
+  background: var(--color-primary);
+  font-size: 11px;
+  font-weight: 750;
+}
+
+.procurement-share-summary {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 8px;
+  margin-top: 17px;
+}
+
+.procurement-share-summary > view {
+  padding: 12px;
+  border-radius: 15px;
+  background: #edf3e8;
+}
+
+.procurement-share-summary > view:last-child {
+  background: #f1ece5;
+}
+
+.procurement-share-summary text {
+  display: block;
+}
+
+.procurement-share-summary text:first-child {
+  font-size: 19px;
+  font-weight: 800;
+}
+
+.procurement-share-summary text:last-child {
+  margin-top: 3px;
+  color: var(--color-muted);
+  font-size: 9px;
+}
+
+.procurement-share-section {
+  margin-top: 20px;
+}
+
+.procurement-share-section__title {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 8px;
+}
+
+.procurement-share-section__title text:first-child,
+.procurement-share-meals > text {
+  font-size: 12px;
+  font-weight: 750;
+}
+
+.procurement-share-section__title text:last-child {
+  color: var(--color-muted);
+  font-size: 8px;
+}
+
+.procurement-share-group {
+  display: grid;
+  grid-template-columns: 30px 1fr;
+  gap: 8px;
+  align-items: start;
+  margin-top: 7px;
+  padding: 11px;
+  border-radius: 14px;
+  background: #edf3e8;
+}
+
+.procurement-share-group--meat {
+  background: #f8e8e2;
+}
+
+.procurement-share-group--fish,
+.procurement-share-group--egg {
+  background: #e8f0f2;
+}
+
+.procurement-share-group--staple {
+  background: #f5edd9;
+}
+
+.procurement-share-group--seasoning,
+.procurement-share-group--other {
+  background: #eee9f3;
+}
+
+.procurement-share-group > view text {
+  display: block;
+}
+
+.procurement-share-group > view text:first-child {
+  font-size: 10px;
+  font-weight: 700;
+}
+
+.procurement-share-group > view text:last-child {
+  margin-top: 4px;
+  color: #5f574f;
+  font-size: 9px;
+  line-height: 1.55;
+}
+
+.procurement-share-all-ready {
+  margin-top: 18px;
+  padding: 18px;
+  border-radius: 16px;
+  color: #55734c;
+  background: #edf3e8;
+  font-size: 11px;
+  text-align: center;
+}
+
+.procurement-share-skipped {
+  margin-top: 12px;
+  padding: 11px 12px;
+  border-radius: 13px;
+  background: #f1ece5;
+}
+
+.procurement-share-skipped text {
+  display: block;
+}
+
+.procurement-share-skipped text:first-child {
+  color: var(--color-muted);
+  font-size: 8px;
+}
+
+.procurement-share-skipped text:last-child {
+  margin-top: 4px;
+  color: #756d64;
+  font-size: 9px;
+  line-height: 1.5;
+}
+
+.procurement-share-meals {
+  margin-top: 20px;
+  padding-top: 17px;
+  border-top: 1px dashed var(--color-line);
+}
+
+.procurement-share-meal {
+  display: grid;
+  grid-template-columns: 46px 1fr;
+  gap: 8px;
+  margin-top: 10px;
+}
+
+.procurement-share-meal text:first-child {
+  color: var(--color-primary);
+  font-size: 9px;
+  font-weight: 700;
+}
+
+.procurement-share-meal text:last-child {
+  color: #655d55;
+  font-size: 9px;
+  line-height: 1.55;
+}
+
+.procurement-share-poster__footnote {
+  display: block;
+  margin-top: 19px;
+  color: var(--color-muted);
+  font-size: 8px;
+  text-align: center;
+}
+
+.procurement-share-tip {
+  margin: 0 22px;
+  color: var(--color-muted);
+  font-size: 9px;
+  line-height: 1.6;
+  text-align: center;
+}
+
+.procurement-share-canvas {
+  position: fixed;
+  z-index: 0;
+  top: 0;
+  left: -10000px;
+  pointer-events: none;
+}
+
+.procurement-share-footer {
+  position: fixed;
+  z-index: 6;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  display: grid;
+  grid-template-columns: 0.86fr 1.14fr;
+  gap: 9px;
+  padding: 10px 14px calc(10px + env(safe-area-inset-bottom));
+  border-top: 1px solid var(--color-line);
+  background: rgb(255 253 249 / 96%);
+}
+
+.procurement-share-footer button {
+  margin: 0;
+  padding: 12px;
+  border: 0;
+  border-radius: 14px;
+  color: #fff;
+  background: var(--color-primary);
+  font-size: 12px;
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+.procurement-share-footer button.is-secondary {
+  border: 1px solid rgb(213 72 54 / 24%);
+  color: var(--color-primary);
+  background: #fff7f1;
+}
+
+.procurement-share-footer button[disabled] {
+  opacity: 0.62;
+}

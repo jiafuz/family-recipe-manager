@@ -1,0 +1,186 @@
+.recipe-import-page {
+  min-height: 100vh;
+  padding: 0 14px 100px;
+  color: var(--color-text);
+  background:
+    radial-gradient(circle at 90% 4%, rgb(229 151 82 / 14%), transparent 26%),
+    var(--color-background);
+  box-sizing: border-box;
+}
+
+.recipe-import-header {
+  display: grid;
+  grid-template-columns: 40px 1fr 40px;
+  align-items: center;
+  min-height: 58px;
+  padding-top: env(safe-area-inset-top);
+  text-align: center;
+}
+
+.recipe-import-header button {
+  font-size: 25px;
+}
+
+.recipe-import-header > text {
+  font-size: 16px;
+  font-weight: 800;
+}
+
+.recipe-import-intro {
+  padding: 22px 18px 18px;
+}
+
+.recipe-import-intro text {
+  display: block;
+}
+
+.recipe-import-intro__icon {
+  font-size: 32px;
+}
+
+.recipe-import-intro__title {
+  margin-top: 10px;
+  font-family: "STKaiti", "KaiTi", serif;
+  font-size: 24px;
+  font-weight: 800;
+}
+
+.recipe-import-intro__copy {
+  max-width: 310px;
+  margin-top: 8px;
+  color: var(--color-muted);
+  font-size: 12px;
+  line-height: 1.65;
+}
+
+.recipe-import-form,
+.recipe-import-flow {
+  margin-top: 10px;
+  padding: 18px;
+  border-radius: 22px;
+  background: var(--color-surface);
+  box-shadow: 0 10px 30px rgb(63 43 32 / 7%);
+}
+
+.recipe-import-form__label,
+.recipe-import-flow__title {
+  display: block;
+  font-size: 13px;
+  font-weight: 800;
+}
+
+.recipe-import-input-row {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 58px;
+  gap: 8px;
+  margin-top: 12px;
+  padding: 5px 5px 5px 14px;
+  border-radius: 16px;
+  background: var(--color-background);
+}
+
+.recipe-import-input-row input {
+  height: 42px;
+  font-size: 12px;
+}
+
+.recipe-import-input-row button {
+  align-self: center;
+  padding: 9px 0;
+  border-radius: 12px;
+  color: var(--color-brand);
+  background: var(--color-brand-soft);
+  font-size: 11px;
+  font-weight: 700;
+}
+
+.recipe-import-platforms {
+  display: flex;
+  gap: 8px;
+  margin-top: 11px;
+}
+
+.recipe-import-platforms text {
+  padding: 5px 10px;
+  border-radius: 999px;
+  color: #746350;
+  background: #f4eadc;
+  font-size: 10px;
+}
+
+.recipe-import-step {
+  display: grid;
+  grid-template-columns: 30px 1fr;
+  gap: 11px;
+  align-items: start;
+  margin-top: 15px;
+}
+
+.recipe-import-step text {
+  display: block;
+}
+
+.recipe-import-step__number {
+  display: flex !important;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  border-radius: 10px;
+  color: #fff;
+  background: var(--color-brand);
+  font-size: 11px;
+  font-weight: 800;
+}
+
+.recipe-import-step__title {
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.recipe-import-step__copy {
+  margin-top: 3px;
+  color: var(--color-muted);
+  font-size: 10px;
+  line-height: 1.5;
+}
+
+.recipe-import-notice {
+  margin: 14px 8px 0;
+  padding: 13px 14px;
+  border-radius: 16px;
+  color: #7b6244;
+  background: #f3e7d7;
+}
+
+.recipe-import-notice text {
+  display: block;
+  font-size: 10px;
+  line-height: 1.55;
+}
+
+.recipe-import-notice text:first-child {
+  margin-bottom: 4px;
+  font-size: 11px;
+  font-weight: 800;
+}
+
+.recipe-import-footer {
+  position: fixed;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  padding: 12px 14px calc(12px + env(safe-area-inset-bottom));
+  background: rgb(248 243 236 / 94%);
+  backdrop-filter: blur(14px);
+}
+
+.recipe-import-footer button {
+  height: 48px;
+  border-radius: 16px;
+  color: #fff;
+  background: var(--color-brand);
+  box-shadow: 0 10px 24px rgb(213 72 54 / 18%);
+  font-size: 14px;
+  font-weight: 800;
+}

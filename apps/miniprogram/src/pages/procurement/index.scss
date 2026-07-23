@@ -43,8 +43,45 @@
   font-size: 9px;
 }
 
+.procurement-scope-tabs {
+  position: sticky;
+  z-index: 5;
+  top: calc(54px + env(safe-area-inset-top));
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  margin: 0 14px;
+  padding: 4px;
+  border-radius: 14px;
+  background: #eee8e0;
+}
+
+.procurement-scope-tabs button {
+  min-width: 0;
+  margin: 0;
+  padding: 8px 0;
+  border: 0;
+  border-radius: 11px;
+  color: var(--color-muted);
+  background: transparent;
+  font-size: 10px;
+  line-height: 1;
+}
+
+.procurement-scope-tabs button::after,
+.procurement-share-footer button::after,
+.procurement-share-sheet button::after {
+  border: 0;
+}
+
+.procurement-scope-tabs button.is-active {
+  color: var(--color-ink);
+  background: #fffdf9;
+  box-shadow: 0 3px 10px rgb(60 44 32 / 8%);
+  font-weight: 700;
+}
+
 .procurement-content {
-  padding: 14px 14px 32px;
+  padding: 14px 14px 108px;
 }
 
 .procurement-summary {
@@ -205,4 +242,154 @@
   color: var(--color-muted);
   font-size: 9px;
   text-align: center;
+}
+
+.procurement-share-footer {
+  position: fixed;
+  z-index: 7;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  padding: 10px 14px calc(10px + env(safe-area-inset-bottom));
+  border-top: 1px solid var(--color-line);
+  background: rgb(255 253 249 / 96%);
+  backdrop-filter: blur(14px);
+}
+
+.procurement-share-footer button,
+.procurement-share-sheet__primary {
+  width: 100%;
+  margin: 0;
+  padding: 12px;
+  border: 0;
+  border-radius: 14px;
+  color: #fff;
+  background: var(--color-primary);
+  font-size: 12px;
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+.procurement-share-mask {
+  position: fixed;
+  z-index: 20;
+  inset: 0;
+  display: flex;
+  align-items: flex-end;
+  background: rgb(35 29 24 / 42%);
+}
+
+.procurement-share-sheet {
+  width: 100%;
+  padding: 20px 16px calc(16px + env(safe-area-inset-bottom));
+  border-radius: 24px 24px 0 0;
+  background: #fffdf9;
+  box-shadow: 0 -14px 36px rgb(45 35 28 / 12%);
+}
+
+.procurement-share-sheet__heading {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+}
+
+.procurement-share-sheet__heading > view text {
+  display: block;
+}
+
+.procurement-share-sheet__heading > view text:first-child {
+  font-size: 16px;
+  font-weight: 750;
+}
+
+.procurement-share-sheet__heading > view text:last-child {
+  margin-top: 5px;
+  color: var(--color-muted);
+  font-size: 10px;
+}
+
+.procurement-share-sheet__heading > button {
+  width: 28px;
+  height: 28px;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  color: var(--color-muted);
+  background: #f1ece5;
+  font-size: 17px;
+  line-height: 28px;
+}
+
+.procurement-share-options {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 9px;
+  margin-top: 18px;
+}
+
+.procurement-share-options > button {
+  display: grid;
+  grid-template-columns: 22px 1fr;
+  align-items: center;
+  min-width: 0;
+  margin: 0;
+  padding: 13px 10px;
+  border: 1px solid var(--color-line);
+  border-radius: 15px;
+  background: #f8f3ec;
+  line-height: 1.2;
+  text-align: left;
+}
+
+.procurement-share-options > button.is-selected {
+  border-color: rgb(108 138 97 / 48%);
+  background: #edf3e8;
+}
+
+.procurement-share-options > button > text {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 19px;
+  height: 19px;
+  border: 1px solid rgb(91 67 44 / 20%);
+  border-radius: 7px;
+  color: #fff;
+  font-size: 10px;
+}
+
+.procurement-share-options > button.is-selected > text {
+  border-color: #6c8a61;
+  background: #6c8a61;
+}
+
+.procurement-share-options view text {
+  display: block;
+}
+
+.procurement-share-options view text:first-child {
+  color: var(--color-ink);
+  font-size: 11px;
+  font-weight: 700;
+}
+
+.procurement-share-options view text:last-child {
+  margin-top: 3px;
+  color: var(--color-muted);
+  font-size: 8px;
+}
+
+.procurement-share-sheet__summary {
+  display: block;
+  min-height: 18px;
+  margin: 14px 0;
+  color: var(--color-muted);
+  font-size: 9px;
+  text-align: center;
+}
+
+.procurement-share-sheet__primary[disabled] {
+  color: rgb(255 255 255 / 72%);
+  background: #c8c0b7;
 }

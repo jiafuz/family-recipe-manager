@@ -2,9 +2,11 @@ import type {
   FamilyRecipeListItem,
   KitchenDetail,
   KitchenInviteResponse,
+  RecommendationPreferences,
   RecipeCategory,
+  TodayRecommendation,
 } from "@jiayan/contracts";
-import { Button, Input, Text, View } from "@tarojs/components";
+import { Button, Input, ScrollView, Text, View } from "@tarojs/components";
 import Taro, { useDidShow } from "@tarojs/taro";
 import { useCallback, useMemo, useState } from "react";
 
@@ -14,6 +16,7 @@ import {
   getRecipeCategoryLabel,
   recipeCategories,
 } from "../../features/recipes/constants";
+import { openAddRecipeMenu } from "../../features/recipes/open-add-recipe-menu";
 import {
   clearOrderingDraft,
   clearOrderingEditContext,
@@ -30,8 +33,12 @@ import {
   ensureSignedIn,
   getKitchenDetail,
   getStoredCurrentKitchenId,
+  getTodayRecommendation,
   joinKitchen,
   listFamilyRecipes,
+  clonePublicRecipe,
+  refreshTodayRecommendation,
+  updateRecommendationPreferences,
 } from "../../services/api-client";
 
 import "./index.scss";
@@ -40,11 +47,28 @@ type PagePhase = "loading" | "onboarding" | "ready" | "error";
 type OnboardingMode = "choice" | "create" | "join";
 type CategoryFilter = "all" | RecipeCategory;
 
+const strategyOptions = [
+  { value: "long_time_no_eat", label: "好久没吃" },
+  { value: "balanced", label: "均衡搭配" },
+  { value: "light", label: "轻盈少负担" },
+  { value: "spicy", label: "香辣过瘾" },
+  { value: "quick", label: "快手不费事" },
+] as const;
+
+const sourceOptions = [
+  { value: "family_only", label: "只从我家菜谱" },
+  { value: "mixed", label: "我家＋菜谱广场" },
+  { value: "public_only", label: "只从菜谱广场" },
+] as const;
+
 export default function OrderingPage(): JSX.Element {
   const [phase, setPhase] = useState<PagePhase>("loading");
   const [mode, setMode] = useState<OnboardingMode>("choice");
   const [kitchen, setKitchen] = useState<KitchenDetail | null>(null);
   const [recipes, setRecipes] = useState<FamilyRecipeListItem[]>([]);
+  const [recommendation, setRecommendation] =
+    useState<TodayRecommendation | null>(null);
+  const [recommendationBusy, setRecommendationBusy] = useState(false);
   const [selectedItems, setSelectedItems] = useState<OrderingDraftItem[]>([]);
   const [editContext, setEditContext] = useState<OrderingEditContext | null>(
     null,
@@ -82,12 +106,15 @@ export default function OrderingPage(): JSX.Element {
         return;
       }
 
-      const [kitchenDetail, availableRecipes] = await Promise.all([
-        getKitchenDetail(selectedKitchen.id),
-        listFamilyRecipes(selectedKitchen.id, { orderingState: "available" }),
-      ]);
+      const [kitchenDetail, availableRecipes, todayRecommendation] =
+        await Promise.all([
+          getKitchenDetail(selectedKitchen.id),
+          listFamilyRecipes(selectedKitchen.id, { orderingState: "available" }),
+          getTodayRecommendation(selectedKitchen.id).catch(() => null),
+        ]);
       setKitchen(kitchenDetail);
       setRecipes(availableRecipes);
+      setRecommendation(todayRecommendation);
       const draft = loadOrderingDraft();
       const storedEditContext = loadOrderingEditContext();
       setSelectedItems(
@@ -143,6 +170,9 @@ export default function OrderingPage(): JSX.Element {
           orderingState: "available",
         }),
       );
+      setRecommendation(
+        await getTodayRecommendation(kitchenDetail.id).catch(() => null),
+      );
       setSelectedItems([]);
       clearOrderingEditContext();
       setEditContext(null);
@@ -185,11 +215,139 @@ export default function OrderingPage(): JSX.Element {
     );
   }, [recipeCategory, recipeSearch, recipes]);
 
-  const openRecipeEditor = (): void => {
+  const saveRecommendationPreferences = async (
+    preferences: RecommendationPreferences,
+  ): Promise<void> => {
     if (!kitchen) return;
-    void Taro.navigateTo({
-      url: `/pages/recipes/editor/index?kitchenId=${encodeURIComponent(kitchen.id)}`,
+    setRecommendationBusy(true);
+    try {
+      setRecommendation(
+        await updateRecommendationPreferences(kitchen.id, preferences),
+      );
+    } catch (error) {
+      await Taro.showToast({ title: getErrorMessage(error), icon: "none" });
+    } finally {
+      setRecommendationBusy(false);
+    }
+  };
+
+  const toggleRecommendation = (): void => {
+    if (!recommendation) return;
+    void saveRecommendationPreferences({
+      ...recommendation.preferences,
+      collapsed: !recommendation.preferences.collapsed,
     });
+  };
+
+  const refreshRecommendation = async (): Promise<void> => {
+    if (!kitchen || !recommendation) return;
+    setRecommendationBusy(true);
+    try {
+      const next = await refreshTodayRecommendation(
+        kitchen.id,
+        recommendation.items.map((item) => item.id),
+      );
+      const unchanged =
+        next.items.map((item) => item.id).join(",") ===
+        recommendation.items.map((item) => item.id).join(",");
+      setRecommendation(next);
+      if (unchanged) {
+        await Taro.showToast({ title: "当前范围暂无更多菜谱", icon: "none" });
+      }
+    } catch (error) {
+      await Taro.showToast({ title: getErrorMessage(error), icon: "none" });
+    } finally {
+      setRecommendationBusy(false);
+    }
+  };
+
+  const adjustRecommendation = async (): Promise<void> => {
+    if (!recommendation) return;
+    const strategyIndex = await chooseAction(
+      strategyOptions.map((item) => item.label),
+    );
+    if (strategyIndex === null) return;
+    const sourceIndex = await chooseAction(
+      sourceOptions.map((item) => item.label),
+    );
+    if (sourceIndex === null) return;
+    const countIndex = await chooseAction(["3 道", "4 道", "5 道", "6 道"]);
+    if (countIndex === null) return;
+    const strategy = strategyOptions[strategyIndex];
+    const source = sourceOptions[sourceIndex];
+    if (!strategy || !source) return;
+    await saveRecommendationPreferences({
+      strategy: strategy.value,
+      sourceScope: source.value,
+      itemCount: countIndex + 3,
+      collapsed: recommendation.preferences.collapsed,
+    });
+  };
+
+  const useRecommendation = async (): Promise<void> => {
+    if (!kitchen || !recommendation || recommendation.items.length === 0)
+      return;
+    setRecommendationBusy(true);
+    try {
+      const items: OrderingDraftItem[] = [];
+      const newlyCloned: FamilyRecipeListItem[] = [];
+      for (const recommendationItem of recommendation.items) {
+        if (recommendationItem.source === "public") {
+          const result = await clonePublicRecipe(recommendationItem.id, {
+            kitchenId: kitchen.id,
+            orderingState: "available",
+          });
+          newlyCloned.push(result.recipe);
+          items.push({
+            recipeId: result.recipe.id,
+            recipeVersionId: result.recipe.currentVersionId,
+            name: result.recipe.name,
+            coverEmoji: result.recipe.coverEmoji,
+            quantity: 1,
+            tasteNote: null,
+          });
+        } else {
+          items.push({
+            recipeId: recommendationItem.id,
+            recipeVersionId: recommendationItem.currentVersionId,
+            name: recommendationItem.name,
+            coverEmoji: recommendationItem.coverEmoji,
+            quantity: 1,
+            tasteNote: null,
+          });
+        }
+      }
+
+      setRecipes((current) => {
+        const existing = new Set(current.map((recipe) => recipe.id));
+        return [
+          ...current,
+          ...newlyCloned.filter((recipe) => !existing.has(recipe.id)),
+        ];
+      });
+      setSelectedItems((current) => {
+        const existing = new Set(current.map((item) => item.recipeId));
+        const next = [
+          ...current,
+          ...items.filter((item) => !existing.has(item.recipeId)),
+        ];
+        saveOrderingDraft({ kitchenId: kitchen.id, items: next });
+        return next;
+      });
+      await Taro.showToast({
+        title: `已选用 ${items.length} 道推荐`,
+        icon: "success",
+      });
+    } catch (error) {
+      await Taro.showToast({ title: getErrorMessage(error), icon: "none" });
+    } finally {
+      setRecommendationBusy(false);
+    }
+  };
+
+  const openRecipeCreator = (): void => {
+    if (!kitchen) return;
+    void openAddRecipeMenu(kitchen.id);
   };
 
   const toggleRecipe = (recipe: FamilyRecipeListItem): void => {
@@ -371,6 +529,107 @@ export default function OrderingPage(): JSX.Element {
           onInput={(event) => setRecipeSearch(event.detail.value)}
         />
       </View>
+      {recommendation ? (
+        recommendation.preferences.collapsed ? (
+          <View className="ordering-recommendation ordering-recommendation--collapsed">
+            <View className="ordering-recommendation__compact-copy">
+              <Text>✨ 今日推荐</Text>
+              <Text>
+                {strategyLabel(recommendation.preferences.strategy)} ·{" "}
+                {recommendation.items.length} 道
+              </Text>
+            </View>
+            <Button
+              disabled={recommendationBusy}
+              onClick={toggleRecommendation}
+            >
+              展开
+            </Button>
+          </View>
+        ) : (
+          <View className="ordering-recommendation">
+            <View className="ordering-recommendation__header">
+              <View>
+                <Text className="ordering-recommendation__title">
+                  ✨ 今日推荐
+                </Text>
+                <Text className="ordering-recommendation__summary">
+                  {strategyLabel(recommendation.preferences.strategy)} ·{" "}
+                  {sourceLabel(recommendation.preferences.sourceScope)}
+                </Text>
+              </View>
+              <Button
+                disabled={recommendationBusy}
+                onClick={toggleRecommendation}
+              >
+                收起
+              </Button>
+            </View>
+            {recommendation.items.length > 0 ? (
+              <ScrollView
+                className="ordering-recommendation__list"
+                scrollX
+                enhanced
+                showScrollbar={false}
+              >
+                <View className="ordering-recommendation__track">
+                  {recommendation.items.map((item) => (
+                    <View
+                      className="ordering-recommendation-item"
+                      key={item.id}
+                    >
+                      <View className="ordering-recommendation-item__cover">
+                        <Text>{item.coverEmoji}</Text>
+                        {item.source === "public" ? <Text>广场</Text> : null}
+                      </View>
+                      <Text className="ordering-recommendation-item__name">
+                        {item.name}
+                      </Text>
+                      <Text className="ordering-recommendation-item__reason">
+                        {item.reason}
+                      </Text>
+                    </View>
+                  ))}
+                </View>
+              </ScrollView>
+            ) : (
+              <View className="ordering-recommendation__empty">
+                <Text>我家还没有可推荐的菜谱</Text>
+                <Text>可以调整来源，或先添加几道家庭菜谱。</Text>
+              </View>
+            )}
+            {recommendation.shortageMessage ? (
+              <Text className="ordering-recommendation__shortage">
+                {recommendation.shortageMessage}
+              </Text>
+            ) : null}
+            <View className="ordering-recommendation__actions">
+              <Button
+                loading={recommendationBusy}
+                disabled={recommendationBusy}
+                onClick={refreshRecommendation}
+              >
+                换一组
+              </Button>
+              <Button
+                disabled={recommendationBusy}
+                onClick={adjustRecommendation}
+              >
+                调整推荐偏好
+              </Button>
+              <Button
+                className="is-primary"
+                disabled={
+                  recommendationBusy || recommendation.items.length === 0
+                }
+                onClick={useRecommendation}
+              >
+                选用推荐
+              </Button>
+            </View>
+          </View>
+        )
+      ) : null}
       <View className="ordering-recipe-heading">
         <Text>今天想吃什么？</Text>
         <View>
@@ -381,7 +640,7 @@ export default function OrderingPage(): JSX.Element {
           >
             ☷ 菜谱管理
           </Button>
-          <Button onClick={openRecipeEditor}>＋ 添加菜谱</Button>
+          <Button onClick={openRecipeCreator}>＋ 添加菜谱</Button>
         </View>
       </View>
       <View className="ordering-recipe-layout">
@@ -419,7 +678,7 @@ export default function OrderingPage(): JSX.Element {
                   : "这个分类暂时没有菜"}
               </Text>
               {recipes.length === 0 ? (
-                <Button onClick={openRecipeEditor}>添加第一道菜</Button>
+                <Button onClick={openRecipeCreator}>添加第一道菜</Button>
               ) : null}
             </View>
           ) : null}
@@ -432,6 +691,11 @@ export default function OrderingPage(): JSX.Element {
                 <Text className="ordering-recipe-item__name">
                   {recipe.name}
                 </Text>
+                {isFirstIntroduced(recipe.firstIntroducedUntil) ? (
+                  <Text className="ordering-recipe-item__introduced">
+                    首次引入我家菜谱
+                  </Text>
+                ) : null}
                 <Text className="ordering-recipe-item__description">
                   {recipe.description || "我家的做法"}
                 </Text>
@@ -539,4 +803,31 @@ function getMealLabel(mealType: OrderingEditContext["mealType"]): string {
     lunch: "午餐",
     dinner: "晚餐",
   }[mealType];
+}
+
+async function chooseAction(itemList: string[]): Promise<number | null> {
+  const result = await Taro.showActionSheet({ itemList }).catch(() => null);
+  return result?.tapIndex ?? null;
+}
+
+function strategyLabel(
+  strategy: RecommendationPreferences["strategy"],
+): string {
+  return (
+    strategyOptions.find((option) => option.value === strategy)?.label ??
+    "好久没吃"
+  );
+}
+
+function sourceLabel(
+  sourceScope: RecommendationPreferences["sourceScope"],
+): string {
+  return (
+    sourceOptions.find((option) => option.value === sourceScope)?.label ??
+    "只从我家菜谱"
+  );
+}
+
+function isFirstIntroduced(value: string | null): boolean {
+  return Boolean(value && Date.parse(value) > Date.now());
 }

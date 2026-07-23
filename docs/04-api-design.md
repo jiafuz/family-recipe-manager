@@ -85,14 +85,19 @@
 | POST   | `/v1/recipes/:recipeId/revert`          | 回退到指定版本               |
 | PATCH  | `/v1/recipes/:recipeId/ordering-state`  | 开放点菜／想学先存／隐藏     |
 | GET    | `/v1/discovery/recipes`                 | 菜谱广场列表                 |
+| GET    | `/v1/discovery/recipes/:recipeId`       | 公共菜谱详情                 |
 | POST   | `/v1/discovery/recipes/:recipeId/clone` | 克隆为家庭版本               |
 | POST   | `/v1/recipe-imports`                    | 创建链接导入任务             |
+| GET    | `/v1/recipe-imports/:importId`          | 获取待核对导入草稿           |
+| POST   | `/v1/recipe-imports/:importId/complete` | 关联用户核对后保存的家庭菜谱 |
 
-链接导入返回任务 ID；解析完成后生成待核对草稿，不能未经用户确认直接发布。
+链接导入提交 `kitchenId` 和外部 HTTPS 链接，首版只接受小红书与下厨房。服务端校验域名和每次跳转、限制超时与响应体大小，并尽量读取公开页面中的结构化菜谱或元信息；解析结果返回任务 ID、草稿和警告。客户端必须复用家庭菜谱编辑器让用户核对，不能未经确认直接发布，也不能自动复制第三方图片。内存联调模式使用明确标注的演示草稿，不访问第三方网站。
 
 家庭菜谱详情、更新、状态调整和删除接口通过 `kitchenId` 查询参数明确当前家庭空间。每次完整编辑都新增不可变的 `recipe_versions` 记录；客户端必须提交 `expectedVersion`，旧版本编辑返回 `RECIPE_VERSION_CONFLICT`，不得静默覆盖其他家庭成员的修改。
 
 菜谱编辑首版保存菜名、介绍、分类、制作时间、用料、步骤、小贴士和点菜状态。封面图片上传在媒体链路接入前使用表情占位，不能接受客户端伪造的对象存储地址。
+
+菜谱广场列表支持 `search` 和 `category` 查询参数；搜索同时匹配菜名、简介和食材。克隆请求提交目标 `kitchenId` 与 `orderingState`，服务端校验当前用户为该厨房成员，并把公共菜谱的当前版本复制成可独立编辑的家庭版本。相同厨房重复克隆同一公共来源时返回已有家庭版本和 `created: false`，不得产生重复资产。
 
 ## 5. 菜单和点餐记录
 
@@ -136,22 +141,26 @@
 
 ## 6. 采购清单
 
-当前纵向切片已实现全天采购清单查询和“是否需要购买”更新；分享预览接口仍是后续媒体与分享阶段的设计约定。
+当前纵向切片已实现全天采购清单查询、“是否需要购买”更新，以及按一餐、两餐或三餐生成分享预览。预览同时返回所选范围的合并清单和逐餐明细，未勾选食材保留为“无需购买”，不要求用户完成额外归类。
 
 | 方法  | 路径                                                       | 用途                   |
 | ----- | ---------------------------------------------------------- | ---------------------- |
 | GET   | `/v1/kitchens/:kitchenId/procurement/:date`                | 全天采购清单及逐餐来源 |
 | PATCH | `/v1/kitchens/:kitchenId/procurement/:date/items/:itemId`  | 修改是否需要购买       |
 | POST  | `/v1/kitchens/:kitchenId/procurement/:date/share-previews` | 按所选餐次生成分享预览 |
+| GET   | `/v1/meta/product-mini-program-code`                       | 获取产品官方小程序码   |
 
 分享预览请求：
 
 ```json
 {
-  "mealTypes": ["breakfast", "dinner"],
-  "includeNotNeeded": true
+  "mealTypes": ["breakfast", "dinner"]
 }
 ```
+
+`mealTypes` 至少包含一个餐次且不得重复。前端默认选中早餐、午餐、晚餐；接口按早餐、午餐、晚餐的固定顺序返回 `mealTypes`、合并后的 `items`、逐餐 `meals` 和生成时间。微信小程序卡片仅允许同厨房成员读取实时预览；客户端还可以把同一份预览绘制为不含厨房名和成员信息的普通长图，用户主动授权后保存到相册，再发送给未加入厨房或未使用小程序的家人。
+
+采购长图通过已登录接口获取官方小程序码，服务端负责用 AppID 和 AppSecret 获取并缓存微信接口凭证及固定入口码，客户端不会接触 AppSecret 或 access token。正式环境的小程序码进入 `pages/ordering/index`，携带 `source=procurement` 场景值；本地 `mock` 模式返回 204，客户端应继续生成不带码的长图并明确提示，不得使用无法扫描的占位码冒充成功。匿名限时链接仍属于后续阶段。
 
 ## 7. 图片和分享
 
@@ -173,6 +182,8 @@
 
 ## 8. 推荐与通知
 
+当前推荐纵向切片已经实现偏好持久化、规则计算、换一组和点菜页一键选用。默认使用“好久没吃＋只从我家菜谱＋3 道＋展开”；推荐依据最近一年的家庭菜单，并为每道菜返回生活化理由。扩大到菜谱广场必须由用户主动选择，客户端选用公共菜谱时调用公共菜谱克隆接口，生成独立家庭版本后再加入点菜草稿。
+
 | 方法 | 路径                                                 | 用途     |
 | ---- | ---------------------------------------------------- | -------- |
 | GET  | `/v1/kitchens/:kitchenId/recommendations/today`      | 今日推荐 |
@@ -181,6 +192,8 @@
 | GET  | `/v1/notifications`                                  | 通知列表 |
 | POST | `/v1/notifications/:notificationId/read`             | 标记已读 |
 | POST | `/v1/notifications/read-all`                         | 全部已读 |
+
+“换一组”请求提交当前 `excludeRecipeIds`，服务端优先返回未出现过的下一组；候选不足时允许回退并返回明确的 `shortageMessage`，不得静默扩大用户选择的推荐来源。
 
 ## 9. 稳定错误码
 
@@ -195,6 +208,9 @@
 - `INVITE_INVALID_OR_EXPIRED`
 - `RECIPE_NOT_FOUND`
 - `RECIPE_VERSION_CONFLICT`
+- `RECIPE_IMPORT_SOURCE_UNSUPPORTED`
+- `RECIPE_IMPORT_FETCH_FAILED`
+- `RECIPE_IMPORT_NOT_FOUND`
 - `MEAL_PLAN_VERSION_CONFLICT`
 - `MEAL_PLAN_ALREADY_COMPLETED`
 - `MEAL_PLAN_EMPTY`

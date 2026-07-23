@@ -12,6 +12,7 @@ import {
   recipeCategories,
   recipeOrderingStateLabels,
 } from "../../../features/recipes/constants";
+import { openAddRecipeMenu } from "../../../features/recipes/open-add-recipe-menu";
 import {
   ApiClientError,
   archiveFamilyRecipe,
@@ -81,6 +82,11 @@ export default function RecipeManagePage(): JSX.Element {
     });
   };
 
+  const openCreator = (): void => {
+    if (!kitchen) return;
+    void openAddRecipeMenu(kitchen.id);
+  };
+
   const handleToggleState = async (
     recipe: FamilyRecipeListItem,
   ): Promise<void> => {
@@ -133,10 +139,7 @@ export default function RecipeManagePage(): JSX.Element {
           ‹
         </Button>
         <Text className="recipe-manage-header__title">菜谱管理</Text>
-        <Button
-          className="recipe-manage-header__add"
-          onClick={() => openEditor()}
-        >
+        <Button className="recipe-manage-header__add" onClick={openCreator}>
           ＋ 添加菜谱
         </Button>
       </View>
@@ -193,7 +196,7 @@ export default function RecipeManagePage(): JSX.Element {
             {!loading && visibleRecipes.length === 0 ? (
               <View className="recipe-manage-list__empty">
                 <Text>这里还没有菜谱</Text>
-                <Button onClick={() => openEditor()}>添加第一道菜</Button>
+                <Button onClick={openCreator}>添加第一道菜</Button>
               </View>
             ) : null}
             {visibleRecipes.map((recipe) => (

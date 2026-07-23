@@ -84,6 +84,8 @@
 - `current_version_id`
 - `status`：active / archived / removed
 
+有效家庭菜谱在 `kitchen_id + source_recipe_id` 范围内唯一，避免网络重试或并发点击把同一公共来源重复收录。家庭版本复制收录时的公共版本内容；二者只保留来源关系，不共享可写的版本、食材或步骤记录。
+
 ### recipe_versions
 
 - `id`
@@ -124,6 +126,20 @@
 - `ordering_state`：available / want_to_learn / hidden
 - `first_introduced_until`
 - `updated_by / updated_at`
+
+### recipe_imports
+
+- `id`
+- `kitchen_id`
+- `source_url`
+- `source_platform`：xiaohongshu / xiachufang
+- `status`：needs_review / completed
+- `draft_snapshot`：受限解析得到、等待用户核对的草稿
+- `warnings`：缺失字段、页面结构变化和图片不复制等提醒
+- `saved_recipe_id`：用户确认后创建的独立家庭菜谱
+- `created_by / created_at / updated_at`
+
+导入任务本身不能进入点菜列表。只有用户在菜谱编辑器中补全并保存后，才创建普通家庭菜谱；任务随后仅记录来源与处理状态。
 
 ## 5. 菜单
 
@@ -256,6 +272,8 @@
 - `item_count`
 - `collapsed`
 - `updated_at`
+
+偏好按 `user_id + kitchen_id` 唯一保存，因此同一用户在不同家庭厨房可以使用不同推荐策略，收起／展开状态也随厨房记忆。推荐结果即时根据当前家庭菜谱和近一年菜单计算，不单独持久化，避免菜谱或点餐记录变化后继续展示过期结果。
 
 ### product_events
 

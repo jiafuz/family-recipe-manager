@@ -1,7 +1,11 @@
 import type {
   ApiErrorResponse,
   AddMealPhotosInput,
+  ClonePublicRecipeInput,
+  ClonePublicRecipeResponse,
   CompleteMediaUploadInput,
+  CompleteRecipeImportInput,
+  CreateRecipeImportInput,
   CreateKitchenInput,
   CurrentUserResponse,
   FamilyRecipeDetail,
@@ -15,15 +19,22 @@ import type {
   MealPhoto,
   MealType,
   ProcurementList,
+  ProcurementSharePreview,
+  ProcurementSharePreviewInput,
+  PublicRecipeDetail,
+  PublicRecipeListItem,
   MediaAsset,
   MediaUploadSession,
   MediaUploadSessionInput,
   RecipeCategory,
+  RecipeImport,
+  RecommendationPreferences,
   RecipeOrderingState,
   SaveFamilyRecipeInput,
   SaveMealPlanInput,
   SaveMealPlanResponse,
   SessionResponse,
+  TodayRecommendation,
   UpdateFamilyRecipeInput,
   UpdateKitchenInput,
   UpdateMealPhotoInput,
@@ -212,6 +223,92 @@ export async function listFamilyRecipes(
   );
 }
 
+export async function listPublicRecipes(
+  filters: { category?: RecipeCategory; search?: string } = {},
+): Promise<PublicRecipeListItem[]> {
+  const query = [
+    filters.category ? `category=${encodeURIComponent(filters.category)}` : "",
+    filters.search ? `search=${encodeURIComponent(filters.search)}` : "",
+  ]
+    .filter(Boolean)
+    .join("&");
+  return request<PublicRecipeListItem[]>(
+    `/v1/discovery/recipes${query ? `?${query}` : ""}`,
+  );
+}
+
+export async function getPublicRecipe(
+  recipeId: string,
+): Promise<PublicRecipeDetail> {
+  return request<PublicRecipeDetail>(`/v1/discovery/recipes/${recipeId}`);
+}
+
+export async function clonePublicRecipe(
+  recipeId: string,
+  input: ClonePublicRecipeInput,
+): Promise<ClonePublicRecipeResponse> {
+  return request<ClonePublicRecipeResponse>(
+    `/v1/discovery/recipes/${recipeId}/clone`,
+    { method: "POST", body: input },
+  );
+}
+
+export async function createRecipeImport(
+  input: CreateRecipeImportInput,
+): Promise<RecipeImport> {
+  return request<RecipeImport>("/v1/recipe-imports", {
+    method: "POST",
+    body: input,
+  });
+}
+
+export async function getRecipeImport(
+  kitchenId: string,
+  importId: string,
+): Promise<RecipeImport> {
+  return request<RecipeImport>(
+    `/v1/recipe-imports/${importId}?kitchenId=${encodeURIComponent(kitchenId)}`,
+  );
+}
+
+export async function completeRecipeImport(
+  importId: string,
+  input: CompleteRecipeImportInput,
+): Promise<RecipeImport> {
+  return request<RecipeImport>(`/v1/recipe-imports/${importId}/complete`, {
+    method: "POST",
+    body: input,
+  });
+}
+
+export async function getTodayRecommendation(
+  kitchenId: string,
+): Promise<TodayRecommendation> {
+  return request<TodayRecommendation>(
+    `/v1/kitchens/${kitchenId}/recommendations/today`,
+  );
+}
+
+export async function refreshTodayRecommendation(
+  kitchenId: string,
+  excludeRecipeIds: string[],
+): Promise<TodayRecommendation> {
+  return request<TodayRecommendation>(
+    `/v1/kitchens/${kitchenId}/recommendations/refresh`,
+    { method: "POST", body: { excludeRecipeIds } },
+  );
+}
+
+export async function updateRecommendationPreferences(
+  kitchenId: string,
+  preferences: RecommendationPreferences,
+): Promise<TodayRecommendation> {
+  return request<TodayRecommendation>(
+    `/v1/kitchens/${kitchenId}/recommendation-preferences`,
+    { method: "PUT", body: preferences },
+  );
+}
+
 export async function getFamilyRecipe(
   kitchenId: string,
   recipeId: string,
@@ -369,6 +466,22 @@ export async function getProcurementList(
   );
 }
 
+export async function createProcurementSharePreview(
+  kitchenId: string,
+  date: string,
+  input: ProcurementSharePreviewInput,
+): Promise<ProcurementSharePreview> {
+  return request<ProcurementSharePreview>(
+    `/v1/kitchens/${kitchenId}/procurement/${encodeURIComponent(date)}/share-previews`,
+    { method: "POST", body: input },
+  );
+}
+
+export async function downloadProductMiniProgramCode(): Promise<string | null> {
+  if (!getStoredSession()) await ensureSignedIn();
+  return downloadProductMiniProgramCodeWithSession(true);
+}
+
 export async function updateProcurementNeeded(
   kitchenId: string,
   date: string,
@@ -434,6 +547,39 @@ async function request<T>(
   throw new ApiClientError(
     failure.error?.code ?? "REQUEST_FAILED",
     failure.error?.message ?? "操作失败，请稍后重试",
+    response.statusCode,
+  );
+}
+
+async function downloadProductMiniProgramCodeWithSession(
+  retryAuthentication: boolean,
+): Promise<string | null> {
+  const session = getStoredSession();
+  if (!session) return null;
+
+  let response;
+  try {
+    response = await Taro.downloadFile({
+      url: `${__API_BASE_URL__}/v1/meta/product-mini-program-code`,
+      header: { authorization: `Bearer ${session.accessToken}` },
+      timeout: 10_000,
+    });
+  } catch {
+    throw new ApiClientError("NETWORK_ERROR", "暂时无法下载小程序码", 0);
+  }
+
+  if (response.statusCode === 200) return response.tempFilePath;
+  if (response.statusCode === 204 || response.statusCode === 404) return null;
+  if (
+    response.statusCode === 401 &&
+    retryAuthentication &&
+    (await refreshStoredSession(session.refreshToken))
+  ) {
+    return downloadProductMiniProgramCodeWithSession(false);
+  }
+  throw new ApiClientError(
+    "MINI_PROGRAM_CODE_UNAVAILABLE",
+    "小程序码暂时不可用",
     response.statusCode,
   );
 }

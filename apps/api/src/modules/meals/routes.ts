@@ -3,6 +3,7 @@ import {
   idSchema,
   localDateSchema,
   mealTypeSchema,
+  procurementSharePreviewInputSchema,
   saveMealPlanInputSchema,
   updateProcurementItemInputSchema,
 } from "@jiayan/contracts";
@@ -133,6 +134,24 @@ export function registerMealRoutes(
     );
     return { data, meta: { requestId: request.id } };
   });
+
+  app.post(
+    "/v1/kitchens/:kitchenId/procurement/:date/share-previews",
+    async (request) => {
+      const principal = await options.auth.authenticate(
+        request.headers.authorization,
+      );
+      const params = procurementParamsSchema.parse(request.params);
+      const input = procurementSharePreviewInputSchema.parse(request.body);
+      const data = await options.meals.createProcurementSharePreview(
+        params.kitchenId,
+        principal.userId,
+        params.date,
+        input,
+      );
+      return { data, meta: { requestId: request.id } };
+    },
+  );
 
   app.patch(
     "/v1/kitchens/:kitchenId/procurement/:date/items/:itemId",

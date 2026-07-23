@@ -1,7 +1,10 @@
 import type {
   MealPlanDetail,
   MealType,
+  ProcurementItemResponse,
   ProcurementList,
+  ProcurementSharePreview,
+  ProcurementSharePreviewInput,
   SaveMealPlanInput,
   SaveMealPlanResponse,
 } from "@jiayan/contracts";
@@ -160,4 +163,59 @@ export class MealPlanService {
     }
     return list;
   }
+
+  async createProcurementSharePreview(
+    kitchenId: string,
+    userId: string,
+    date: string,
+    input: ProcurementSharePreviewInput,
+  ): Promise<ProcurementSharePreview> {
+    await this.kitchens.getDetail(kitchenId, userId);
+    const list = await this.meals.getProcurementList(kitchenId, date);
+    const mealTypes = orderMealTypes(input.mealTypes);
+
+    return {
+      kitchenId,
+      date,
+      revision: list.revision,
+      mealTypes,
+      items: filterProcurementItems(list.items, mealTypes),
+      meals: mealTypes.map((mealType) => ({
+        mealType,
+        items: filterProcurementItems(list.items, [mealType]),
+      })),
+      generatedAt: new Date().toISOString(),
+    };
+  }
+}
+
+const mealTypeOrder: MealType[] = ["breakfast", "lunch", "dinner"];
+
+function orderMealTypes(mealTypes: MealType[]): MealType[] {
+  const selected = new Set(mealTypes);
+  return mealTypeOrder.filter((mealType) => selected.has(mealType));
+}
+
+function filterProcurementItems(
+  items: ProcurementItemResponse[],
+  mealTypes: MealType[],
+): ProcurementItemResponse[] {
+  const selected = new Set(mealTypes);
+
+  return items.flatMap((item) => {
+    const sources = item.sources.filter((source) =>
+      selected.has(source.mealType),
+    );
+    if (sources.length === 0) return [];
+
+    return [
+      {
+        ...item,
+        totalQuantity: sources.every((source) => source.quantity !== null)
+          ? sources.reduce((total, source) => total + source.quantity!, 0)
+          : null,
+        sources,
+      },
+    ];
+  });
 }

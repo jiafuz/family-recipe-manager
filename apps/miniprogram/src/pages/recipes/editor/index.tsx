@@ -20,8 +20,10 @@ import {
 } from "../../../features/recipes/constants";
 import {
   ApiClientError,
+  completeRecipeImport,
   createFamilyRecipe,
   getFamilyRecipe,
+  getRecipeImport,
   updateFamilyRecipe,
 } from "../../../services/api-client";
 
@@ -75,9 +77,10 @@ export default function RecipeEditorPage(): JSX.Element {
   const router = useRouter();
   const kitchenId = router.params.kitchenId ?? "";
   const recipeId = router.params.recipeId ?? "";
+  const importId = router.params.importId ?? "";
   const editing = Boolean(recipeId);
 
-  const [loading, setLoading] = useState(editing);
+  const [loading, setLoading] = useState(editing || Boolean(importId));
   const [saving, setSaving] = useState(false);
   const [version, setVersion] = useState(1);
   const [name, setName] = useState("");
@@ -92,49 +95,95 @@ export default function RecipeEditorPage(): JSX.Element {
     emptyIngredient(),
   ]);
   const [steps, setSteps] = useState<StepDraft[]>([emptyStep()]);
+  const [importWarnings, setImportWarnings] = useState<string[]>([]);
 
   useEffect(() => {
     if (!kitchenId) {
       void Taro.showToast({ title: "缺少厨房信息", icon: "none" });
       return;
     }
-    if (!recipeId) return;
+    if (recipeId) {
+      void getFamilyRecipe(kitchenId, recipeId)
+        .then((recipe) => {
+          setVersion(recipe.version);
+          setName(recipe.name);
+          setDescription(recipe.description ?? "");
+          setCategory(recipe.category);
+          setCoverEmoji(recipe.coverEmoji);
+          setCookMinutes(recipe.cookMinutes?.toString() ?? "");
+          setTips(recipe.tips ?? "");
+          setOrderingState(recipe.orderingState);
+          setIngredients(
+            recipe.ingredients.map((ingredient) => ({
+              key: ingredient.id,
+              name: ingredient.name,
+              quantity: ingredient.quantity?.toString() ?? "",
+              unit: ingredient.unit ?? "",
+              category: ingredient.category,
+            })),
+          );
+          setSteps(
+            recipe.steps.map((step) => ({
+              key: step.id,
+              instruction: step.instruction,
+            })),
+          );
+        })
+        .catch((error) => {
+          void showLoadError("无法打开菜谱", error);
+        })
+        .finally(() => setLoading(false));
+      return;
+    }
 
-    void getFamilyRecipe(kitchenId, recipeId)
-      .then((recipe) => {
-        setVersion(recipe.version);
-        setName(recipe.name);
-        setDescription(recipe.description ?? "");
-        setCategory(recipe.category);
-        setCoverEmoji(recipe.coverEmoji);
-        setCookMinutes(recipe.cookMinutes?.toString() ?? "");
-        setTips(recipe.tips ?? "");
-        setOrderingState(recipe.orderingState);
+    if (!importId) return;
+    void getRecipeImport(kitchenId, importId)
+      .then((recipeImport) => {
+        const { draft } = recipeImport;
+        setName(draft.name);
+        setDescription(draft.description ?? "");
+        setCategory(draft.category);
+        setCoverEmoji(draft.coverEmoji);
+        setCookMinutes(draft.cookMinutes?.toString() ?? "");
+        setTips(draft.tips ?? "");
         setIngredients(
-          recipe.ingredients.map((ingredient) => ({
-            key: ingredient.id,
-            name: ingredient.name,
-            quantity: ingredient.quantity?.toString() ?? "",
-            unit: ingredient.unit ?? "",
-            category: ingredient.category,
-          })),
+          draft.ingredients.length > 0
+            ? draft.ingredients.map((ingredient) => ({
+                key: nextKey("imported-ingredient"),
+                name: ingredient.name,
+                quantity: ingredient.quantity?.toString() ?? "",
+                unit: ingredient.unit ?? "",
+                category: ingredient.category,
+              }))
+            : [emptyIngredient()],
         );
         setSteps(
-          recipe.steps.map((step) => ({
-            key: step.id,
-            instruction: step.instruction,
-          })),
+          draft.steps.length > 0
+            ? draft.steps.map((step) => ({
+                key: nextKey("imported-step"),
+                instruction: step.instruction,
+              }))
+            : [emptyStep()],
         );
+        setImportWarnings(recipeImport.warnings);
       })
       .catch((error) => {
-        void Taro.showModal({
-          title: "无法打开菜谱",
-          content: getErrorMessage(error),
-          showCancel: false,
-        }).then(() => Taro.navigateBack());
+        void showLoadError("无法打开导入草稿", error);
       })
       .finally(() => setLoading(false));
-  }, [kitchenId, recipeId]);
+  }, [importId, kitchenId, recipeId]);
+
+  const showLoadError = async (
+    title: string,
+    error: unknown,
+  ): Promise<void> => {
+    await Taro.showModal({
+      title,
+      content: getErrorMessage(error),
+      showCancel: false,
+    });
+    await Taro.navigateBack();
+  };
 
   const updateIngredient = (
     key: string,
@@ -227,7 +276,20 @@ export default function RecipeEditorPage(): JSX.Element {
           changeNote: "家庭成员编辑菜谱",
         });
       } else {
-        await createFamilyRecipe(kitchenId, data);
+        const created = await createFamilyRecipe(kitchenId, data);
+        if (importId) {
+          try {
+            await completeRecipeImport(importId, {
+              kitchenId,
+              recipeId: created.id,
+            });
+          } catch {
+            await Taro.showToast({
+              title: "菜谱已保存，导入记录稍后同步",
+              icon: "none",
+            });
+          }
+        }
       }
       await Taro.showToast({ title: "菜谱已保存", icon: "success" });
       setTimeout(() => void Taro.navigateBack(), 500);
@@ -263,7 +325,7 @@ export default function RecipeEditorPage(): JSX.Element {
         <Button onClick={() => Taro.navigateBack()}>‹</Button>
         <View>
           <Text className="recipe-editor-header__title">
-            {editing ? "编辑菜谱" : "创建菜谱"}
+            {editing ? "编辑菜谱" : importId ? "核对导入草稿" : "创建菜谱"}
           </Text>
           {editing ? (
             <Text className="recipe-editor-header__version">
@@ -273,6 +335,16 @@ export default function RecipeEditorPage(): JSX.Element {
         </View>
         <Text />
       </View>
+
+      {importId ? (
+        <View className="recipe-editor-import-notice">
+          <Text>导入内容需要你确认</Text>
+          <Text>请特别核对用量、火候和步骤，确认无误后再保存。</Text>
+          {importWarnings.map((warning) => (
+            <Text key={warning}>· {warning}</Text>
+          ))}
+        </View>
+      ) : null}
 
       <View className="recipe-editor-section recipe-editor-cover-section">
         <Text className="recipe-editor-label">选择封面标识</Text>

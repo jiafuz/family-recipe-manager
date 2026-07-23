@@ -219,6 +219,7 @@ export const familyRecipeListItemSchema = z.object({
   coverEmoji: z.string(),
   cookMinutes: z.number().int().positive().nullable(),
   orderingState: recipeOrderingStateSchema,
+  firstIntroducedUntil: z.string().nullable(),
   ingredientCount: z.number().int().min(0),
   updatedAt: z.string(),
 });
@@ -232,6 +233,154 @@ export const familyRecipeDetailSchema = familyRecipeListItemSchema.extend({
 });
 
 export type FamilyRecipeDetail = z.infer<typeof familyRecipeDetailSchema>;
+
+export const publicRecipeListItemSchema = familyRecipeListItemSchema
+  .omit({ orderingState: true, firstIntroducedUntil: true })
+  .extend({
+    authorName: z.string().min(1).max(80),
+  });
+
+export type PublicRecipeListItem = z.infer<typeof publicRecipeListItemSchema>;
+
+export const publicRecipeDetailSchema = publicRecipeListItemSchema.extend({
+  tips: z.string().nullable(),
+  ingredients: z.array(recipeIngredientSchema),
+  steps: z.array(recipeStepSchema),
+});
+
+export type PublicRecipeDetail = z.infer<typeof publicRecipeDetailSchema>;
+
+export const clonePublicRecipeInputSchema = z.object({
+  kitchenId: idSchema,
+  orderingState: z.enum(["available", "want_to_learn"]),
+});
+
+export type ClonePublicRecipeInput = z.infer<
+  typeof clonePublicRecipeInputSchema
+>;
+
+export const clonePublicRecipeResponseSchema = z.object({
+  recipe: familyRecipeDetailSchema,
+  created: z.boolean(),
+});
+
+export type ClonePublicRecipeResponse = z.infer<
+  typeof clonePublicRecipeResponseSchema
+>;
+
+export const recipeImportPlatformSchema = z.enum(["xiaohongshu", "xiachufang"]);
+
+export type RecipeImportPlatform = z.infer<typeof recipeImportPlatformSchema>;
+
+export const recipeImportDraftSchema = z.object({
+  name: z.string().trim().min(1).max(120),
+  description: z.string().trim().max(2_000).nullable(),
+  category: recipeCategorySchema,
+  coverEmoji: z.string().trim().min(1).max(20),
+  cookMinutes: z.number().int().min(1).max(1_440).nullable(),
+  tips: z.string().trim().max(2_000).nullable(),
+  ingredients: z.array(recipeIngredientInputSchema).max(100),
+  steps: z.array(recipeStepInputSchema).max(100),
+});
+
+export type RecipeImportDraft = z.infer<typeof recipeImportDraftSchema>;
+
+export const createRecipeImportInputSchema = z.object({
+  kitchenId: idSchema,
+  url: z.string().trim().url().max(2_048),
+});
+
+export type CreateRecipeImportInput = z.infer<
+  typeof createRecipeImportInputSchema
+>;
+
+export const recipeImportSchema = z.object({
+  id: idSchema,
+  kitchenId: idSchema,
+  sourceUrl: z.string().url(),
+  platform: recipeImportPlatformSchema,
+  status: z.enum(["needs_review", "completed"]),
+  draft: recipeImportDraftSchema,
+  warnings: z.array(z.string()),
+  savedRecipeId: idSchema.nullable(),
+  createdAt: z.string(),
+  updatedAt: z.string(),
+});
+
+export type RecipeImport = z.infer<typeof recipeImportSchema>;
+
+export const completeRecipeImportInputSchema = z.object({
+  kitchenId: idSchema,
+  recipeId: idSchema,
+});
+
+export type CompleteRecipeImportInput = z.infer<
+  typeof completeRecipeImportInputSchema
+>;
+
+export const recommendationStrategySchema = z.enum([
+  "long_time_no_eat",
+  "balanced",
+  "light",
+  "spicy",
+  "quick",
+]);
+
+export type RecommendationStrategy = z.infer<
+  typeof recommendationStrategySchema
+>;
+
+export const recommendationSourceScopeSchema = z.enum([
+  "family_only",
+  "mixed",
+  "public_only",
+]);
+
+export type RecommendationSourceScope = z.infer<
+  typeof recommendationSourceScopeSchema
+>;
+
+export const recommendationPreferencesSchema = z.object({
+  strategy: recommendationStrategySchema,
+  sourceScope: recommendationSourceScopeSchema,
+  itemCount: z.number().int().min(3).max(6),
+  collapsed: z.boolean(),
+});
+
+export type RecommendationPreferences = z.infer<
+  typeof recommendationPreferencesSchema
+>;
+
+export const recommendationItemSchema = z.object({
+  id: idSchema,
+  currentVersionId: idSchema,
+  name: z.string(),
+  description: z.string().nullable(),
+  category: recipeCategorySchema,
+  coverEmoji: z.string(),
+  cookMinutes: z.number().int().positive().nullable(),
+  ingredientCount: z.number().int().min(0),
+  source: z.enum(["family", "public"]),
+  reason: z.string().min(1).max(120),
+});
+
+export type RecommendationItem = z.infer<typeof recommendationItemSchema>;
+
+export const todayRecommendationSchema = z.object({
+  preferences: recommendationPreferencesSchema,
+  items: z.array(recommendationItemSchema),
+  shortageMessage: z.string().nullable(),
+});
+
+export type TodayRecommendation = z.infer<typeof todayRecommendationSchema>;
+
+export const refreshRecommendationInputSchema = z.object({
+  excludeRecipeIds: z.array(idSchema).max(12).default([]),
+});
+
+export type RefreshRecommendationInput = z.infer<
+  typeof refreshRecommendationInputSchema
+>;
 
 export const saveMealItemSchema = z.object({
   itemId: idSchema.optional(),
@@ -310,6 +459,35 @@ export const procurementListSchema = z.object({
 });
 
 export type ProcurementList = z.infer<typeof procurementListSchema>;
+
+export const procurementSharePreviewInputSchema = z.object({
+  mealTypes: z
+    .array(mealTypeSchema)
+    .min(1, "至少选择一个餐次")
+    .max(3)
+    .refine((items) => new Set(items).size === items.length, "餐次不能重复"),
+});
+
+export type ProcurementSharePreviewInput = z.infer<
+  typeof procurementSharePreviewInputSchema
+>;
+
+export const procurementShareMealSchema = z.object({
+  mealType: mealTypeSchema,
+  items: z.array(procurementItemSchema),
+});
+
+export type ProcurementShareMeal = z.infer<typeof procurementShareMealSchema>;
+
+export const procurementSharePreviewSchema = procurementListSchema.extend({
+  mealTypes: z.array(mealTypeSchema).min(1).max(3),
+  meals: z.array(procurementShareMealSchema),
+  generatedAt: z.string(),
+});
+
+export type ProcurementSharePreview = z.infer<
+  typeof procurementSharePreviewSchema
+>;
 
 export const saveMealPlanResponseSchema = z.object({
   mealPlan: mealPlanDetailSchema,
@@ -420,6 +598,7 @@ export const errorCodeSchema = z.enum([
   "AUTH_REQUIRED",
   "SESSION_EXPIRED",
   "WECHAT_LOGIN_FAILED",
+  "MINI_PROGRAM_CODE_UNAVAILABLE",
   "KITCHEN_ACCESS_DENIED",
   "KITCHEN_NOT_FOUND",
   "KITCHEN_OWNER_REQUIRED",
@@ -429,6 +608,9 @@ export const errorCodeSchema = z.enum([
   "INVITE_INVALID_OR_EXPIRED",
   "RECIPE_NOT_FOUND",
   "RECIPE_VERSION_CONFLICT",
+  "RECIPE_IMPORT_SOURCE_UNSUPPORTED",
+  "RECIPE_IMPORT_FETCH_FAILED",
+  "RECIPE_IMPORT_NOT_FOUND",
   "MEAL_PLAN_VERSION_CONFLICT",
   "MEAL_PLAN_ALREADY_COMPLETED",
   "MEAL_PLAN_NOT_COMPLETED",

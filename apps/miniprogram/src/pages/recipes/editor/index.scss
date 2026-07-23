@@ -77,6 +77,27 @@
   padding-bottom: 14px;
 }
 
+.recipe-editor-import-notice {
+  margin: 10px 14px 0;
+  padding: 14px 16px;
+  border-radius: 17px;
+  color: #755c3d;
+  background: #f3e6d4;
+}
+
+.recipe-editor-import-notice text {
+  display: block;
+  font-size: 10px;
+  line-height: 1.55;
+}
+
+.recipe-editor-import-notice text:first-child {
+  margin-bottom: 4px;
+  color: var(--color-text);
+  font-size: 12px;
+  font-weight: 800;
+}
+
 .recipe-editor-label {
   display: block;
   margin: 16px 0 8px;

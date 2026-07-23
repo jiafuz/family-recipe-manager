@@ -1,18 +1,26 @@
 import type {
   FamilyRecipeDetail,
   FamilyRecipeListItem,
+  PublicRecipeDetail,
+  PublicRecipeListItem,
+  RecipeImport,
+  RecommendationPreferences,
   RecipeIngredient,
   RecipeStep,
 } from "@jiayan/contracts";
 
 import type {
+  ClonePublicRecipeResult,
+  PublicRecipeListFilters,
   RecipeListFilters,
   RecipeRepository,
   UpdateRecipeResult,
 } from "../repository";
+import { publicRecipeCatalog } from "../public-catalog";
 
 interface StoredRecipe {
   kitchenId: string;
+  sourceRecipeId: string | null;
   detail: FamilyRecipeDetail;
   versions: Map<string, FamilyRecipeDetail>;
   archived: boolean;
@@ -20,6 +28,161 @@ interface StoredRecipe {
 
 export class InMemoryRecipeRepository implements RecipeRepository {
   private readonly records = new Map<string, StoredRecipe>();
+  private readonly imports = new Map<string, RecipeImport>();
+  private readonly recommendationPreferences = new Map<
+    string,
+    RecommendationPreferences
+  >();
+  private readonly publicRecords = new Map(
+    publicRecipeCatalog.map((recipe) => [recipe.id, structuredClone(recipe)]),
+  );
+
+  async getRecommendationPreferences(
+    userId: string,
+    kitchenId: string,
+  ): Promise<RecommendationPreferences> {
+    return structuredClone(
+      this.recommendationPreferences.get(`${userId}:${kitchenId}`) ?? {
+        strategy: "long_time_no_eat",
+        sourceScope: "family_only",
+        itemCount: 3,
+        collapsed: false,
+      },
+    );
+  }
+
+  async saveRecommendationPreferences(
+    userId: string,
+    kitchenId: string,
+    preferences: RecommendationPreferences,
+  ): Promise<RecommendationPreferences> {
+    this.recommendationPreferences.set(
+      `${userId}:${kitchenId}`,
+      structuredClone(preferences),
+    );
+    return structuredClone(preferences);
+  }
+
+  async createRecipeImport(
+    input: Parameters<RecipeRepository["createRecipeImport"]>[0],
+  ): Promise<RecipeImport> {
+    const timestamp = new Date().toISOString();
+    const recipeImport: RecipeImport = {
+      id: input.id,
+      kitchenId: input.kitchenId,
+      sourceUrl: input.sourceUrl,
+      platform: input.platform,
+      status: "needs_review",
+      draft: structuredClone(input.draft),
+      warnings: [...input.warnings],
+      savedRecipeId: null,
+      createdAt: timestamp,
+      updatedAt: timestamp,
+    };
+    this.imports.set(recipeImport.id, recipeImport);
+    return structuredClone(recipeImport);
+  }
+
+  async findRecipeImport(
+    importId: string,
+    kitchenId: string,
+  ): Promise<RecipeImport | null> {
+    const recipeImport = this.imports.get(importId);
+    return recipeImport?.kitchenId === kitchenId
+      ? structuredClone(recipeImport)
+      : null;
+  }
+
+  async completeRecipeImport(
+    input: Parameters<RecipeRepository["completeRecipeImport"]>[0],
+  ): Promise<RecipeImport | null> {
+    const recipeImport = this.imports.get(input.importId);
+    if (!recipeImport || recipeImport.kitchenId !== input.kitchenId)
+      return null;
+    recipeImport.status = "completed";
+    recipeImport.savedRecipeId = input.recipeId;
+    recipeImport.updatedAt = new Date().toISOString();
+    return structuredClone(recipeImport);
+  }
+
+  async listPublicRecipes(
+    filters: PublicRecipeListFilters,
+  ): Promise<PublicRecipeListItem[]> {
+    const search = filters.search?.trim().toLocaleLowerCase("zh-CN");
+    return [...this.publicRecords.values()]
+      .filter(
+        (recipe) =>
+          (!filters.category || recipe.category === filters.category) &&
+          (!search ||
+            recipe.name.toLocaleLowerCase("zh-CN").includes(search) ||
+            recipe.description?.toLocaleLowerCase("zh-CN").includes(search) ||
+            recipe.ingredients.some((ingredient) =>
+              ingredient.name.toLocaleLowerCase("zh-CN").includes(search),
+            )),
+      )
+      .map(toPublicListItem);
+  }
+
+  async findPublicRecipe(recipeId: string): Promise<PublicRecipeDetail | null> {
+    const recipe = this.publicRecords.get(recipeId);
+    return recipe ? structuredClone(recipe) : null;
+  }
+
+  async clonePublicRecipe(
+    input: Parameters<RecipeRepository["clonePublicRecipe"]>[0],
+  ): Promise<ClonePublicRecipeResult> {
+    const source = this.publicRecords.get(input.publicRecipeId);
+    if (!source) return { status: "not_found" };
+
+    const existing = [...this.records.values()].find(
+      (record) =>
+        record.kitchenId === input.kitchenId &&
+        record.sourceRecipeId === input.publicRecipeId &&
+        !record.archived,
+    );
+    if (existing) {
+      return {
+        status: "already_cloned",
+        recipe: structuredClone(existing.detail),
+      };
+    }
+
+    const recipe = await this.createFamilyRecipe({
+      kitchenId: input.kitchenId,
+      actorUserId: input.actorUserId,
+      entities: input.entities,
+      data: {
+        name: source.name,
+        description: source.description,
+        category: source.category,
+        coverEmoji: source.coverEmoji,
+        cookMinutes: source.cookMinutes,
+        tips: source.tips,
+        orderingState: input.orderingState,
+        ingredients: source.ingredients.map((ingredient) => ({
+          name: ingredient.name,
+          quantity: ingredient.quantity,
+          unit: ingredient.unit,
+          category: ingredient.category,
+        })),
+        steps: source.steps.map((step) => ({
+          instruction: step.instruction,
+        })),
+      },
+    });
+    const record = this.records.get(recipe.id)!;
+    const firstIntroducedUntil = new Date(
+      Date.now() + 24 * 60 * 60 * 1_000,
+    ).toISOString();
+    recipe.firstIntroducedUntil = firstIntroducedUntil;
+    record.detail.firstIntroducedUntil = firstIntroducedUntil;
+    record.versions.set(
+      recipe.currentVersionId,
+      structuredClone(record.detail),
+    );
+    record.sourceRecipeId = input.publicRecipeId;
+    return { status: "created", recipe };
+  }
 
   async listFamilyRecipes(
     kitchenId: string,
@@ -95,6 +258,7 @@ export class InMemoryRecipeRepository implements RecipeRepository {
       cookMinutes: input.data.cookMinutes,
       tips: input.data.tips,
       orderingState: input.data.orderingState,
+      firstIntroducedUntil: null,
       ingredientCount: ingredients.length,
       ingredients,
       steps,
@@ -103,6 +267,7 @@ export class InMemoryRecipeRepository implements RecipeRepository {
 
     this.records.set(detail.id, {
       kitchenId: input.kitchenId,
+      sourceRecipeId: null,
       detail,
       versions: new Map([[detail.currentVersionId, structuredClone(detail)]]),
       archived: false,
@@ -186,6 +351,16 @@ export class InMemoryRecipeRepository implements RecipeRepository {
 }
 
 function toListItem(detail: FamilyRecipeDetail): FamilyRecipeListItem {
+  const {
+    ingredients: _ingredients,
+    steps: _steps,
+    tips: _tips,
+    ...item
+  } = detail;
+  return structuredClone(item);
+}
+
+function toPublicListItem(detail: PublicRecipeDetail): PublicRecipeListItem {
   const {
     ingredients: _ingredients,
     steps: _steps,

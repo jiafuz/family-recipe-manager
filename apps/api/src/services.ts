@@ -25,7 +25,16 @@ import { MediaStorageService } from "./modules/media/storage-service";
 import { MysqlMediaRepository } from "./modules/media/mysql-repository";
 import type { MediaRepository } from "./modules/media/repository";
 import { InMemoryMediaRepository } from "./modules/media/testing/in-memory-media-repository";
+import {
+  LiveMiniProgramCodeService,
+  MockMiniProgramCodeService,
+  type MiniProgramCodeService,
+} from "./modules/meta/mini-program-code-service";
 import { MysqlRecipeRepository } from "./modules/recipes/mysql-repository";
+import {
+  LiveRecipeImportSourceClient,
+  MockRecipeImportSourceClient,
+} from "./modules/recipes/import-source-client";
 import type { RecipeRepository } from "./modules/recipes/repository";
 import { RecipeService } from "./modules/recipes/service";
 import { InMemoryRecipeRepository } from "./modules/recipes/testing/in-memory-recipe-repository";
@@ -36,6 +45,7 @@ export interface AppServices {
   recipes: RecipeService;
   meals: MealPlanService;
   media: MediaService;
+  miniProgramCode: MiniProgramCodeService;
   dispose(): Promise<void>;
 }
 
@@ -83,6 +93,14 @@ export function createAppServices(config: AppConfig): AppServices {
     config.INVITE_CODE_SECRET,
   );
   const mediaStorage = new MediaStorageService(config);
+  const miniProgramCode =
+    config.WECHAT_LOGIN_MODE === "live"
+      ? new LiveMiniProgramCodeService(
+          config.WECHAT_APP_ID,
+          config.WECHAT_APP_SECRET,
+          config.NODE_ENV === "production" ? "release" : "trial",
+        )
+      : new MockMiniProgramCodeService();
 
   return {
     auth: new AuthService({
@@ -94,7 +112,14 @@ export function createAppServices(config: AppConfig): AppServices {
       refreshTokenTtlDays: config.AUTH_REFRESH_TOKEN_TTL_DAYS,
     }),
     kitchens: kitchenService,
-    recipes: new RecipeService(recipeRepository, kitchenService),
+    recipes: new RecipeService(
+      recipeRepository,
+      kitchenService,
+      config.PERSISTENCE_MODE === "mysql"
+        ? new LiveRecipeImportSourceClient()
+        : new MockRecipeImportSourceClient(),
+      mealRepository,
+    ),
     meals: new MealPlanService(mealRepository, kitchenService),
     media: new MediaService(
       mediaRepository,
@@ -102,6 +127,7 @@ export function createAppServices(config: AppConfig): AppServices {
       kitchenService,
       mediaStorage,
     ),
+    miniProgramCode,
     dispose,
   };
 }

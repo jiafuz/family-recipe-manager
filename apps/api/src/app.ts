@@ -39,7 +39,7 @@ export function buildApp({
 
   registerErrorHandler(app);
   registerHealthRoutes(app);
-  registerMetaRoutes(app);
+  registerMetaRoutes(app, services);
 
   if (services) {
     registerAccountRoutes(app, services);

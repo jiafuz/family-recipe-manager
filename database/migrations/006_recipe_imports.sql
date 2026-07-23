@@ -1,0 +1,20 @@
+CREATE TABLE recipe_imports (
+  id CHAR(26) NOT NULL PRIMARY KEY,
+  kitchen_id CHAR(26) NOT NULL,
+  source_url VARCHAR(2048) NOT NULL,
+  source_platform VARCHAR(30) NOT NULL,
+  status VARCHAR(30) NOT NULL DEFAULT 'needs_review',
+  draft_snapshot JSON NOT NULL,
+  warnings JSON NOT NULL,
+  saved_recipe_id CHAR(26) NULL,
+  created_by CHAR(26) NOT NULL,
+  created_at DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
+  updated_at DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3) ON UPDATE CURRENT_TIMESTAMP(3),
+  KEY idx_recipe_imports_kitchen (kitchen_id, status, created_at),
+  KEY idx_recipe_imports_creator (created_by, created_at),
+  CONSTRAINT chk_recipe_imports_platform CHECK (source_platform IN ('xiaohongshu', 'xiachufang')),
+  CONSTRAINT chk_recipe_imports_status CHECK (status IN ('needs_review', 'completed')),
+  CONSTRAINT fk_recipe_imports_kitchen FOREIGN KEY (kitchen_id) REFERENCES kitchens (id),
+  CONSTRAINT fk_recipe_imports_saved_recipe FOREIGN KEY (saved_recipe_id) REFERENCES recipes (id),
+  CONSTRAINT fk_recipe_imports_creator FOREIGN KEY (created_by) REFERENCES users (id)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
