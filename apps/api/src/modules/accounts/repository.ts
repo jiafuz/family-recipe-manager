@@ -1,5 +1,6 @@
 import type {
   KitchenDetail,
+  KitchenInvitePreview,
   KitchenRole,
   KitchenSummary,
   UserSummary,
@@ -63,6 +64,23 @@ export interface KitchenRepository {
     userId: string,
   ): Promise<KitchenDetail | null>;
 
+  updateByOwner(input: {
+    kitchenId: string;
+    ownerUserId: string;
+    name: string;
+    icon: string;
+  }): Promise<boolean>;
+
+  removeMemberByOwner(input: {
+    kitchenId: string;
+    ownerUserId: string;
+    memberUserId: string;
+  }): Promise<boolean>;
+
+  leaveAsMember(kitchenId: string, userId: string): Promise<boolean>;
+
+  deleteByOwner(kitchenId: string, ownerUserId: string): Promise<boolean>;
+
   createInvite(input: {
     inviteId: string;
     kitchenId: string;
@@ -71,6 +89,11 @@ export interface KitchenRepository {
     expiresAt: Date;
     maxUses: number;
   }): Promise<void>;
+
+  findInvitePreviewByHash(
+    codeHash: string,
+    now: Date,
+  ): Promise<KitchenInvitePreview | null>;
 
   joinByInviteHash(input: {
     codeHash: string;

@@ -146,6 +146,19 @@ describe("account and kitchen onboarding", () => {
     expect(inviteCode).toMatch(/^\d{6}$/);
 
     const member = await login(app, "invited-member");
+    const previewResponse = await app.inject({
+      method: "POST",
+      url: "/v1/kitchen-invites/preview",
+      headers: { authorization: `Bearer ${member.accessToken}` },
+      payload: { inviteCode },
+    });
+    expect(previewResponse.statusCode).toBe(200);
+    expect(previewResponse.json().data).toMatchObject({
+      kitchenName: "一家人的厨房",
+      kitchenIcon: "🏠",
+      memberCount: 1,
+    });
+
     const joinResponse = await app.inject({
       method: "POST",
       url: "/v1/kitchen-invites/join",
@@ -159,6 +172,106 @@ describe("account and kitchen onboarding", () => {
     expect(joined.members.map((item) => item.userId)).toEqual(
       expect.arrayContaining([owner.user.id, member.user.id]),
     );
+  });
+
+  it("supports owner management, member exit and kitchen dissolution", async () => {
+    const owner = await login(app, "lifecycle-owner");
+    const member = await login(app, "lifecycle-member");
+    const created = await app.inject({
+      method: "POST",
+      url: "/v1/kitchens",
+      headers: { authorization: `Bearer ${owner.accessToken}` },
+      payload: { name: "原来的厨房", icon: "🏠" },
+    });
+    const kitchen = created.json<{ data: KitchenDetail }>().data;
+    const invite = await app.inject({
+      method: "POST",
+      url: `/v1/kitchens/${kitchen.id}/invites`,
+      headers: { authorization: `Bearer ${owner.accessToken}` },
+      payload: {},
+    });
+    const inviteCode = invite.json().data.code as string;
+    await app.inject({
+      method: "POST",
+      url: "/v1/kitchen-invites/join",
+      headers: { authorization: `Bearer ${member.accessToken}` },
+      payload: { inviteCode },
+    });
+
+    const forbiddenEdit = await app.inject({
+      method: "PATCH",
+      url: `/v1/kitchens/${kitchen.id}`,
+      headers: { authorization: `Bearer ${member.accessToken}` },
+      payload: { name: "不能修改", icon: "🌟" },
+    });
+    expect(forbiddenEdit.statusCode).toBe(403);
+    expect(forbiddenEdit.json().error.code).toBe("KITCHEN_OWNER_REQUIRED");
+
+    const updated = await app.inject({
+      method: "PATCH",
+      url: `/v1/kitchens/${kitchen.id}`,
+      headers: { authorization: `Bearer ${owner.accessToken}` },
+      payload: { name: "周末团圆厨房", icon: "🍲" },
+    });
+    expect(updated.statusCode).toBe(200);
+    expect(updated.json().data).toMatchObject({
+      name: "周末团圆厨房",
+      icon: "🍲",
+    });
+
+    const removed = await app.inject({
+      method: "DELETE",
+      url: `/v1/kitchens/${kitchen.id}/members/${member.user.id}`,
+      headers: { authorization: `Bearer ${owner.accessToken}` },
+    });
+    expect(removed.statusCode).toBe(200);
+    expect(removed.json().data.memberCount).toBe(1);
+
+    const removedMemberRead = await app.inject({
+      method: "GET",
+      url: `/v1/kitchens/${kitchen.id}`,
+      headers: { authorization: `Bearer ${member.accessToken}` },
+    });
+    expect(removedMemberRead.statusCode).toBe(404);
+
+    const rejoined = await app.inject({
+      method: "POST",
+      url: "/v1/kitchen-invites/join",
+      headers: { authorization: `Bearer ${member.accessToken}` },
+      payload: { inviteCode },
+    });
+    expect(rejoined.statusCode).toBe(200);
+
+    const leave = await app.inject({
+      method: "DELETE",
+      url: `/v1/kitchens/${kitchen.id}/membership`,
+      headers: { authorization: `Bearer ${member.accessToken}` },
+    });
+    expect(leave.statusCode).toBe(204);
+
+    const ownerCannotLeave = await app.inject({
+      method: "DELETE",
+      url: `/v1/kitchens/${kitchen.id}/membership`,
+      headers: { authorization: `Bearer ${owner.accessToken}` },
+    });
+    expect(ownerCannotLeave.statusCode).toBe(409);
+    expect(ownerCannotLeave.json().error.code).toBe(
+      "KITCHEN_OWNER_CANNOT_LEAVE",
+    );
+
+    const dissolved = await app.inject({
+      method: "DELETE",
+      url: `/v1/kitchens/${kitchen.id}`,
+      headers: { authorization: `Bearer ${owner.accessToken}` },
+    });
+    expect(dissolved.statusCode).toBe(204);
+
+    const ownerKitchens = await app.inject({
+      method: "GET",
+      url: "/v1/kitchens",
+      headers: { authorization: `Bearer ${owner.accessToken}` },
+    });
+    expect(ownerKitchens.json().data).toEqual([]);
   });
 
   it("rotates refresh tokens and invalidates a logged out access token", async () => {

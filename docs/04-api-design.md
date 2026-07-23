@@ -63,11 +63,14 @@
 | POST   | `/v1/kitchens`                            | 创建厨房           |
 | GET    | `/v1/kitchens/:kitchenId`                 | 厨房详情           |
 | PATCH  | `/v1/kitchens/:kitchenId`                 | 修改厨房资料       |
-| GET    | `/v1/kitchens/:kitchenId/members`         | 成员列表           |
 | DELETE | `/v1/kitchens/:kitchenId/members/:userId` | 移除成员           |
 | POST   | `/v1/kitchens/:kitchenId/invites`         | 创建 6 位邀请码    |
+| POST   | `/v1/kitchen-invites/preview`             | 加入前预览厨房     |
 | POST   | `/v1/kitchen-invites/join`                | 使用邀请码加入     |
-| POST   | `/v1/kitchens/:kitchenId/leave`           | 退出厨房           |
+| DELETE | `/v1/kitchens/:kitchenId/membership`      | 当前成员退出厨房   |
+| DELETE | `/v1/kitchens/:kitchenId`                 | 创建者解散厨房     |
+
+厨房详情已包含当前有效成员列表。成员可以邀请家人和自行退出；只有厨房创建者可以修改资料、移除其他成员或解散厨房。创建者不能直接退出，必须明确执行解散，避免留下无人管理的家庭空间。
 
 ## 4. 菜谱
 
@@ -184,6 +187,10 @@
 - `AUTH_REQUIRED`
 - `SESSION_EXPIRED`
 - `KITCHEN_ACCESS_DENIED`
+- `KITCHEN_NOT_FOUND`
+- `KITCHEN_OWNER_REQUIRED`
+- `KITCHEN_OWNER_CANNOT_LEAVE`
+- `KITCHEN_MEMBER_NOT_FOUND`
 - `KITCHEN_MEMBER_LIMIT_REACHED`
 - `INVITE_INVALID_OR_EXPIRED`
 - `RECIPE_NOT_FOUND`

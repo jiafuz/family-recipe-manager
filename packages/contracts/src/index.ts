@@ -88,6 +88,10 @@ export const createKitchenInputSchema = z.object({
 
 export type CreateKitchenInput = z.infer<typeof createKitchenInputSchema>;
 
+export const updateKitchenInputSchema = createKitchenInputSchema;
+
+export type UpdateKitchenInput = z.infer<typeof updateKitchenInputSchema>;
+
 export const joinKitchenInputSchema = z.object({
   inviteCode: z.string().regex(/^\d{6}$/, "请输入 6 位邀请码"),
 });
@@ -110,6 +114,15 @@ export const kitchenInviteResponseSchema = z.object({
 });
 
 export type KitchenInviteResponse = z.infer<typeof kitchenInviteResponseSchema>;
+
+export const kitchenInvitePreviewSchema = z.object({
+  kitchenName: z.string().min(1).max(80),
+  kitchenIcon: z.string().min(1).max(20),
+  memberCount: z.number().int().min(1),
+  expiresAt: z.string(),
+});
+
+export type KitchenInvitePreview = z.infer<typeof kitchenInvitePreviewSchema>;
 
 export const recipeOrderingStateSchema = z.enum([
   "available",
@@ -409,6 +422,9 @@ export const errorCodeSchema = z.enum([
   "WECHAT_LOGIN_FAILED",
   "KITCHEN_ACCESS_DENIED",
   "KITCHEN_NOT_FOUND",
+  "KITCHEN_OWNER_REQUIRED",
+  "KITCHEN_OWNER_CANNOT_LEAVE",
+  "KITCHEN_MEMBER_NOT_FOUND",
   "KITCHEN_MEMBER_LIMIT_REACHED",
   "INVITE_INVALID_OR_EXPIRED",
   "RECIPE_NOT_FOUND",

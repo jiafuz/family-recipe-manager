@@ -1,5 +1,6 @@
 import type {
   KitchenDetail,
+  KitchenInvitePreview,
   KitchenMember,
   KitchenRole,
   KitchenSummary,
@@ -51,6 +52,13 @@ interface InviteRow extends RowDataPacket {
   max_uses: number;
   used_count: number;
   member_limit: number;
+}
+
+interface InvitePreviewRow extends RowDataPacket {
+  kitchen_name: string;
+  kitchen_icon: string;
+  expires_at: Date;
+  member_count: number;
 }
 
 interface ExistingMemberRow extends RowDataPacket {
@@ -399,6 +407,94 @@ export class MysqlAccountKitchenRepository
     };
   }
 
+  async updateByOwner(input: {
+    kitchenId: string;
+    ownerUserId: string;
+    name: string;
+    icon: string;
+  }): Promise<boolean> {
+    const [result] = await this.pool.execute<ResultSetHeader>(
+      `UPDATE kitchens
+       SET name = ?, icon = ?, version = version + 1
+       WHERE id = ? AND owner_user_id = ? AND deleted_at IS NULL`,
+      [input.name, input.icon, input.kitchenId, input.ownerUserId],
+    );
+    return result.affectedRows === 1;
+  }
+
+  async removeMemberByOwner(input: {
+    kitchenId: string;
+    ownerUserId: string;
+    memberUserId: string;
+  }): Promise<boolean> {
+    const [result] = await this.pool.execute<ResultSetHeader>(
+      `UPDATE kitchen_members target
+       INNER JOIN kitchens kitchen ON kitchen.id = target.kitchen_id
+       SET target.left_at = UTC_TIMESTAMP(3)
+       WHERE target.kitchen_id = ?
+         AND target.user_id = ?
+         AND target.membership_role = 'member'
+         AND target.left_at IS NULL
+         AND kitchen.owner_user_id = ?
+         AND kitchen.deleted_at IS NULL`,
+      [input.kitchenId, input.memberUserId, input.ownerUserId],
+    );
+    return result.affectedRows === 1;
+  }
+
+  async leaveAsMember(kitchenId: string, userId: string): Promise<boolean> {
+    const [result] = await this.pool.execute<ResultSetHeader>(
+      `UPDATE kitchen_members
+       SET left_at = UTC_TIMESTAMP(3)
+       WHERE kitchen_id = ?
+         AND user_id = ?
+         AND membership_role = 'member'
+         AND left_at IS NULL`,
+      [kitchenId, userId],
+    );
+    return result.affectedRows === 1;
+  }
+
+  async deleteByOwner(
+    kitchenId: string,
+    ownerUserId: string,
+  ): Promise<boolean> {
+    const connection = await this.pool.getConnection();
+
+    try {
+      await connection.beginTransaction();
+      const [result] = await connection.execute<ResultSetHeader>(
+        `UPDATE kitchens
+         SET deleted_at = UTC_TIMESTAMP(3), version = version + 1
+         WHERE id = ? AND owner_user_id = ? AND deleted_at IS NULL`,
+        [kitchenId, ownerUserId],
+      );
+      if (result.affectedRows !== 1) {
+        await connection.rollback();
+        return false;
+      }
+      await connection.execute(
+        `UPDATE kitchen_members
+         SET left_at = COALESCE(left_at, UTC_TIMESTAMP(3))
+         WHERE kitchen_id = ?`,
+        [kitchenId],
+      );
+      await connection.execute(
+        `UPDATE kitchen_invites
+         SET revoked_at = COALESCE(revoked_at, UTC_TIMESTAMP(3))
+         WHERE kitchen_id = ?`,
+        [kitchenId],
+      );
+      await connection.commit();
+      return true;
+    } catch (error) {
+      await this.rollbackQuietly(connection);
+      throw error;
+    } finally {
+      connection.release();
+    }
+  }
+
   async createInvite(input: {
     inviteId: string;
     kitchenId: string;
@@ -433,6 +529,41 @@ export class MysqlAccountKitchenRepository
         message: "你不是这个厨房的成员",
       });
     }
+  }
+
+  async findInvitePreviewByHash(
+    codeHash: string,
+    now: Date,
+  ): Promise<KitchenInvitePreview | null> {
+    const [rows] = await this.pool.query<InvitePreviewRow[]>(
+      `SELECT
+         k.name AS kitchen_name,
+         k.icon AS kitchen_icon,
+         i.expires_at,
+         (
+           SELECT COUNT(*)
+           FROM kitchen_members active_members
+           WHERE active_members.kitchen_id = k.id
+             AND active_members.left_at IS NULL
+         ) AS member_count
+       FROM kitchen_invites i
+       INNER JOIN kitchens k ON k.id = i.kitchen_id
+       WHERE i.code_hash = ?
+         AND i.revoked_at IS NULL
+         AND i.expires_at > ?
+         AND i.used_count < i.max_uses
+         AND k.deleted_at IS NULL`,
+      [codeHash, now],
+    );
+    const row = rows[0];
+    return row
+      ? {
+          kitchenName: row.kitchen_name,
+          kitchenIcon: row.kitchen_icon,
+          memberCount: Number(row.member_count),
+          expiresAt: row.expires_at.toISOString(),
+        }
+      : null;
   }
 
   async joinByInviteHash(input: {

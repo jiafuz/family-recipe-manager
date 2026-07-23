@@ -8,9 +8,13 @@
 .kitchen-toolbar__space {
   display: flex;
   align-items: center;
-}
-
-.kitchen-toolbar__space {
+  width: auto;
+  margin: 0;
+  padding: 0;
+  color: inherit;
+  line-height: 1.2;
+  text-align: left;
+  background: transparent;
   gap: 10px;
 }
 
@@ -40,6 +44,77 @@
 
 .kitchen-toolbar__meta {
   margin-top: 2px;
+  color: var(--color-muted);
+  font-size: 10px;
+}
+
+.kitchen-toolbar__chevron {
+  margin-left: 1px;
+  color: var(--color-muted);
+  font-size: 13px;
+}
+
+.kitchen-toolbar-menu__mask {
+  position: fixed;
+  z-index: 50;
+  inset: 0;
+  background: rgb(41 37 33 / 18%);
+}
+
+.kitchen-toolbar-menu {
+  position: fixed;
+  z-index: 51;
+  top: calc(env(safe-area-inset-top) + 66px);
+  left: 18px;
+  width: 250px;
+  padding: 8px;
+  border: 1px solid var(--color-line);
+  border-radius: 18px;
+  background: var(--color-surface);
+  box-shadow: 0 18px 50px rgb(73 57 43 / 18%);
+}
+
+.kitchen-toolbar-menu button {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  margin: 0;
+  padding: 12px 10px;
+  color: var(--color-ink);
+  line-height: 1.25;
+  text-align: left;
+  background: transparent;
+  gap: 11px;
+}
+
+.kitchen-toolbar-menu button + button {
+  border-top: 1px solid var(--color-line);
+}
+
+.kitchen-toolbar-menu button > text:first-child {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 11px;
+  color: var(--color-brand);
+  background: var(--color-brand-soft);
+  font-size: 17px;
+}
+
+.kitchen-toolbar-menu button view,
+.kitchen-toolbar-menu button view text {
+  display: block;
+}
+
+.kitchen-toolbar-menu button view text:first-child {
+  font-size: 14px;
+  font-weight: 650;
+}
+
+.kitchen-toolbar-menu button view text:last-child {
+  margin-top: 3px;
   color: var(--color-muted);
   font-size: 10px;
 }

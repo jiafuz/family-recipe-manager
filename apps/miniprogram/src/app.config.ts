@@ -10,6 +10,11 @@ export default defineAppConfig({
     "pages/procurement/index",
     "pages/meal-share/index",
     "pages/meal-photo-editor/index",
+    "pages/kitchens/switch/index",
+    "pages/kitchens/create/index",
+    "pages/kitchens/join/index",
+    "pages/kitchens/manage/index",
+    "pages/kitchens/invite/index",
   ],
   window: {
     navigationStyle: "custom",

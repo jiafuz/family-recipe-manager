@@ -218,6 +218,7 @@ export default function MealRecordsPage(): JSX.Element {
   return (
     <View className="meal-records-page">
       <KitchenToolbar
+        kitchenId={kitchen?.id}
         kitchenName={kitchen?.name ?? "我的家"}
         memberCount={kitchen?.memberCount ?? 1}
       />

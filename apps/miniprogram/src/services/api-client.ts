@@ -8,7 +8,9 @@ import type {
   FamilyRecipeListItem,
   JoinKitchenInput,
   KitchenDetail,
+  KitchenInvitePreview,
   KitchenInviteResponse,
+  KitchenSummary,
   MealPlanDetail,
   MealPhoto,
   MealType,
@@ -23,6 +25,7 @@ import type {
   SaveMealPlanResponse,
   SessionResponse,
   UpdateFamilyRecipeInput,
+  UpdateKitchenInput,
   UpdateMealPhotoInput,
 } from "@jiayan/contracts";
 import Taro from "@tarojs/taro";
@@ -64,6 +67,10 @@ export function getStoredSession(): SessionResponse | null {
 
 export function storeCurrentKitchen(kitchenId: string): void {
   Taro.setStorageSync(CURRENT_KITCHEN_STORAGE_KEY, kitchenId);
+}
+
+export function clearStoredCurrentKitchen(): void {
+  Taro.removeStorageSync(CURRENT_KITCHEN_STORAGE_KEY);
 }
 
 export function getStoredCurrentKitchenId(): string | null {
@@ -125,6 +132,15 @@ export async function joinKitchen(
   return kitchen;
 }
 
+export async function previewKitchenInvite(
+  input: JoinKitchenInput,
+): Promise<KitchenInvitePreview> {
+  return request<KitchenInvitePreview>("/v1/kitchen-invites/preview", {
+    method: "POST",
+    body: input,
+  });
+}
+
 export async function getKitchenDetail(
   kitchenId: string,
 ): Promise<KitchenDetail> {
@@ -138,6 +154,40 @@ export async function createKitchenInvite(
     method: "POST",
     body: {},
   });
+}
+
+export async function listKitchens(): Promise<KitchenSummary[]> {
+  return request<KitchenSummary[]>("/v1/kitchens");
+}
+
+export async function updateKitchen(
+  kitchenId: string,
+  input: UpdateKitchenInput,
+): Promise<KitchenDetail> {
+  return request<KitchenDetail>(`/v1/kitchens/${kitchenId}`, {
+    method: "PATCH",
+    body: input,
+  });
+}
+
+export async function removeKitchenMember(
+  kitchenId: string,
+  memberUserId: string,
+): Promise<KitchenDetail> {
+  return request<KitchenDetail>(
+    `/v1/kitchens/${kitchenId}/members/${memberUserId}`,
+    { method: "DELETE" },
+  );
+}
+
+export async function leaveKitchen(kitchenId: string): Promise<void> {
+  await request<void>(`/v1/kitchens/${kitchenId}/membership`, {
+    method: "DELETE",
+  });
+}
+
+export async function deleteKitchen(kitchenId: string): Promise<void> {
+  await request<void>(`/v1/kitchens/${kitchenId}`, { method: "DELETE" });
 }
 
 export async function listFamilyRecipes(

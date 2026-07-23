@@ -350,6 +350,7 @@ export default function OrderingPage(): JSX.Element {
   return (
     <View className="ordering-page">
       <KitchenToolbar
+        kitchenId={kitchen!.id}
         kitchenName={kitchen!.name}
         memberCount={kitchen!.memberCount}
       />

@@ -1,0 +1,261 @@
+.kitchen-task-page {
+  min-height: 100vh;
+  padding: 0 18px calc(env(safe-area-inset-bottom) + 28px);
+  box-sizing: border-box;
+}
+
+.kitchen-task-header {
+  display: grid;
+  grid-template-columns: 52px 1fr 52px;
+  align-items: center;
+  padding: calc(env(safe-area-inset-top) + 14px) 0 16px;
+}
+
+.kitchen-task-header button {
+  width: 42px;
+  height: 38px;
+  margin: 0;
+  padding: 0;
+  border-radius: 13px;
+  color: var(--color-ink);
+  line-height: 38px;
+  background: var(--color-surface);
+}
+
+.kitchen-task-header text {
+  text-align: center;
+  font-size: 18px;
+  font-weight: 700;
+}
+
+.kitchen-task-intro {
+  margin: 2px 2px 18px;
+}
+
+.kitchen-task-intro text {
+  display: block;
+}
+
+.kitchen-task-intro text:first-child {
+  font-size: 22px;
+  font-weight: 750;
+}
+
+.kitchen-task-intro text:last-child {
+  margin-top: 7px;
+  color: var(--color-muted);
+  font-size: 12px;
+  line-height: 1.6;
+}
+
+.kitchen-form-section,
+.kitchen-member-section,
+.kitchen-danger-section,
+.kitchen-invite-card {
+  padding: 18px;
+  border: 1px solid var(--color-line);
+  border-radius: var(--radius-card);
+  background: var(--color-surface);
+}
+
+.kitchen-form-section + .kitchen-form-section,
+.kitchen-form-section + .kitchen-member-section,
+.kitchen-member-section + .kitchen-danger-section,
+.kitchen-invite-card + .kitchen-form-section {
+  margin-top: 14px;
+}
+
+.kitchen-field-label,
+.kitchen-section-title {
+  display: block;
+  margin-bottom: 10px;
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.kitchen-field-input {
+  height: 46px;
+  padding: 0 14px;
+  border: 1px solid var(--color-line);
+  border-radius: 14px;
+  background: #fff;
+  font-size: 14px;
+  box-sizing: border-box;
+}
+
+.kitchen-icon-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 10px;
+}
+
+.kitchen-icon-grid button {
+  width: 100%;
+  height: 48px;
+  margin: 0;
+  padding: 0;
+  border: 1px solid transparent;
+  border-radius: 15px;
+  line-height: 48px;
+  background: #f7f1e9;
+  font-size: 22px;
+}
+
+.kitchen-icon-grid button.is-active {
+  border-color: var(--color-brand);
+  background: var(--color-brand-soft);
+}
+
+.kitchen-primary-action,
+.kitchen-secondary-action,
+.kitchen-danger-action {
+  height: 48px;
+  margin: 18px 0 0;
+  border-radius: 15px;
+  font-size: 15px;
+  font-weight: 700;
+  line-height: 48px;
+}
+
+.kitchen-primary-action {
+  color: #fff;
+  background: var(--color-brand);
+}
+
+.kitchen-primary-action[disabled] {
+  color: #aaa39b;
+  background: #e8e1d8;
+}
+
+.kitchen-secondary-action {
+  color: var(--color-brand);
+  background: var(--color-brand-soft);
+}
+
+.kitchen-danger-action {
+  color: #b63b2c;
+  background: #fff0ec;
+}
+
+.kitchen-error {
+  display: block;
+  margin-top: 12px;
+  color: #b63b2c;
+  font-size: 12px;
+  text-align: center;
+}
+
+.kitchen-list-item,
+.kitchen-member-item {
+  display: flex;
+  align-items: center;
+  padding: 13px 2px;
+  gap: 12px;
+}
+
+.kitchen-list-item + .kitchen-list-item,
+.kitchen-member-item + .kitchen-member-item {
+  border-top: 1px solid var(--color-line);
+}
+
+.kitchen-list-item__icon,
+.kitchen-member-item__avatar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 42px;
+  height: 42px;
+  border-radius: 14px;
+  background: #f4ede4;
+  font-size: 21px;
+}
+
+.kitchen-list-item__content,
+.kitchen-member-item__content {
+  flex: 1;
+  min-width: 0;
+}
+
+.kitchen-list-item__content text,
+.kitchen-member-item__content text {
+  display: block;
+}
+
+.kitchen-list-item__content text:first-child,
+.kitchen-member-item__content text:first-child {
+  font-size: 14px;
+  font-weight: 650;
+}
+
+.kitchen-list-item__content text:last-child,
+.kitchen-member-item__content text:last-child {
+  margin-top: 4px;
+  color: var(--color-muted);
+  font-size: 11px;
+}
+
+.kitchen-list-item__status {
+  color: var(--color-brand);
+  font-size: 12px;
+}
+
+.kitchen-member-item button {
+  width: auto;
+  margin: 0;
+  padding: 7px 10px;
+  border-radius: 10px;
+  color: #b63b2c;
+  line-height: 1.2;
+  background: #fff0ec;
+  font-size: 11px;
+}
+
+.kitchen-invite-code {
+  display: block;
+  margin: 18px 0 8px;
+  color: var(--color-brand);
+  font-size: 34px;
+  font-weight: 750;
+  letter-spacing: 9px;
+  text-align: center;
+}
+
+.kitchen-invite-meta {
+  display: block;
+  color: var(--color-muted);
+  font-size: 11px;
+  line-height: 1.6;
+  text-align: center;
+}
+
+.kitchen-invite-actions {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  margin-top: 16px;
+  gap: 10px;
+}
+
+.kitchen-invite-actions button {
+  margin: 0;
+}
+
+.kitchen-join-code {
+  height: 62px;
+  padding: 0 12px;
+  border: 0;
+  border-bottom: 2px solid var(--color-brand);
+  color: var(--color-ink);
+  background: transparent;
+  font-size: 28px;
+  font-weight: 700;
+  letter-spacing: 12px;
+  text-align: center;
+  box-sizing: border-box;
+}
+
+.kitchen-loading-state {
+  padding: 70px 20px;
+  color: var(--color-muted);
+  font-size: 13px;
+  text-align: center;
+}

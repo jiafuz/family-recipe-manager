@@ -1,5 +1,6 @@
 import type {
   KitchenDetail,
+  KitchenInvitePreview,
   KitchenMember,
   KitchenRole,
   KitchenSummary,
@@ -198,6 +199,71 @@ export class InMemoryAccountKitchenRepository
       : null;
   }
 
+  async updateByOwner(input: {
+    kitchenId: string;
+    ownerUserId: string;
+    name: string;
+    icon: string;
+  }): Promise<boolean> {
+    const kitchen = this.kitchens.get(input.kitchenId);
+    if (
+      !kitchen ||
+      kitchen.ownerUserId !== input.ownerUserId ||
+      !kitchen.members.get(input.ownerUserId)?.active
+    ) {
+      return false;
+    }
+    kitchen.name = input.name;
+    kitchen.icon = input.icon;
+    return true;
+  }
+
+  async removeMemberByOwner(input: {
+    kitchenId: string;
+    ownerUserId: string;
+    memberUserId: string;
+  }): Promise<boolean> {
+    const kitchen = this.kitchens.get(input.kitchenId);
+    const membership = kitchen?.members.get(input.memberUserId);
+    if (
+      !kitchen ||
+      kitchen.ownerUserId !== input.ownerUserId ||
+      !membership?.active ||
+      membership.role === "owner"
+    ) {
+      return false;
+    }
+    membership.active = false;
+    return true;
+  }
+
+  async leaveAsMember(kitchenId: string, userId: string): Promise<boolean> {
+    const kitchen = this.kitchens.get(kitchenId);
+    const membership = kitchen?.members.get(userId);
+    if (!membership?.active || membership.role === "owner") return false;
+    membership.active = false;
+    return true;
+  }
+
+  async deleteByOwner(
+    kitchenId: string,
+    ownerUserId: string,
+  ): Promise<boolean> {
+    const kitchen = this.kitchens.get(kitchenId);
+    if (
+      !kitchen ||
+      kitchen.ownerUserId !== ownerUserId ||
+      !kitchen.members.get(ownerUserId)?.active
+    ) {
+      return false;
+    }
+    this.kitchens.delete(kitchenId);
+    for (const [codeHash, invite] of this.invites) {
+      if (invite.kitchenId === kitchenId) this.invites.delete(codeHash);
+    }
+    return true;
+  }
+
   async createInvite(input: {
     inviteId: string;
     kitchenId: string;
@@ -221,6 +287,30 @@ export class InMemoryAccountKitchenRepository
       maxUses: input.maxUses,
       usedCount: 0,
     });
+  }
+
+  async findInvitePreviewByHash(
+    codeHash: string,
+    now: Date,
+  ): Promise<KitchenInvitePreview | null> {
+    const invite = this.invites.get(codeHash);
+    if (
+      !invite ||
+      invite.expiresAt.getTime() <= now.getTime() ||
+      invite.usedCount >= invite.maxUses
+    ) {
+      return null;
+    }
+    const kitchen = this.kitchens.get(invite.kitchenId);
+    if (!kitchen) return null;
+    return {
+      kitchenName: kitchen.name,
+      kitchenIcon: kitchen.icon,
+      memberCount: [...kitchen.members.values()].filter(
+        (member) => member.active,
+      ).length,
+      expiresAt: invite.expiresAt.toISOString(),
+    };
   }
 
   async joinByInviteHash(input: {

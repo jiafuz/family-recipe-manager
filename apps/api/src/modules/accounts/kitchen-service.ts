@@ -3,8 +3,10 @@ import { createHmac, randomInt } from "node:crypto";
 import type {
   CreateKitchenInput,
   KitchenDetail,
+  KitchenInvitePreview,
   KitchenInviteResponse,
   KitchenSummary,
+  UpdateKitchenInput,
 } from "@jiayan/contracts";
 import { ulid } from "ulid";
 
@@ -42,6 +44,83 @@ export class KitchenService {
     }
 
     return kitchen;
+  }
+
+  async update(
+    kitchenId: string,
+    actorUserId: string,
+    input: UpdateKitchenInput,
+  ): Promise<KitchenDetail> {
+    const kitchen = await this.getDetail(kitchenId, actorUserId);
+    this.assertOwner(kitchen);
+
+    const updated = await this.kitchens.updateByOwner({
+      kitchenId,
+      ownerUserId: actorUserId,
+      name: input.name,
+      icon: input.icon,
+    });
+    if (!updated) throw this.ownerRequiredError();
+    return this.getDetail(kitchenId, actorUserId);
+  }
+
+  async removeMember(
+    kitchenId: string,
+    actorUserId: string,
+    memberUserId: string,
+  ): Promise<KitchenDetail> {
+    const kitchen = await this.getDetail(kitchenId, actorUserId);
+    this.assertOwner(kitchen);
+    const member = kitchen.members.find((item) => item.userId === memberUserId);
+
+    if (!member || member.role === "owner") {
+      throw new AppError({
+        statusCode: 404,
+        code: "KITCHEN_MEMBER_NOT_FOUND",
+        message: "没有找到可移除的家庭成员",
+      });
+    }
+
+    const removed = await this.kitchens.removeMemberByOwner({
+      kitchenId,
+      ownerUserId: actorUserId,
+      memberUserId,
+    });
+    if (!removed) {
+      throw new AppError({
+        statusCode: 409,
+        code: "KITCHEN_MEMBER_NOT_FOUND",
+        message: "成员状态已经变化，请刷新后重试",
+      });
+    }
+    return this.getDetail(kitchenId, actorUserId);
+  }
+
+  async leave(kitchenId: string, userId: string): Promise<void> {
+    const kitchen = await this.getDetail(kitchenId, userId);
+    if (kitchen.role === "owner") {
+      throw new AppError({
+        statusCode: 409,
+        code: "KITCHEN_OWNER_CANNOT_LEAVE",
+        message: "创建者不能直接退出，请先解散厨房",
+      });
+    }
+
+    const left = await this.kitchens.leaveAsMember(kitchenId, userId);
+    if (!left) {
+      throw new AppError({
+        statusCode: 409,
+        code: "KITCHEN_MEMBER_NOT_FOUND",
+        message: "成员状态已经变化，请刷新后重试",
+      });
+    }
+  }
+
+  async delete(kitchenId: string, actorUserId: string): Promise<void> {
+    const kitchen = await this.getDetail(kitchenId, actorUserId);
+    this.assertOwner(kitchen);
+    const deleted = await this.kitchens.deleteByOwner(kitchenId, actorUserId);
+    if (!deleted) throw this.ownerRequiredError();
   }
 
   async createInvite(input: {
@@ -111,10 +190,37 @@ export class KitchenService {
     return result.kitchen;
   }
 
+  async previewInvite(inviteCode: string): Promise<KitchenInvitePreview> {
+    const preview = await this.kitchens.findInvitePreviewByHash(
+      this.hashInviteCode(inviteCode),
+      new Date(),
+    );
+    if (!preview) {
+      throw new AppError({
+        statusCode: 400,
+        code: "INVITE_INVALID_OR_EXPIRED",
+        message: "邀请码无效或已过期",
+      });
+    }
+    return preview;
+  }
+
   private hashInviteCode(code: string): string {
     return createHmac("sha256", this.inviteCodeSecret)
       .update(code)
       .digest("hex");
+  }
+
+  private assertOwner(kitchen: KitchenDetail): void {
+    if (kitchen.role !== "owner") throw this.ownerRequiredError();
+  }
+
+  private ownerRequiredError(): AppError {
+    return new AppError({
+      statusCode: 403,
+      code: "KITCHEN_OWNER_REQUIRED",
+      message: "只有厨房创建者可以进行这项操作",
+    });
   }
 
   private isDuplicateError(error: unknown): boolean {

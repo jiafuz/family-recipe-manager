@@ -5,6 +5,7 @@ import {
   joinKitchenInputSchema,
   loginWithWechatInputSchema,
   refreshSessionInputSchema,
+  updateKitchenInputSchema,
 } from "@jiayan/contracts";
 import type { FastifyInstance, FastifyRequest } from "fastify";
 import { z } from "zod";
@@ -19,6 +20,10 @@ export interface AccountRoutesOptions {
 
 const kitchenParamsSchema = z.object({
   kitchenId: idSchema,
+});
+
+const kitchenMemberParamsSchema = kitchenParamsSchema.extend({
+  memberUserId: idSchema,
 });
 
 function getDeviceLabel(request: FastifyRequest): string | null {
@@ -98,6 +103,54 @@ export function registerAccountRoutes(
     return { data, meta: { requestId: request.id } };
   });
 
+  app.patch("/v1/kitchens/:kitchenId", async (request) => {
+    const principal = await options.auth.authenticate(
+      request.headers.authorization,
+    );
+    const params = kitchenParamsSchema.parse(request.params);
+    const input = updateKitchenInputSchema.parse(request.body);
+    const data = await options.kitchens.update(
+      params.kitchenId,
+      principal.userId,
+      input,
+    );
+    return { data, meta: { requestId: request.id } };
+  });
+
+  app.delete(
+    "/v1/kitchens/:kitchenId/members/:memberUserId",
+    async (request) => {
+      const principal = await options.auth.authenticate(
+        request.headers.authorization,
+      );
+      const params = kitchenMemberParamsSchema.parse(request.params);
+      const data = await options.kitchens.removeMember(
+        params.kitchenId,
+        principal.userId,
+        params.memberUserId,
+      );
+      return { data, meta: { requestId: request.id } };
+    },
+  );
+
+  app.delete("/v1/kitchens/:kitchenId/membership", async (request, reply) => {
+    const principal = await options.auth.authenticate(
+      request.headers.authorization,
+    );
+    const params = kitchenParamsSchema.parse(request.params);
+    await options.kitchens.leave(params.kitchenId, principal.userId);
+    return reply.status(204).send();
+  });
+
+  app.delete("/v1/kitchens/:kitchenId", async (request, reply) => {
+    const principal = await options.auth.authenticate(
+      request.headers.authorization,
+    );
+    const params = kitchenParamsSchema.parse(request.params);
+    await options.kitchens.delete(params.kitchenId, principal.userId);
+    return reply.status(204).send();
+  });
+
   app.post("/v1/kitchens/:kitchenId/invites", async (request, reply) => {
     const principal = await options.auth.authenticate(
       request.headers.authorization,
@@ -125,6 +178,13 @@ export function registerAccountRoutes(
       principal.userId,
       input.inviteCode,
     );
+    return { data, meta: { requestId: request.id } };
+  });
+
+  app.post("/v1/kitchen-invites/preview", async (request) => {
+    await options.auth.authenticate(request.headers.authorization);
+    const input = joinKitchenInputSchema.parse(request.body);
+    const data = await options.kitchens.previewInvite(input.inviteCode);
     return { data, meta: { requestId: request.id } };
   });
 }
