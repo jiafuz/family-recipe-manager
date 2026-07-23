@@ -1,0 +1,25 @@
+.foundation-card {
+  margin: 12px 18px;
+  padding: 20px;
+  border: 1px solid var(--color-line);
+  border-radius: var(--radius-card);
+  background: var(--color-surface);
+  box-shadow: 0 8px 28px rgb(91 67 44 / 5%);
+}
+
+.foundation-card__title,
+.foundation-card__description {
+  display: block;
+}
+
+.foundation-card__title {
+  font-size: 18px;
+  font-weight: 700;
+}
+
+.foundation-card__description {
+  margin-top: 8px;
+  color: var(--color-muted);
+  font-size: 13px;
+  line-height: 1.7;
+}

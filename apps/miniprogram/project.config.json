@@ -1,0 +1,18 @@
+{
+  "miniprogramRoot": "dist/",
+  "projectname": "jiayan-miniprogram",
+  "description": "家宴家庭菜谱与点餐小程序",
+  "appid": "touristappid",
+  "setting": {
+    "urlCheck": false,
+    "es6": true,
+    "enhance": true,
+    "postcss": true,
+    "minified": true,
+    "compileHotReLoad": true
+  },
+  "compileType": "miniprogram",
+  "libVersion": "latest",
+  "srcMiniprogramRoot": "dist/",
+  "condition": {}
+}

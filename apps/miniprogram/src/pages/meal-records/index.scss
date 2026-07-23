@@ -1,0 +1,307 @@
+.meal-records-page {
+  min-height: 100vh;
+  box-sizing: border-box;
+  padding-bottom: 90px;
+  color: var(--color-ink);
+  background: var(--color-background);
+}
+
+.meal-record-date-options {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 8px;
+  margin: 8px 14px 10px;
+}
+
+.meal-record-date-options button,
+.meal-record-custom-date,
+.meal-record-meal-tabs button,
+.meal-record-heading button,
+.meal-record-state button,
+.meal-record-empty button {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  line-height: inherit;
+}
+
+.meal-record-date-options button,
+.meal-record-custom-date {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 58px;
+  border-radius: 15px;
+  color: var(--color-muted);
+  background: var(--color-surface);
+}
+
+.meal-record-date-options .is-active,
+.meal-record-custom-date.is-active {
+  color: #fff;
+  background: #292521;
+}
+
+.meal-record-date-options text:first-child {
+  font-size: 11px;
+  font-weight: 650;
+}
+
+.meal-record-date-options text:last-child {
+  margin-top: 4px;
+  font-size: 8px;
+}
+
+.meal-record-meal-tabs {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  margin: 0 14px;
+  padding: 3px;
+  border-radius: 14px;
+  background: #eee7de;
+}
+
+.meal-record-meal-tabs button {
+  height: 30px;
+  border-radius: 11px;
+  color: var(--color-muted);
+  font-size: 10px;
+}
+
+.meal-record-meal-tabs button.is-active {
+  color: var(--color-brand);
+  background: var(--color-surface);
+  box-shadow: 0 3px 10px rgb(91 67 44 / 7%);
+  font-weight: 700;
+}
+
+.meal-record-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 18px 14px 10px;
+}
+
+.meal-record-heading > view text {
+  display: block;
+}
+
+.meal-record-heading > view text:first-child {
+  font-size: 16px;
+  font-weight: 750;
+}
+
+.meal-record-heading > view text:last-child {
+  margin-top: 2px;
+  color: var(--color-muted);
+  font-size: 9px;
+}
+
+.meal-record-heading button {
+  padding: 8px 10px;
+  border-radius: 12px;
+  color: var(--color-brand);
+  background: var(--color-brand-soft);
+  font-size: 10px;
+  font-weight: 650;
+}
+
+.meal-record-card,
+.meal-record-empty {
+  margin: 0 14px;
+  overflow: hidden;
+  border-radius: 20px;
+  background: var(--color-surface);
+  box-shadow: 0 9px 28px rgb(91 67 44 / 5%);
+}
+
+.meal-record-dish {
+  display: flex;
+  padding: 14px;
+}
+
+.meal-record-dish + .meal-record-dish {
+  border-top: 1px solid var(--color-line);
+}
+
+.meal-record-dish__cover {
+  display: flex;
+  flex: 0 0 48px;
+  align-items: center;
+  justify-content: center;
+  height: 48px;
+  border-radius: 14px;
+  background: var(--color-brand-soft);
+  font-size: 23px;
+}
+
+.meal-record-dish__copy {
+  min-width: 0;
+  flex: 1;
+  margin-left: 10px;
+}
+
+.meal-record-dish__copy > view {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.meal-record-dish__name {
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.meal-record-dish__copy > view > text:last-child,
+.meal-record-dish__meta,
+.meal-record-dish__note {
+  color: var(--color-muted);
+  font-size: 9px;
+}
+
+.meal-record-dish__meta,
+.meal-record-dish__note {
+  display: block;
+  margin-top: 5px;
+}
+
+.meal-record-dish__note {
+  color: #836f32;
+}
+
+.meal-record-card__note {
+  display: block;
+  margin: 0 14px 12px;
+  padding: 9px 10px;
+  border-radius: 10px;
+  color: #836f32;
+  background: #f4eccd;
+  font-size: 9px;
+}
+
+.meal-record-card__footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 11px 14px;
+  border-top: 1px solid var(--color-line);
+  color: var(--color-muted);
+  font-size: 9px;
+}
+
+.meal-record-card__footer button {
+  height: 28px;
+  margin: 0;
+  padding: 0 12px;
+  border: 0;
+  border-radius: 10px;
+  color: var(--color-brand);
+  background: var(--color-brand-soft);
+  font-size: 9px;
+  font-weight: 700;
+  line-height: 28px;
+}
+
+.meal-record-card__actions {
+  display: flex;
+  gap: 7px;
+}
+
+.meal-record-card__footer button.is-primary {
+  color: #fff;
+  background: var(--color-brand);
+}
+
+.meal-record-photos {
+  padding: 12px 14px 14px;
+  border-top: 1px solid var(--color-line);
+}
+
+.meal-record-photos__hint {
+  display: block;
+  color: var(--color-muted);
+  font-size: 9px;
+}
+
+.meal-record-photo-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 7px;
+}
+
+.meal-record-photo {
+  position: relative;
+  height: 82px;
+  overflow: hidden;
+  border-radius: 12px;
+  background: var(--color-background);
+}
+
+.meal-record-photo image {
+  width: 100%;
+  height: 100%;
+}
+
+.meal-record-photo text {
+  position: absolute;
+  right: 5px;
+  bottom: 5px;
+  left: 5px;
+  overflow: hidden;
+  padding: 3px 5px;
+  border-radius: 7px;
+  color: #fff;
+  background: rgb(41 37 33 / 62%);
+  font-size: 8px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.meal-record-photo-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+  margin-top: 11px;
+}
+
+.meal-record-photo-actions button {
+  height: 28px;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  color: var(--color-brand);
+  background: transparent;
+  font-size: 9px;
+  font-weight: 700;
+  line-height: 28px;
+}
+
+.meal-record-empty,
+.meal-record-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 54px 20px;
+  color: var(--color-muted);
+  font-size: 11px;
+  text-align: center;
+}
+
+.meal-record-empty > text:first-child {
+  color: var(--color-ink);
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.meal-record-empty > text + text {
+  margin-top: 6px;
+}
+
+.meal-record-empty button,
+.meal-record-state button {
+  margin-top: 14px;
+  color: var(--color-brand);
+  font-size: 11px;
+}

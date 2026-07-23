@@ -1,0 +1,21 @@
+page {
+  --color-brand: #d54836;
+  --color-brand-soft: #f7e5df;
+  --color-ink: #292521;
+  --color-muted: #847d74;
+  --color-surface: #fffdf9;
+  --color-background: #f8f3ec;
+  --color-line: #ece4da;
+  --radius-card: 18px;
+
+  min-height: 100%;
+  color: var(--color-ink);
+  background: var(--color-background);
+  font-family:
+    -apple-system, BlinkMacSystemFont, "PingFang SC", "Microsoft YaHei",
+    sans-serif;
+}
+
+button::after {
+  border: 0;
+}

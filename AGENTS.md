@@ -2,45 +2,64 @@
 
 ## Project Structure & Module Organization
 
-This repository is a dependency-free, single-page prototype for a family recipe manager.
+This repository contains both the finalized single-page product prototype and the production application foundation.
 
-- `index.html` contains all HTML, CSS, sample data, and JavaScript behavior.
+- `index.html` remains the visual and interaction prototype. Preserve it as an acceptance reference; do not move production networking or persistence into it.
+- `apps/miniprogram/` contains the Taro + React + TypeScript WeChat mini program.
+- `apps/api/` contains the Fastify + TypeScript backend API.
+- `packages/contracts/` contains runtime-validated API contracts shared by clients and the API.
+- `packages/domain/` contains framework-independent business rules such as procurement derivation.
+- `database/migrations/` contains ordered, immutable MySQL migrations.
+- `docs/` contains the MVP, architecture, data, API, permission, release, and compliance decisions.
+- `infra/` contains local infrastructure configuration.
 - `.git/` stores repository history and configuration; do not edit it directly.
-- `.agents/` is reserved for local agent metadata and currently contains no project source.
 
-Keep new product behavior in `index.html` while the prototype remains small. If the file is split later, use `src/` for JavaScript and styles, `assets/` for images, and `tests/` for automated checks.
+Keep prototype-only UI refinements in `index.html`. Implement production behavior in the appropriate app or shared package. Do not duplicate menu/procurement rules across the mini program and API; shared calculations belong in `packages/domain`, while authoritative writes and permission checks stay in the API.
 
 ## Build, Test, and Development Commands
 
-No build step or package installation is required.
+Install the production workspace dependencies from the repository root:
+
+```powershell
+npm.cmd install
+```
+
+Run the API and the WeChat mini program compiler:
+
+```powershell
+npm.cmd run dev:api
+npm.cmd run dev:weapp
+```
+
+Validate the workspace before committing:
+
+```powershell
+npm.cmd run check
+git diff --check
+```
+
+The original prototype can still be served independently:
 
 ```powershell
 python -m http.server 8000
 ```
 
-Serves the repository locally at `http://localhost:8000`; prefer this over opening the file directly when testing browser behavior.
-
-```powershell
-npx.cmd --yes prettier@3.6.2 --check index.html
-npx.cmd --yes prettier@3.6.2 --write index.html
-git diff --check
-```
-
-Use these commands to check formatting, apply formatting, and detect whitespace errors before committing.
-
 ## Coding Style & Naming Conventions
 
-- Use two-space indentation for HTML, CSS, and JavaScript.
-- Format `index.html` with Prettier after structural edits.
+- Use two-space indentation for HTML, CSS, JavaScript, TypeScript, JSON, SQL, and Markdown.
+- Format changed source and documentation with the pinned root Prettier command.
 - Use semantic, kebab-case CSS classes such as `.manage-item` and `.today-card`.
-- Use camelCase for JavaScript functions and variables, for example `showScreen()` and `cartCount`.
+- Use camelCase for JavaScript/TypeScript functions and variables, for example `showScreen()` and `cartCount`.
+- Keep API request/response contracts in `packages/contracts` and validate untrusted input at runtime.
+- Keep business rules free of Taro, Fastify, database, and cloud dependencies in `packages/domain`.
+- Never edit an already-applied SQL migration; add a new ordered migration instead.
 - Name screen IDs by purpose (`home`, `manage`, `recipeEditor`), and keep IDs unique.
 - Reuse the CSS variables in `:root` instead of introducing scattered color values.
 - Keep user-facing language consistent: use “点菜”, “保存菜单”, “采购清单”, and “保存菜谱” rather than commercial order terminology.
 
 ## Testing Guidelines
 
-There is no automated test suite yet. Manually verify all primary flows on desktop and a narrow mobile viewport: navigation, recipe search/filtering, creating and editing recipes, submitting a menu, and updating cooking progress. Check the browser console for JavaScript errors. Add automated tests under `tests/` if logic is extracted from the page.
+Run `npm.cmd run check` before committing. Add unit tests beside shared domain rules and API tests beside backend modules. Any change to menu persistence must test procurement derivation, version conflicts, idempotency, and kitchen membership boundaries. Manually verify the original prototype when `index.html` changes, and verify production mini-program flows in the WeChat developer tools on both narrow and wide phone viewports.
 
 ## Commit & Pull Request Guidelines
 

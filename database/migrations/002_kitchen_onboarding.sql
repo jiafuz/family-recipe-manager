@@ -1,0 +1,3 @@
+ALTER TABLE kitchens
+  ADD COLUMN icon VARCHAR(20) NOT NULL DEFAULT '🏠' AFTER name;
+

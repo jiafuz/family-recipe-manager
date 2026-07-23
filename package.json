@@ -1,0 +1,30 @@
+{
+  "name": "jiayan-family-recipe-manager",
+  "version": "0.1.0",
+  "private": true,
+  "description": "家宴微信小程序、后端 API 与共享业务模块",
+  "engines": {
+    "node": ">=22",
+    "npm": ">=10"
+  },
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
+  "scripts": {
+    "build": "npm run build --workspaces --if-present",
+    "dev:api": "npm run dev --workspace @jiayan/api",
+    "dev:weapp": "npm run dev:weapp --workspace @jiayan/miniprogram",
+    "build:weapp": "npm run build:weapp --workspace @jiayan/miniprogram",
+    "db:migrate": "npm run db:migrate --workspace @jiayan/api",
+    "typecheck": "npm run typecheck --workspaces --if-present",
+    "test": "npm run test --workspaces --if-present",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "check": "npm run format:check && npm run typecheck && npm test"
+  },
+  "devDependencies": {
+    "prettier": "3.9.6",
+    "typescript": "7.0.2"
+  }
+}

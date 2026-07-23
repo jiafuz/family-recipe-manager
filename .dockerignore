@@ -1,0 +1,13 @@
+.git
+.github
+.vscode
+node_modules
+**/node_modules
+**/dist
+coverage
+.env
+.env.*
+index.html
+assets
+docs
+

@@ -1,0 +1,169 @@
+.meal-share-page {
+  min-height: 100vh;
+  padding-bottom: calc(82px + env(safe-area-inset-bottom));
+  box-sizing: border-box;
+}
+
+.meal-share-header {
+  display: grid;
+  grid-template-columns: 72px 1fr 72px;
+  align-items: center;
+  min-height: 52px;
+  padding: env(safe-area-inset-top) 14px 0;
+  border-bottom: 1px solid var(--color-line);
+  background: var(--color-surface);
+}
+
+.meal-share-header button {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  font-size: 11px;
+  text-align: left;
+}
+
+.meal-share-header > text {
+  font-size: 14px;
+  font-weight: 750;
+  text-align: center;
+}
+
+.meal-share-preview,
+.meal-share-privacy {
+  margin: 14px;
+  padding: 16px;
+  border-radius: 22px;
+  background: var(--color-surface);
+  box-shadow: 0 9px 28px rgb(91 67 44 / 6%);
+}
+
+.meal-share-preview__eyebrow,
+.meal-share-preview__kitchen {
+  display: block;
+  text-align: center;
+}
+
+.meal-share-preview__eyebrow {
+  color: var(--color-brand);
+  font-size: 10px;
+  font-weight: 700;
+}
+
+.meal-share-preview__kitchen {
+  margin-top: 5px;
+  font-size: 17px;
+  font-weight: 750;
+}
+
+.meal-share-photo-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px;
+  margin-top: 14px;
+}
+
+.meal-share-photo {
+  position: relative;
+  height: 142px;
+  overflow: hidden;
+  border-radius: 16px;
+  background: var(--color-background);
+}
+
+.meal-share-photo image {
+  width: 100%;
+  height: 100%;
+}
+
+.meal-share-photo > text {
+  position: absolute;
+  right: 7px;
+  bottom: 7px;
+  left: 7px;
+  padding: 4px 6px;
+  border-radius: 8px;
+  color: #fff;
+  background: rgb(41 37 33 / 62%);
+  font-size: 9px;
+}
+
+.meal-share-photo > text.meal-share-photo__uploader {
+  top: 7px;
+  right: auto;
+  bottom: auto;
+  left: 7px;
+  width: auto;
+}
+
+.meal-share-menu {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 8px 12px;
+  margin-top: 14px;
+}
+
+.meal-share-menu text {
+  font-size: 10px;
+}
+
+.meal-share-privacy > text:first-child {
+  display: block;
+  margin-bottom: 8px;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.meal-share-privacy > view {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  min-height: 42px;
+  border-top: 1px solid var(--color-line);
+  font-size: 10px;
+}
+
+.meal-share-privacy switch {
+  transform: scale(0.75);
+  transform-origin: right center;
+}
+
+.meal-share-privacy__tip {
+  display: block;
+  margin-top: 8px;
+  color: var(--color-muted);
+  font-size: 9px;
+  line-height: 1.5;
+}
+
+.meal-share-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 100px 24px;
+  color: var(--color-muted);
+  font-size: 12px;
+}
+
+.meal-share-footer {
+  position: fixed;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  padding: 10px 14px calc(10px + env(safe-area-inset-bottom));
+  background: var(--color-surface);
+  box-shadow: 0 -8px 22px rgb(91 67 44 / 6%);
+}
+
+.meal-share-footer button {
+  height: 46px;
+  margin: 0;
+  border: 0;
+  border-radius: 15px;
+  color: #fff;
+  background: var(--color-brand);
+  font-size: 13px;
+  font-weight: 700;
+  line-height: 46px;
+}

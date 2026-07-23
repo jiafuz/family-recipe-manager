@@ -1,0 +1,225 @@
+.recipe-manage-page {
+  min-height: 100vh;
+  color: var(--color-ink);
+  background: var(--color-background);
+}
+
+.recipe-manage-header {
+  position: sticky;
+  z-index: 5;
+  top: 0;
+  display: grid;
+  grid-template-columns: 90px 1fr 90px;
+  align-items: center;
+  min-height: 54px;
+  padding: env(safe-area-inset-top) 14px 0;
+  border-bottom: 1px solid var(--color-line);
+  background: rgb(255 253 249 / 96%);
+}
+
+.recipe-manage-header button,
+.recipe-manage-search button,
+.recipe-manage-categories button,
+.managed-recipe__actions button,
+.recipe-manage-state button,
+.recipe-manage-list__empty button {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  line-height: inherit;
+}
+
+.recipe-manage-header__back {
+  justify-self: start;
+  width: 34px;
+  font-size: 30px;
+  font-weight: 400;
+}
+
+.recipe-manage-header__title {
+  justify-self: center;
+  font-size: 17px;
+  font-weight: 750;
+}
+
+.recipe-manage-header__add {
+  justify-self: end;
+  color: var(--color-brand);
+  font-size: 12px;
+  font-weight: 650;
+}
+
+.recipe-manage-search {
+  display: flex;
+  align-items: center;
+  height: 42px;
+  margin: 14px;
+  padding: 0 14px;
+  border-radius: 15px;
+  background: var(--color-surface);
+  color: var(--color-muted);
+}
+
+.recipe-manage-search input {
+  flex: 1;
+  margin-left: 8px;
+  font-size: 13px;
+}
+
+.recipe-manage-search button {
+  color: var(--color-brand);
+  font-size: 11px;
+}
+
+.recipe-manage-content {
+  display: grid;
+  grid-template-columns: 82px minmax(0, 1fr);
+  min-height: calc(100vh - 126px);
+  margin-top: 8px;
+}
+
+.recipe-manage-categories {
+  padding: 6px 8px 24px;
+  border-right: 1px solid var(--color-line);
+}
+
+.recipe-manage-categories button {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  padding: 12px 4px;
+  border-radius: 14px;
+  color: var(--color-muted);
+  font-size: 11px;
+}
+
+.recipe-manage-categories button + button {
+  margin-top: 3px;
+}
+
+.recipe-manage-categories button.is-active {
+  color: var(--color-brand);
+  background: var(--color-brand-soft);
+  font-weight: 700;
+}
+
+.recipe-manage-categories button > text:first-child {
+  margin-bottom: 4px;
+  font-size: 17px;
+}
+
+.recipe-manage-categories__count {
+  margin-top: 2px;
+  font-size: 9px;
+  opacity: 0.72;
+}
+
+.recipe-manage-list {
+  padding: 0 14px 32px;
+}
+
+.managed-recipe {
+  padding: 14px 0 12px;
+  border-bottom: 1px solid var(--color-line);
+}
+
+.managed-recipe__main {
+  display: flex;
+  min-width: 0;
+}
+
+.managed-recipe__cover {
+  display: flex;
+  flex: 0 0 58px;
+  align-items: center;
+  justify-content: center;
+  height: 58px;
+  border-radius: 16px;
+  background: var(--color-brand-soft);
+  font-size: 28px;
+}
+
+.managed-recipe__copy {
+  min-width: 0;
+  margin-left: 10px;
+}
+
+.managed-recipe__title-line {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.managed-recipe__title {
+  overflow: hidden;
+  font-size: 14px;
+  font-weight: 700;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.managed-recipe__state {
+  flex: none;
+  padding: 2px 6px;
+  border-radius: 8px;
+  color: #836f32;
+  background: #f4eccd;
+  font-size: 9px;
+}
+
+.managed-recipe__state--available {
+  color: #4e714a;
+  background: #e2ecdc;
+}
+
+.managed-recipe__state--hidden {
+  color: var(--color-muted);
+  background: var(--color-line);
+}
+
+.managed-recipe__description,
+.managed-recipe__meta {
+  display: block;
+  overflow: hidden;
+  margin-top: 5px;
+  color: var(--color-muted);
+  font-size: 10px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.managed-recipe__actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 16px;
+  margin-top: 9px;
+}
+
+.managed-recipe__actions button {
+  color: #635b52;
+  font-size: 10px;
+}
+
+.managed-recipe__actions button.is-danger {
+  color: var(--color-brand);
+}
+
+.recipe-manage-list__empty,
+.recipe-manage-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 64px 16px;
+  color: var(--color-muted);
+  font-size: 12px;
+  text-align: center;
+}
+
+.recipe-manage-list__empty button,
+.recipe-manage-state button {
+  margin-top: 12px;
+  color: var(--color-brand);
+  font-size: 12px;
+}

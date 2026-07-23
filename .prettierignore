@@ -1,0 +1,8 @@
+index.html
+AGENTS.md
+assets/
+database/migrations/*.sql
+package-lock.json
+node_modules/
+**/dist/
+
